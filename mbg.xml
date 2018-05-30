@@ -19,7 +19,7 @@
         </jdbcConnection>
 
         <javaTypeResolver >
-            <property name="forceBigDecimals" value="false" />
+            <property name="forceBigDecimals" value="true" />
         </javaTypeResolver>
 
         <!--指定java类生成的位置-->
