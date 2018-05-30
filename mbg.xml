@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--配置数据库连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://35.194.218.250:3306/web?useSSL=true"
+                        userId="mysql"
+                        password="mysql123">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--指定java类生成的位置-->
+        <javaModelGenerator
+                targetPackage="com.web.bean"
+                targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--指定sql映射文件生成的位置-->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--指定dao接口生成的位置 mapper接口-->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.web.dao"
+                             targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--指定每个表的生成策略-->
+
+        <!--<table tableName="`b_credit_paper`" domainObjectName="CreditPaper"></table>-->
+        <table tableName="`b_discipline`" domainObjectName="Discipline"></table>
+        <!--<table tableName="`b_institute`" domainObjectName="Institute"></table>-->
+        <!--<table tableName="`b_paper`" domainObjectName="Paper"></table>-->
+        <!--<table tableName="`b_paper_order`" domainObjectName="PaperOrder"></table>-->
+        <!--<table tableName="`b_subject`" domainObjectName="Subject"></table>-->
+        <!--<table tableName="`r_scholar_paper`" domainObjectName="ScholarPaper"></table>-->
+        <!--<table tableName="`r_user_paper`" domainObjectName="UserPaper"></table>-->
+        <!--<table tableName="`s_admin`" domainObjectName="Admin"></table>-->
+        <!--<table tableName="`s_scholar`" domainObjectName="Scholar"></table>-->
+        <!--<table tableName="`s_user`" domainObjectName="User"></table>-->
+        <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+            <columnOverride column="DATE_FIELD" property="startDate" />
+            <ignoreColumn column="FRED" />
+            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        </table>
+
+    </context>
+</generatorConfiguration>
