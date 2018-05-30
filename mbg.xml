@@ -45,17 +45,17 @@
 
         <!--指定每个表的生成策略-->
 
-        <!--<table tableName="`b_credit_paper`" domainObjectName="CreditPaper"></table>-->
+        <table tableName="`b_credit_paper`" domainObjectName="CreditPaper"></table>
         <table tableName="`b_discipline`" domainObjectName="Discipline"></table>
-        <!--<table tableName="`b_institute`" domainObjectName="Institute"></table>-->
-        <!--<table tableName="`b_paper`" domainObjectName="Paper"></table>-->
-        <!--<table tableName="`b_paper_order`" domainObjectName="PaperOrder"></table>-->
-        <!--<table tableName="`b_subject`" domainObjectName="Subject"></table>-->
-        <!--<table tableName="`r_scholar_paper`" domainObjectName="ScholarPaper"></table>-->
-        <!--<table tableName="`r_user_paper`" domainObjectName="UserPaper"></table>-->
-        <!--<table tableName="`s_admin`" domainObjectName="Admin"></table>-->
-        <!--<table tableName="`s_scholar`" domainObjectName="Scholar"></table>-->
-        <!--<table tableName="`s_user`" domainObjectName="User"></table>-->
+        <table tableName="`b_institute`" domainObjectName="Institute"></table>
+        <table tableName="`b_paper`" domainObjectName="Paper"></table>
+        <table tableName="`b_paper_order`" domainObjectName="PaperOrder"></table>
+        <table tableName="`b_subject`" domainObjectName="Subject"></table>
+        <table tableName="`r_scholar_paper`" domainObjectName="ScholarPaper"></table>
+        <table tableName="`r_user_paper`" domainObjectName="UserPaper"></table>
+        <table tableName="`s_admin`" domainObjectName="Admin"></table>
+        <table tableName="`s_scholar`" domainObjectName="Scholar"></table>
+        <table tableName="`s_user`" domainObjectName="User"></table>
         <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="ID" sqlStatement="DB2" identity="true" />
