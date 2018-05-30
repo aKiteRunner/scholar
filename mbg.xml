@@ -45,7 +45,7 @@
 
         <!--指定每个表的生成策略-->
 
-        <table tableName="`b_credit_paper`" domainObjectName="CreditPaper"></table>
+        <table tableName="`b_credit_order`" domainObjectName="CreditOrder"></table>
         <table tableName="`b_discipline`" domainObjectName="Discipline"></table>
         <table tableName="`b_institute`" domainObjectName="Institute"></table>
         <table tableName="`b_paper`" domainObjectName="Paper"></table>
