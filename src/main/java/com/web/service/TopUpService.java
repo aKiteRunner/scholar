@@ -8,9 +8,14 @@ import org.springframework.stereotype.Service;
 // 充值
 @Service
 public class TopUpService {
-    @Autowired
-    private CreditOrderMapper creditOrderMapper;
+    private final CreditOrderMapper creditOrderMapper;
 
-    public void insertOrder() {
+    @Autowired
+    public TopUpService(CreditOrderMapper creditOrderMapper) {
+        this.creditOrderMapper = creditOrderMapper;
+    }
+
+    public void insertOrder(CreditOrder creditOrder) {
+        creditOrderMapper.insert(creditOrder);
     }
 }
