@@ -25,8 +25,7 @@ public class TopUpController {
         this.userService = userService;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/topup/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{userId}/topup", method = RequestMethod.POST)
     // price 代表用户付款金额
     // credit 为兑换后的积分总额
     public String topUp(@RequestParam(value = "price") String price, @PathVariable(value = "userId") Integer userId, Model model) {
@@ -48,6 +47,11 @@ public class TopUpController {
         } catch (ParameterInvalidException e) {
             model.addAttribute("errorInfo", e.getMessage());
         }
+        return "topUpInfo";
+    }
+
+    @RequestMapping(value = "/{userId}/topup", method = RequestMethod.GET)
+    public String  topUp() {
         return "topUpInfo";
     }
 }

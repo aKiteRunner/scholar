@@ -20,6 +20,8 @@ public interface DisciplineMapper {
 
     Discipline selectByPrimaryKey(Integer id);
 
+    Discipline selectByName(String name);
+
     int updateByExampleSelective(@Param("record") Discipline record, @Param("example") DisciplineExample example);
 
     int updateByExample(@Param("record") Discipline record, @Param("example") DisciplineExample example);
