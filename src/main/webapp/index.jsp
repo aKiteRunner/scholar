@@ -14,7 +14,7 @@
     pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <html>
-asdjalksdjlawjdioa jdoijawiodjawoid
+fuck you
 <head>
     <%--不以斜杠开始的相对路径，找资源，以当前资源路径为标准，容易出问题。--%>
     <%--以/开始的相对路径，找资源，以服务器的路径为标准(http://127.0.0.1:80),需要加入项目名--%>
