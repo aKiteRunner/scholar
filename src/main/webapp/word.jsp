@@ -21,7 +21,7 @@
 <div class="container">
 
     <div class="row">
-        <form  class="form col-md-12 center-block" method="post" action="${APP_PATH}/word">
+        <form  class="form col-md-12 center-block" method="post" action="${APP_PATH}/regist">
             <div class="row">
             <textarea style="margin: 0px; width: 630px; height: 410px;" name="text" id="text">
             </textarea>

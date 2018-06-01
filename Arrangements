@@ -1,0 +1,2 @@
+Autowire时，使用构造器注入
+向前端传参时，一般的消息用"info", 错误信息用"errorInfo"
