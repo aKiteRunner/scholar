@@ -11,6 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-aaaaa
+<form method="post" >
+    money: <input type="text" name="price">
+    <input type="submit">
+</form>
 </body>
 </html>

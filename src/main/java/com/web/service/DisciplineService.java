@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.web.bean.Discipline;
 import com.web.dao.DisciplineMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,13 @@ public class DisciplineService {
 
     public boolean disciplineExist(Integer id) {
         return null != disciplineMapper.selectByPrimaryKey(id);
+    }
+
+    public Discipline selectByName(String name) {
+        return disciplineMapper.selectByName(name);
+    }
+
+    public Discipline selectById(Integer id) {
+        return disciplineMapper.selectByPrimaryKey(id);
     }
 }

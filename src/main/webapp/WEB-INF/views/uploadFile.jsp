@@ -16,7 +16,7 @@ aaaaa
 <form method="post" enctype="multipart/form-data">
     file: <input type="file" name="file">
     subject: <select name="subject">
-    <option>我也不知道干嘛的</option>
+    <option>其他</option>
 </select>
     discipline <select name="discipline">
     <option>其他</option>

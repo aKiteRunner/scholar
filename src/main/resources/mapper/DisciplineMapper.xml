@@ -104,17 +104,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.web.bean.Discipline">
-    insert into b_discipline (id, name, super_discipline_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{superDisciplineId,jdbcType=INTEGER}
-      )
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into b_discipline (name, super_discipline_id)
+    values (#{name,jdbcType=VARCHAR}, #{superDisciplineId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.web.bean.Discipline">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into b_discipline
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="name != null">
         name,
       </if>
@@ -123,9 +124,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>

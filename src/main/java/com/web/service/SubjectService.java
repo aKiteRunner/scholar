@@ -22,4 +22,12 @@ public class SubjectService {
     public boolean subjectExist(Integer id) {
         return null != subjectMapper.selectByPrimaryKey(id);
     }
+
+    public Subject selectByName(String name) {
+        return subjectMapper.selectByName(name);
+    }
+
+    public Subject selectById(Integer id) {
+        return subjectMapper.selectByPrimaryKey(id);
+    }
 }

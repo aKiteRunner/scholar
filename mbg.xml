@@ -45,23 +45,38 @@
 
         <!--指定每个表的生成策略-->
 
-        <table tableName="`b_credit_order`" domainObjectName="CreditOrder"></table>
-        <table tableName="`b_discipline`" domainObjectName="Discipline"></table>
-        <table tableName="`b_institute`" domainObjectName="Institute"></table>
-        <table tableName="`b_paper`" domainObjectName="Paper"></table>
-        <table tableName="`b_paper_order`" domainObjectName="PaperOrder"></table>
-        <table tableName="`b_subject`" domainObjectName="Subject"></table>
-        <table tableName="`r_scholar_paper`" domainObjectName="ScholarPaper"></table>
-        <table tableName="`r_user_paper`" domainObjectName="UserPaper"></table>
-        <table tableName="`s_admin`" domainObjectName="Admin"></table>
-        <table tableName="`s_scholar`" domainObjectName="Scholar"></table>
-        <table tableName="`s_user`" domainObjectName="User"></table>
-        <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
-            <columnOverride column="DATE_FIELD" property="startDate" />
-            <ignoreColumn column="FRED" />
-            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+        <table tableName="`b_credit_order`" domainObjectName="CreditOrder">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`b_discipline`" domainObjectName="Discipline">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`b_institute`" domainObjectName="Institute">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`b_paper`" domainObjectName="Paper">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`b_paper_order`" domainObjectName="PaperOrder">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`b_subject`" domainObjectName="Subject">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`r_scholar_paper`" domainObjectName="ScholarPaper">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`r_user_paper`" domainObjectName="UserPaper">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`s_admin`" domainObjectName="Admin">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`s_scholar`" domainObjectName="Scholar">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="`s_user`" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>

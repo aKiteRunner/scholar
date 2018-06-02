@@ -15,7 +15,7 @@ public class TopUpService {
         this.creditOrderMapper = creditOrderMapper;
     }
 
-    public void insertOrder(CreditOrder creditOrder) {
-        creditOrderMapper.insert(creditOrder);
+    public int insertOrder(CreditOrder creditOrder) {
+        return creditOrderMapper.insert(creditOrder);
     }
 }
