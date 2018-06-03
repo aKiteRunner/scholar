@@ -109,19 +109,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.web.bean.User">
-    insert into s_user (id, username, password, 
-      email, degree, credit, 
-      phone, exp)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, 
-      #{email,jdbcType=VARCHAR}, #{degree,jdbcType=INTEGER}, #{credit,jdbcType=INTEGER}, 
-      #{phone,jdbcType=CHAR}, #{exp,jdbcType=INTEGER})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into s_user (username, password, email, 
+      degree, credit, phone, 
+      exp)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
+      #{degree,jdbcType=INTEGER}, #{credit,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, 
+      #{exp,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.web.bean.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into s_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="username != null">
         username,
       </if>
@@ -145,9 +148,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>

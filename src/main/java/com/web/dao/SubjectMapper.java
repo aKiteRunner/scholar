@@ -20,6 +20,8 @@ public interface SubjectMapper {
 
     Subject selectByPrimaryKey(Integer id);
 
+    Subject selectByName(String name);
+
     int updateByExampleSelective(@Param("record") Subject record, @Param("example") SubjectExample example);
 
     int updateByExample(@Param("record") Subject record, @Param("example") SubjectExample example);
