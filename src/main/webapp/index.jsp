@@ -25,7 +25,25 @@ fuck you
 
 </head>
 <body>
+<body>
+<div class="container">
 
+    <div class="row">
+        <form  class="form col-md-12 center-block" method="post" action="${APP_PATH}/regist/abc">
+            <div class="row">
+            <textarea style="margin: 0px; width: 630px; height: 410px;" name="text" id="text">
+            </textarea>
+            </div>
+            <div class="row">
+                <button id="submit">提交</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+</body>
 
 </body>
 </html>

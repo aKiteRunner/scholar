@@ -23,4 +23,9 @@ public class UserService {
     public void insertUser(User user){
         userMapper.insert(user);
     }
+
+    public boolean  userExist(String username){
+        User user = userMapper.selectByName(username);
+        return user != null;
+    }
 }

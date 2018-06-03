@@ -17,6 +17,19 @@ public class User {
 
     private Integer exp;
 
+    public User(String username, String password, String email, Integer degree, Integer credit, String phone, Integer exp){
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.degree = degree;
+        this.credit = credit;
+        this.phone = phone;
+        this.exp = exp;
+    }
+
+    public User(){
+
+    }
     public Integer getId() {
         return id;
     }
