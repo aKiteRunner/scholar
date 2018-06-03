@@ -24,6 +24,8 @@ public class UserServiceTest {
 
     @Test
     public void insertUser() {
-        userService.insertUser(new User( "1", "1", "1", 1, 1, "1", 1));
+        String a = "1";
+        String b = new String("1");
+        System.out.println(a.equals(b));
     }
 }

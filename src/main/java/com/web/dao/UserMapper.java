@@ -22,6 +22,10 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer id);
 
+    String selectPasswordByUsername(String username);
+
+    int selectExpByUsername(String username);
+
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
     int updateByExample(@Param("record") User record, @Param("example") UserExample example);
@@ -29,4 +33,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    int updateExpByUsername(User user);
+
+    int updateDegreeByUsername(User user);
+
+
 }

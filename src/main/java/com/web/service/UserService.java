@@ -28,4 +28,27 @@ public class UserService {
         User user = userMapper.selectByName(username);
         return user != null;
     }
+
+    public String selectPassword(String username){
+        String password = userMapper.selectPasswordByUsername(username);
+        return password;
+    }
+
+    public void updateExp(User user){
+        userMapper.updateExpByUsername(user);
+    }
+
+    public void updateDegree(User user){
+        userMapper.updateDegreeByUsername(user);
+    }
+
+    public int selectExp(String username){
+        int exp = userMapper.selectExpByUsername(username);
+        return exp;
+    }
+
+    public User getUser(String username){
+        User user = userMapper.selectByName(username);
+        return user;
+    }
 }
