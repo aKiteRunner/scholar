@@ -16,13 +16,13 @@ public interface PaperMapper {
 
     int insertSelective(Paper record);
 
-    Integer selectLastInsertID();
-
     List<Paper> selectByExample(PaperExample example);
 
     Paper selectByPrimaryKey(Integer id);
 
     Paper selectByName(String name);
+
+    List<Paper> selectByDiscipline(Integer disciplineId);
 
     int updateByExampleSelective(@Param("record") Paper record, @Param("example") PaperExample example);
 

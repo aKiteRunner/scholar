@@ -604,6 +604,76 @@ public class PaperExample {
             addCriterion("discipline_id not between", value1, value2, "disciplineId");
             return (Criteria) this;
         }
+
+        public Criteria andAbstract1IsNull() {
+            addCriterion("abstract1 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1IsNotNull() {
+            addCriterion("abstract1 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1EqualTo(String value) {
+            addCriterion("abstract1 =", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1NotEqualTo(String value) {
+            addCriterion("abstract1 <>", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1GreaterThan(String value) {
+            addCriterion("abstract1 >", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1GreaterThanOrEqualTo(String value) {
+            addCriterion("abstract1 >=", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1LessThan(String value) {
+            addCriterion("abstract1 <", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1LessThanOrEqualTo(String value) {
+            addCriterion("abstract1 <=", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1Like(String value) {
+            addCriterion("abstract1 like", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1NotLike(String value) {
+            addCriterion("abstract1 not like", value, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1In(List<String> values) {
+            addCriterion("abstract1 in", values, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1NotIn(List<String> values) {
+            addCriterion("abstract1 not in", values, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1Between(String value1, String value2) {
+            addCriterion("abstract1 between", value1, value2, "abstract1");
+            return (Criteria) this;
+        }
+
+        public Criteria andAbstract1NotBetween(String value1, String value2) {
+            addCriterion("abstract1 not between", value1, value2, "abstract1");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
