@@ -92,6 +92,22 @@
     from s_user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from s_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectExpByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select exp
+    from s_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectPasswordByUsername" parameterType="java.lang.String" resultType="java.lang.String">
+    select password
+    from s_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from s_user
     where id = #{id,jdbcType=INTEGER}
@@ -254,5 +270,15 @@
       phone = #{phone,jdbcType=CHAR},
       exp = #{exp,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateExpByUsername" parameterType="com.web.bean.User">
+    update s_user
+    set exp = #{exp,jdbcType=INTEGER}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateDegreeByUsername" parameterType="com.web.bean.User">
+    update s_user
+    set degree = degree + 1
+    where username = #{username,jdbcType=VARCHAR}
   </update>
 </mapper>

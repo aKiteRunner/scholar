@@ -18,7 +18,13 @@ public interface UserMapper {
 
     List<User> selectByExample(UserExample example);
 
+    User selectByName(String username);
+
     User selectByPrimaryKey(Integer id);
+
+    String selectPasswordByUsername(String username);
+
+    int selectExpByUsername(String username);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
@@ -27,4 +33,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    int updateExpByUsername(User user);
+
+    int updateDegreeByUsername(User user);
+
+
 }
