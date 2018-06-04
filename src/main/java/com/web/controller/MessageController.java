@@ -11,9 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MessageController {
@@ -37,6 +39,13 @@ public class MessageController {
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, List<Message>> map = new HashMap<String, List<Message>>();
         List<Message> sentMessage = messageService.selectSentMessage(userId);
+        // 按照时间倒序排列，并都标记为已读
+        sentMessage.forEach((Message m) -> {
+            messageService.checkMessage(m.getId());
+        });
+        sentMessage = sentMessage.parallelStream().
+                sorted(Comparator.comparing(Message::getSendTime).reversed()).
+                collect(Collectors.toList());
         map.put("sentMessage", sentMessage);
         return map;
     }
@@ -49,21 +58,29 @@ public class MessageController {
             return null;
         }
         Integer userId = (Integer) session.getAttribute("id");
-        HashMap<String, List<Message>> map = new HashMap<String, List<Message>>();
+        HashMap<String, List<Message>> map = new HashMap<>();
         List<Message> receivedMessage = messageService.selectReceivedMessage(userId);
+        // 按照时间倒序排列，并都标记为已读
+        receivedMessage.forEach((Message m) -> {
+            messageService.checkMessage(m.getId());
+        });
+        receivedMessage = receivedMessage.parallelStream().
+                sorted(Comparator.comparing(Message::getSendTime).reversed()).
+                collect(Collectors.toList());
         map.put("sentMessage", receivedMessage);
         return map;
     }
 
     @RequestMapping(value = "/setting/sendmessage", method = RequestMethod.POST)
     @ResponseBody
+    // JSON中传receiverId, senderId, content
     public HashMap<String, String> sendMessage(@RequestBody String json, HttpSession session) {
         // 先登录
         if (session.getAttribute("logined") == null) {
             return null;
         }
         Integer userId = (Integer) session.getAttribute("id");
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, String> map = new HashMap<>();
         JSONObject jsonObject = new JSONObject(json);
         Integer receiverId = jsonObject.getInt("receiverId");
         if (!userService.userExist(receiverId)) {
@@ -75,7 +92,7 @@ public class MessageController {
         message.setSenderId(userId);
         message.setReceiverId(receiverId);
         message.setContent(content);
-        message.setStatus((byte)0);
+        message.setStatus((byte) 0);
         message.setSendTime(new Date());
         messageService.insertMessage(message);
         map.put("info", "发送成功");

@@ -27,4 +27,10 @@ public class MessageService {
     public void insertMessage(Message message) {
         messageMapper.insert(message);
     }
+
+    public void checkMessage(Integer messageId) {
+        Message message = messageMapper.selectByPrimaryKey(messageId);
+        message.setStatus((byte)1);
+        messageMapper.updateByPrimaryKey(message);
+    }
 }
