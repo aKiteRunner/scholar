@@ -45,38 +45,41 @@
 
         <!--指定每个表的生成策略-->
 
-        <table tableName="`b_credit_order`" domainObjectName="CreditOrder">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`b_discipline`" domainObjectName="Discipline">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`b_institute`" domainObjectName="Institute">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`b_paper`" domainObjectName="Paper">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`b_paper_order`" domainObjectName="PaperOrder">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`b_subject`" domainObjectName="Subject">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`r_scholar_paper`" domainObjectName="ScholarPaper">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`r_user_paper`" domainObjectName="UserPaper">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`s_admin`" domainObjectName="Admin">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`s_scholar`" domainObjectName="Scholar">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table tableName="`s_user`" domainObjectName="User">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        <!--<table tableName="`b_credit_order`" domainObjectName="CreditOrder">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`b_discipline`" domainObjectName="Discipline">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`b_institute`" domainObjectName="Institute">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`b_paper`" domainObjectName="Paper">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`b_paper_order`" domainObjectName="PaperOrder">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`b_subject`" domainObjectName="Subject">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`r_scholar_paper`" domainObjectName="ScholarPaper">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`r_user_paper`" domainObjectName="UserPaper">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`s_admin`" domainObjectName="Admin">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`s_scholar`" domainObjectName="Scholar">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="`s_user`" domainObjectName="User">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <table tableName="`b_message`" domainObjectName="Message">
+        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>

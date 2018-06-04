@@ -41,6 +41,7 @@ public class TopUpController {
             order.setTime(new Date());
             order.setUserId(userId);
             topUpService.insertOrder(order);
+            userService.updateExpAndDegree(userService.getUser(userId).getUsername(), Setting.CREDIT_EXP);
             model.addAttribute("info", "操作成功");
         } catch (NumberFormatException e) {
             model.addAttribute("errorInfo", "金额不合法");
