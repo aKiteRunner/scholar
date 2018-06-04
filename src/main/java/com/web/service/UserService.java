@@ -72,4 +72,10 @@ public class UserService {
     public void updateEmail(User user){
         userMapper.updateByPrimaryKey(user);
     }
+
+    public void updatePhone(User user) { userMapper.updateByPrimaryKey(user); }
+
+    public void updatePw(User user) { userMapper.updateByPrimaryKey(user); }
+
+    public void updateUserName(User user) { userMapper.updateByPrimaryKey(user); }
 }
