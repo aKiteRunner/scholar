@@ -38,15 +38,7 @@ public class LoginController {
                 model.addAttribute("errorInfo", "您输入的用户");
             }else{
                 //没写专家情况
-                int exp = userService.selectExp(userName);
-                if(exp + Setting.LOGIN_EXP == 100) {
-                    User user = new User(userName, null, null, 0, 0, null, 0);
-                    userService.updateExp(user);
-                    userService.updateDegree(user);
-                }else{
-                    User user = new User(userName, null, null, 0, 0, null, exp + Setting.LOGIN_EXP);
-                    userService.updateExp(user);
-                }
+                userService.updateExpAndDegree(userName);
                 //session
                 HttpSession session = request.getSession(true);
                 session.setAttribute("logined", "success");

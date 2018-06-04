@@ -2,6 +2,7 @@ package com.web.service;
 
 import com.web.bean.User;
 import com.web.dao.UserMapper;
+import com.web.utils.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,18 @@ public class UserService {
     public User getUser(String username){
         User user = userMapper.selectByName(username);
         return user;
+    }
+
+    public void updateExpAndDegree(String userName){
+        int exp = selectExp(userName);
+        int expNew = exp + Setting.LOGIN_EXP;
+        if(expNew >= 100) {
+            User user = new User(userName, null, null, 0, 0, null, expNew - 100);
+            updateExp(user);
+            updateDegree(user);
+        }else{
+            User user = new User(userName, null, null, 0, 0, null, expNew);
+            updateExp(user);
+        }
     }
 }
