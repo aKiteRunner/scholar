@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-// TODO: 删除，赠送paper
 @Controller
 public class UploadController {
     private final SubjectService subjectService;
@@ -53,10 +53,11 @@ public class UploadController {
     public String uploadFile(@RequestParam(value = "file") MultipartFile file,
                              @RequestParam(value = "subject") String subject,
                              @RequestParam(value = "discipline") String discipline,
-                             @PathVariable("userId") Integer scholarId,
+                             HttpSession session,
                              Model model) {
         // 文件大小必须大于0，必须为专家用户
-        if (file.getSize() > 0) {
+        Integer scholarId = (Integer) session.getAttribute("id");
+        if (file.getSize() > 0 && scholarService.scholarExist(scholarId)) {
             try {
                 if (!disciplineService.disciplineExist(discipline)) {
                     throw new ParameterInvalidException("所选学科不存在");
@@ -98,11 +99,13 @@ public class UploadController {
 
     @RequestMapping(value = "/download/{paperId}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> download(@PathVariable Integer paperId,
+                                           HttpSession httpSession,
                                            Model model) throws Exception {
         //下载文件路径
-        // TODO: 判断是否有下载权限
+        // 用UserPaperService判断用户是否拥有此文献
+        Integer userId = (Integer) httpSession.getAttribute("id");
         Paper paper = paperService.selectById(paperId);
-        if (paper == null) {
+        if (paper == null || !userPaperService.paperAccessible(userId, paperId)) {
             return null;
         }
         File file = new File(paper.getPath());
@@ -119,11 +122,14 @@ public class UploadController {
     @RequestMapping(value = "/deletepaper/{paperId}", method = RequestMethod.DELETE)
     @ResponseBody
     // 删除paper，AJAX
-    // TODO: session获得userID并判断权限
-    public HashMap<String, Object> deletePaper(@PathVariable Integer paperId) {
+    public HashMap<String, Object> deletePaper(@PathVariable Integer paperId, HttpSession httpSession) {
         HashMap<String, Object> map = new HashMap<String, Object>();
+        // 用ScholarPaperService判断专家是否拥有此文献
+        Integer userId = (Integer) httpSession.getAttribute("id");
         if (!paperService.paperExist(paperId)) {
             map.put("errorInfo", "该文献不存在");
+        } else if (!scholarPaperService.paperAccessible(userId, paperId)) {
+            map.put("errorInfo", "没有权限");
         } else {
             paperService.deletePaper(paperId);
             map.put("info", "删除成功");
@@ -134,12 +140,17 @@ public class UploadController {
     @RequestMapping(value = "/giftpaper/{paperId}/{userId}", method = RequestMethod.POST)
     @ResponseBody
     public HashMap<String, Object> giftPaper(@PathVariable(value = "paperId") Integer paperId,
-                                             @PathVariable(value = "userId") Integer userId) {
+                                             @PathVariable(value = "userId") Integer userId,
+                                             HttpSession httpSession) {
         HashMap<String, Object> map = new HashMap<String, Object>();
+        Integer scholarId = (Integer) httpSession.getAttribute("id");
+        // 用ScholarPaperService判断专家是否拥有此文献
         if (!paperService.paperExist(paperId)) {
             map.put("errorInfo", "该文献不存在");
         } else if (!userService.userExist(userId)){
             map.put("errorInfo", "该用户不存在");
+        } else if (!scholarPaperService.paperAccessible(scholarId, paperId)) {
+            map.put("errorInfo", "没有权限");
         } else {
             UserPaper userPaper = new UserPaper();
             userPaper.setPaperId(paperId);

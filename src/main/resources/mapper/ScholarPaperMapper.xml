@@ -87,6 +87,12 @@
     from r_scholar_paper
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByScholarAndPaper" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from r_scholar_paper
+    where scholar_id = #{scholarId} and paper_id = #{paperId};
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from r_scholar_paper
     where id = #{id,jdbcType=INTEGER}

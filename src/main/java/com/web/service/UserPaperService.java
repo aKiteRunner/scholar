@@ -17,4 +17,8 @@ public class UserPaperService {
     public int insertUserPaper(UserPaper userPaper) {
         return userPaperMapper.insert(userPaper);
     }
+
+    public boolean paperAccessible(Integer userId, Integer paperId) {
+        return null != userPaperMapper.selectByUserAndPaper(userId, paperId);
+    }
 }

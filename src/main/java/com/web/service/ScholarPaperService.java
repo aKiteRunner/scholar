@@ -17,4 +17,8 @@ public class ScholarPaperService {
     public int insertScholarPaper(ScholarPaper scholarPaper) {
         return scholarPaperMapper.insert(scholarPaper);
     }
+
+    public boolean paperAccessible(Integer scholarId, Integer paperId) {
+        return null != scholarPaperMapper.selectByScholarAndPaper(scholarId, paperId);
+    }
 }
