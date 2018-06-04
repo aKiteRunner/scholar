@@ -53,9 +53,9 @@ public class UserService {
         return user;
     }
 
-    public void updateExpAndDegree(String userName){
+    public void updateExpAndDegree(String userName, int expAdd){
         int exp = selectExp(userName);
-        int expNew = exp + Setting.LOGIN_EXP;
+        int expNew = exp + expAdd;
         if(expNew >= 100) {
             User user = new User(userName, null, null, 0, 0, null, expNew - 100);
             updateExp(user);
