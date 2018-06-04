@@ -34,9 +34,9 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    int updateExpByUsername(User user);
+    int updateExpByUser(User user);
 
-    int updateDegreeByUsername(User user);
+    int updateDegreeByUser(User user);
 
 
 }
