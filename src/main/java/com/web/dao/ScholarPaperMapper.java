@@ -27,4 +27,6 @@ public interface ScholarPaperMapper {
     int updateByPrimaryKeySelective(ScholarPaper record);
 
     int updateByPrimaryKey(ScholarPaper record);
+
+    ScholarPaper selectByScholarAndPaper(@Param("scholarId") Integer scholarId,@Param("paperId") Integer paperId);
 }

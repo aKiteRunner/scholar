@@ -10,6 +10,7 @@
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
     <result column="discipline_id" jdbcType="INTEGER" property="disciplineId" />
+    <result column="abstract1" jdbcType="VARCHAR" property="abstract1" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, path, popularity, degree, price, subject_id, discipline_id
+    id, name, path, popularity, degree, price, subject_id, discipline_id, abstract1
   </sql>
   <select id="selectByExample" parameterType="com.web.bean.PaperExample" resultMap="BaseResultMap">
     select
@@ -92,13 +93,18 @@
     from b_paper
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectLastInsertID" resultType="java.lang.Integer">
-    select LAST_INSERT_ID()
-  </select>
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List" />
     from b_paper
     where name = #{name}
+  </select>
+  <select id="selectByDiscipline" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from b_paper, b_discipline
+    where b_paper.discipline_id = #{disciplineId}
+    order by popularity;
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from b_paper
@@ -116,10 +122,10 @@
     </selectKey>
     insert into b_paper (name, path, popularity, 
       degree, price, subject_id, 
-      discipline_id)
+      discipline_id, abstract1)
     values (#{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{popularity,jdbcType=DOUBLE}, 
       #{degree,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{subjectId,jdbcType=INTEGER}, 
-      #{disciplineId,jdbcType=INTEGER})
+      #{disciplineId,jdbcType=INTEGER}, #{abstract1,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.web.bean.Paper">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -148,6 +154,9 @@
       <if test="disciplineId != null">
         discipline_id,
       </if>
+      <if test="abstract1 != null">
+        abstract1,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -170,6 +179,9 @@
       </if>
       <if test="disciplineId != null">
         #{disciplineId,jdbcType=INTEGER},
+      </if>
+      <if test="abstract1 != null">
+        #{abstract1,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -206,6 +218,9 @@
       <if test="record.disciplineId != null">
         discipline_id = #{record.disciplineId,jdbcType=INTEGER},
       </if>
+      <if test="record.abstract1 != null">
+        abstract1 = #{record.abstract1,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -220,7 +235,8 @@
       degree = #{record.degree,jdbcType=INTEGER},
       price = #{record.price,jdbcType=DECIMAL},
       subject_id = #{record.subjectId,jdbcType=INTEGER},
-      discipline_id = #{record.disciplineId,jdbcType=INTEGER}
+      discipline_id = #{record.disciplineId,jdbcType=INTEGER},
+      abstract1 = #{record.abstract1,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -249,6 +265,9 @@
       <if test="disciplineId != null">
         discipline_id = #{disciplineId,jdbcType=INTEGER},
       </if>
+      <if test="abstract1 != null">
+        abstract1 = #{abstract1,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -260,7 +279,8 @@
       degree = #{degree,jdbcType=INTEGER},
       price = #{price,jdbcType=DECIMAL},
       subject_id = #{subjectId,jdbcType=INTEGER},
-      discipline_id = #{disciplineId,jdbcType=INTEGER}
+      discipline_id = #{disciplineId,jdbcType=INTEGER},
+      abstract1 = #{abstract1,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -19,6 +19,8 @@ public class Paper {
 
     private Integer disciplineId;
 
+    private String abstract1;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class Paper {
 
     public void setDisciplineId(Integer disciplineId) {
         this.disciplineId = disciplineId;
+    }
+
+    public String getAbstract1() {
+        return abstract1;
+    }
+
+    public void setAbstract1(String abstract1) {
+        this.abstract1 = abstract1 == null ? null : abstract1.trim();
     }
 }

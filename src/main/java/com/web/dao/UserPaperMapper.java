@@ -27,4 +27,6 @@ public interface UserPaperMapper {
     int updateByPrimaryKeySelective(UserPaper record);
 
     int updateByPrimaryKey(UserPaper record);
+
+    UserPaper selectByUserAndPaper(@Param("userId") Integer userId,@Param("paperId") Integer paperId);
 }
