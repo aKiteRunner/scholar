@@ -38,7 +38,7 @@ public class LoginController {
                 model.addAttribute("errorInfo", "您输入的用户");
             }else{
                 //没写专家情况
-                userService.updateExpAndDegree(userName);
+                userService.updateExpAndDegree(userName, Setting.LOGIN_EXP);
                 //session
                 HttpSession session = request.getSession(true);
                 session.setAttribute("logined", "success");
@@ -48,7 +48,7 @@ public class LoginController {
                 return "index";
             }
         }
-        return "regist";
+        return "login";
     }
 //    public String login(){
 //        String userName = "1";
