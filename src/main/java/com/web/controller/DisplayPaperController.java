@@ -22,6 +22,7 @@ public class DisplayPaperController {
         this.paperService = paperService;
     }
 
+    // 返回按照热度排行
     @RequestMapping("/discipline/{disciplineId}")
     public String displayPaperByCategory(@PathVariable Integer disciplineId, Model model) {
         if (!disciplineService.disciplineExist(disciplineId)) {

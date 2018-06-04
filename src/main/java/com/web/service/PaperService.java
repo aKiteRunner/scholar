@@ -41,4 +41,10 @@ public class PaperService {
     public List<Paper> selectByDiscipline(Integer disciplineId) {
         return paperMapper.selectByDiscipline(disciplineId);
     }
+
+    public void addPopularity(Integer paperId, Double popularity) {
+        Paper paper = paperMapper.selectByPrimaryKey(paperId);
+        paper.setPopularity(paper.getPopularity() + popularity);
+        paperMapper.updateByPrimaryKey(paper);
+    }
 }

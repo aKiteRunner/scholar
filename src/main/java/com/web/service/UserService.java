@@ -49,8 +49,11 @@ public class UserService {
     }
 
     public User getUser(String username){
-        User user = userMapper.selectByName(username);
-        return user;
+        return userMapper.selectByName(username);
+    }
+
+    public User getUser(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
     public void updateExpAndDegree(String userName, int expAdd){
