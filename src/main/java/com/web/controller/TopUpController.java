@@ -5,13 +5,16 @@ import com.web.exception.ParameterInvalidException;
 import com.web.service.TopUpService;
 import com.web.service.UserService;
 import com.web.utils.Setting;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 
 // 充值
 @Controller
@@ -25,15 +28,19 @@ public class TopUpController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/{userId}/topup", method = RequestMethod.POST)
+    @RequestMapping(value = "/setting/topup", method = RequestMethod.POST)
+    @ResponseBody
     // price 代表用户付款金额
     // credit 为兑换后的积分总额
-    public String topUp(@RequestParam(value = "price") String price, @PathVariable(value = "userId") Integer userId, Model model) {
+    public HashMap<String, String> topUp(@RequestBody String json, HttpSession session) {
+        if (session.getAttribute("logined") == null) {
+            return null;
+        }
+        Integer userId = (Integer) session.getAttribute("id");
+        HashMap<String, String> map = new HashMap<>();
+        JSONObject jsonObject = new JSONObject(json);
         try {
-            BigDecimal money = new BigDecimal(price);
-            if (!userService.userExist(userId)) {
-                throw new ParameterInvalidException("用户不存在");
-            }
+            BigDecimal money = jsonObject.getBigDecimal("price");
             int credit = money.multiply(new BigDecimal(Setting.CREDIT_PRICE)).intValue();
             CreditOrder order = new CreditOrder();
             order.setCredit(credit);
@@ -42,17 +49,10 @@ public class TopUpController {
             order.setUserId(userId);
             topUpService.insertOrder(order);
             userService.updateExpAndDegree(userService.getUser(userId).getUsername(), Setting.CREDIT_EXP);
-            model.addAttribute("info", "操作成功");
+            map.put("info", "操作成功");
         } catch (NumberFormatException e) {
-            model.addAttribute("errorInfo", "金额不合法");
-        } catch (ParameterInvalidException e) {
-            model.addAttribute("errorInfo", e.getMessage());
+            map.put("errorInfo", "金额不合法");
         }
-        return "topUpInfo";
-    }
-
-    @RequestMapping(value = "/{userId}/topup", method = RequestMethod.GET)
-    public String  topUp() {
-        return "topUpInfo";
+        return map;
     }
 }
