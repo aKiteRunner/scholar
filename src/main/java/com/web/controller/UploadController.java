@@ -45,7 +45,10 @@ public class UploadController {
     }
 
     @RequestMapping(value = "/{userId}/uploadfile", method = RequestMethod.GET)
-    public String uploadFile() {
+    public String uploadFile(HttpSession session) {
+        if (session.getAttribute("logined") == null) {
+            return "login";
+        }
         return "uploadFile";
     }
 

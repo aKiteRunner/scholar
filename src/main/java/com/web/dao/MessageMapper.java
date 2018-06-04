@@ -20,6 +20,10 @@ public interface MessageMapper {
 
     Message selectByPrimaryKey(Integer id);
 
+    List<Message> selectBySenderId(Integer senderId);
+
+    List<Message> selectByReceiverId(Integer receiverId);
+
     int updateByExampleSelective(@Param("record") Message record, @Param("example") MessageExample example);
 
     int updateByExample(@Param("record") Message record, @Param("example") MessageExample example);
