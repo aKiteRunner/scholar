@@ -115,6 +115,8 @@ public class UploadController {
         headers.setContentDispositionFormData("attachment", filename);
         //application/octet-stream ： 二进制流数据（最常见的文件下载）。
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        // 热度加一
+        paperService.addPopularity(paperId, Setting.POPULARITY_PER_DOWNLOAD);
         return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
                 headers, HttpStatus.CREATED);
     }
