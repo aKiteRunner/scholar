@@ -36,7 +36,7 @@ public class RegisterController {
             model.addAttribute("errorInfo", "用户名需由字母或数字组成且位数不多于12位不少于6位");
         }else if(password1.length() < 8 || userName.length() > 16){
             model.addAttribute("errorInfo", "密码的长度不多于16位不少于8位");
-        }else if(password2.equals(password1)){
+        }else if(!password2.equals(password1)){
             model.addAttribute("errorInfo", "两次输入的密码不一致");
         }else if(!email.matches("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$")){
             model.addAttribute("errorInfo", "输入的邮箱的不合法");

@@ -36,11 +36,11 @@ public class UserService {
     }
 
     public void updateExp(User user){
-        userMapper.updateExpByUsername(user);
+        userMapper.updateExpByUser(user);
     }
 
     public void updateDegree(User user){
-        userMapper.updateDegreeByUsername(user);
+        userMapper.updateDegreeByUser(user);
     }
 
     public int selectExp(String username){
@@ -68,4 +68,14 @@ public class UserService {
             updateExp(user);
         }
     }
+
+    public void updateEmail(User user){
+        userMapper.updateByPrimaryKey(user);
+    }
+
+    public void updatePhone(User user) { userMapper.updateByPrimaryKey(user); }
+
+    public void updatePw(User user) { userMapper.updateByPrimaryKey(user); }
+
+    public void updateUserName(User user) { userMapper.updateByPrimaryKey(user); }
 }

@@ -271,12 +271,12 @@
       exp = #{exp,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateExpByUsername" parameterType="com.web.bean.User">
+  <update id="updateExpByUser" parameterType="com.web.bean.User">
     update s_user
     set exp = #{exp,jdbcType=INTEGER}
     where username = #{username,jdbcType=VARCHAR}
   </update>
-  <update id="updateDegreeByUsername" parameterType="com.web.bean.User">
+  <update id="updateDegreeByUser" parameterType="com.web.bean.User">
     update s_user
     set degree = degree + 1
     where username = #{username,jdbcType=VARCHAR}
