@@ -1,6 +1,10 @@
 package com.web.controller;
 
+import com.web.bean.Application;
+import com.web.bean.Institute;
 import com.web.bean.Message;
+import com.web.service.ApplicationService;
+import com.web.service.InstituteService;
 import com.web.service.MessageService;
 import com.web.service.UserService;
 import org.json.JSONArray;
@@ -21,11 +25,15 @@ import java.util.stream.Collectors;
 public class MessageController {
     private final MessageService messageService;
     private final UserService userService;
+    private final InstituteService instituteService;
+    private final ApplicationService applicationService;
 
     @Autowired
-    public MessageController(MessageService messageService, UserService userService) {
+    public MessageController(MessageService messageService, UserService userService, InstituteService instituteService, ApplicationService applicationService) {
         this.messageService = messageService;
         this.userService = userService;
+        this.instituteService = instituteService;
+        this.applicationService = applicationService;
     }
 
     // 返回所有站内信并标记为已读, AJAX
@@ -39,10 +47,6 @@ public class MessageController {
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, List<Message>> map = new HashMap<String, List<Message>>();
         List<Message> sentMessage = messageService.selectSentMessage(userId);
-        // 按照时间倒序排列，并都标记为已读
-        sentMessage.forEach((Message m) -> {
-            messageService.checkMessage(m.getId());
-        });
         sentMessage = sentMessage.parallelStream().
                 sorted(Comparator.comparing(Message::getSendTime).reversed()).
                 collect(Collectors.toList());
@@ -60,10 +64,6 @@ public class MessageController {
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, List<Message>> map = new HashMap<>();
         List<Message> receivedMessage = messageService.selectReceivedMessage(userId);
-        // 按照时间倒序排列，并都标记为已读
-        receivedMessage.forEach((Message m) -> {
-            messageService.checkMessage(m.getId());
-        });
         receivedMessage = receivedMessage.parallelStream().
                 sorted(Comparator.comparing(Message::getSendTime).reversed()).
                 collect(Collectors.toList());
@@ -73,21 +73,20 @@ public class MessageController {
 
     @RequestMapping(value = "/setting/sendmessage", method = RequestMethod.POST)
     @ResponseBody
-    // JSON中传receiverId, senderId, content
-    public HashMap<String, String> sendMessage(@RequestBody String json, HttpSession session) {
+    // 传receiverId, content
+    public HashMap<String, String> sendMessage(@RequestParam Integer receiverId,
+                                               @RequestParam String content,
+                                               HttpSession session) {
         // 先登录
         if (session.getAttribute("logined") == null) {
             return null;
         }
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, String> map = new HashMap<>();
-        JSONObject jsonObject = new JSONObject(json);
-        Integer receiverId = jsonObject.getInt("receiverId");
         if (!userService.userExist(receiverId)) {
             map.put("errorInfo", "用户不存在");
             return map;
         }
-        String content = jsonObject.getString("content");
         Message message = new Message();
         message.setSenderId(userId);
         message.setReceiverId(receiverId);
@@ -96,6 +95,30 @@ public class MessageController {
         message.setSendTime(new Date());
         messageService.insertMessage(message);
         map.put("info", "发送成功");
+        return map;
+    }
+
+    @RequestMapping(value = "/setting/apply", method = RequestMethod.POST)
+    @ResponseBody
+    public HashMap<String, String> applyForScholar(@RequestParam("institute") String instituteName,
+                                                   @RequestParam("identity") String identity,
+                                                   @RequestParam("title") String title,
+                                                   HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("id");
+        HashMap<String, String> map = new HashMap<>();
+        Institute institute = instituteService.selectByName(instituteName);
+        if (institute == null) {
+            map.put("errorInfo", "未认证的机构");
+            return map;
+        }
+        Integer instituteId = institute.getId();
+        Application application = new Application();
+        application.setUserId(userId);
+        application.setInstituteId(instituteId);
+        application.setTitle(title);
+        application.setIdentity(identity);
+        applicationService.insertApplication(application);
+        map.put("info", "申请已发送");
         return map;
     }
 }

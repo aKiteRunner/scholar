@@ -20,6 +20,8 @@ public interface InstituteMapper {
 
     Institute selectByPrimaryKey(Integer id);
 
+    Institute selectByName(String name);
+
     int updateByExampleSelective(@Param("record") Institute record, @Param("example") InstituteExample example);
 
     int updateByExample(@Param("record") Institute record, @Param("example") InstituteExample example);

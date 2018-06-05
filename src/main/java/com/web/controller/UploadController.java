@@ -7,6 +7,7 @@ import com.web.exception.ParameterInvalidException;
 import com.web.service.*;
 import com.web.utils.Setting;
 import org.apache.commons.io.FileUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 @Controller
@@ -44,7 +46,7 @@ public class UploadController {
         this.scholarPaperService = scholarPaperService;
     }
 
-    @RequestMapping(value = "/{userId}/uploadfile", method = RequestMethod.GET)
+    @RequestMapping(value = "/setting/uploadfile", method = RequestMethod.GET)
     public String uploadFile(HttpSession session) {
         if (session.getAttribute("logined") == null) {
             return "login";
@@ -52,7 +54,7 @@ public class UploadController {
         return "uploadFile";
     }
 
-    @RequestMapping(value = "/{userId}/uploadfile", method = RequestMethod.POST)
+    @RequestMapping(value = "/setting/uploadfile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam(value = "file") MultipartFile file,
                              @RequestParam(value = "subject") String subject,
                              @RequestParam(value = "discipline") String discipline,
@@ -124,11 +126,14 @@ public class UploadController {
                 headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/deletepaper/{paperId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deletepaper", method = RequestMethod.DELETE)
     @ResponseBody
     // 删除paper，AJAX
-    public HashMap<String, Object> deletePaper(@PathVariable Integer paperId, HttpSession httpSession) {
-        HashMap<String, Object> map = new HashMap<String, Object>();
+    public HashMap<String, String> deletePaper(@RequestParam Integer paperId, HttpSession httpSession) {
+        if (httpSession.getAttribute("logined") == null) {
+            return null;
+        }
+        HashMap<String, String> map = new HashMap<>();
         // 用ScholarPaperService判断专家是否拥有此文献
         Integer userId = (Integer) httpSession.getAttribute("id");
         if (!paperService.paperExist(paperId)) {
@@ -142,17 +147,20 @@ public class UploadController {
         return map;
     }
 
-    @RequestMapping(value = "/giftpaper/{paperId}/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/giftpaper/", method = RequestMethod.POST)
     @ResponseBody
-    public HashMap<String, Object> giftPaper(@PathVariable(value = "paperId") Integer paperId,
-                                             @PathVariable(value = "userId") Integer userId,
+    public HashMap<String, String> giftPaper(@RequestParam(value = "paperId") Integer paperId,
+                                             @RequestParam(value = "userId") Integer userId,
                                              HttpSession httpSession) {
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        if (httpSession.getAttribute("logined") == null) {
+            return null;
+        }
+        HashMap<String, String> map = new HashMap<>();
         Integer scholarId = (Integer) httpSession.getAttribute("id");
         // 用ScholarPaperService判断专家是否拥有此文献
         if (!paperService.paperExist(paperId)) {
             map.put("errorInfo", "该文献不存在");
-        } else if (!userService.userExist(userId)){
+        } else if (!userService.userExist(userId)) {
             map.put("errorInfo", "该用户不存在");
         } else if (!scholarPaperService.paperAccessible(scholarId, paperId)) {
             map.put("errorInfo", "没有权限");
@@ -162,6 +170,30 @@ public class UploadController {
             userPaper.setUserId(userId);
             userPaperService.insertUserPaper(userPaper);
             map.put("info", "赠送成功");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/changeprice/", method = RequestMethod.POST)
+    @ResponseBody
+    // 前端传form, JSON返回
+    public HashMap<String, String> changePaperPrice(@RequestParam(value = "paperId") Integer paperId,
+                                                    @RequestParam("price") String money,
+                                                    HttpSession session) {
+        if (session.getAttribute("logined") == null) {
+            return null;
+        }
+        Integer userId = (Integer) session.getAttribute("id");
+        BigDecimal price = new BigDecimal(money);
+        HashMap<String, String> map;
+        map = new HashMap<String, String>();
+        if (!paperService.paperExist(paperId)) {
+            map.put("errorInfo", "该文献不存在");
+        } else if (!scholarPaperService.paperAccessible(userId, paperId)) {
+            map.put("errorInfo", "没有权限");
+        } else {
+            paperService.updatePrice(paperId, price);
+            map.put("info", "修改成功");
         }
         return map;
     }
