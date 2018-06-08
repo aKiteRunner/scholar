@@ -4,11 +4,14 @@ import com.web.bean.Discipline;
 import com.web.bean.Paper;
 import com.web.bean.PaperExample;
 import com.web.bean.PaperForSearch;
+import com.web.bean.PaperForSearch;
 import com.web.dao.PaperMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,6 +45,10 @@ public class PaperService {
         return paperMapper.selectByName(name);
     }
 
+    public List<Paper> mostPopularPaper(Integer number) {
+        return paperMapper.orderByDescendingPopularity(number);
+    }
+
     public boolean paperExist(Integer id) {
         return null != paperMapper.selectByPrimaryKey(id);
     }
@@ -58,9 +65,19 @@ public class PaperService {
         return paperMapper.selectByDiscipline(disciplineId);
     }
 
+    public List<Paper> selectByUser(Integer userId) {
+        return paperMapper.selectByUser(userId);
+    }
+
     public void addPopularity(Integer paperId, Double popularity) {
         Paper paper = paperMapper.selectByPrimaryKey(paperId);
         paper.setPopularity(paper.getPopularity() + popularity);
+        paperMapper.updateByPrimaryKey(paper);
+    }
+
+    public void updatePrice(Integer paperId, BigDecimal price) {
+        Paper paper = selectById(paperId);
+        paper.setPrice(price);
         paperMapper.updateByPrimaryKey(paper);
     }
 }

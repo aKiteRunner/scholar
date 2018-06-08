@@ -20,11 +20,15 @@ public interface PaperMapper {
 
     List<Paper> selectByExample(PaperExample example);
 
+    List<Paper> orderByDescendingPopularity(Integer number);
+
     Paper selectByPrimaryKey(Integer id);
 
     Paper selectByName(String name);
 
     List<Paper> selectByDiscipline(Integer disciplineId);
+
+    List<Paper> selectByUser(Integer userId);
 
     int updateByExampleSelective(@Param("record") Paper record, @Param("example") PaperExample example);
 

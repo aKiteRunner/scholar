@@ -20,6 +20,8 @@ public interface CreditOrderMapper {
 
     CreditOrder selectByPrimaryKey(Integer id);
 
+    List<CreditOrder> selectByUser(Integer userId);
+
     int updateByExampleSelective(@Param("record") CreditOrder record, @Param("example") CreditOrderExample example);
 
     int updateByExample(@Param("record") CreditOrder record, @Param("example") CreditOrderExample example);

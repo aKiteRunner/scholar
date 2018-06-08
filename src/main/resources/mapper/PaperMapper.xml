@@ -104,7 +104,26 @@
       <include refid="Base_Column_List"/>
     from b_paper, b_discipline
     where b_paper.discipline_id = #{disciplineId}
-    order by popularity;
+  </select>
+  <select id="selectByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from b_paper, b_paper_order
+    where b_paper.id = b_paper_order.paper_id and b_paper_order.user_id = #{userId};
+  </select>
+  <select id="orderByAscendingPopularity" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from b_paper
+    order by popularity asc
+    limit #{number};
+  </select>
+  <select id="orderByDescendingPopularity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from b_paper
+    order by popularity desc
+    limit #{number};
   </select>
   <select id="selectPaperForSearch" resultMap="BaseResultMap">
     select

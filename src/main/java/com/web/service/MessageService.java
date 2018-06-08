@@ -2,6 +2,7 @@ package com.web.service;
 
 import com.web.bean.Message;
 import com.web.dao.MessageMapper;
+import com.web.utils.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,12 @@ public class MessageService {
 
     public void checkMessage(Integer messageId) {
         Message message = messageMapper.selectByPrimaryKey(messageId);
-        message.setStatus((byte)1);
+        if (message.getStatus() == Setting.UNREAD_MESSAGE) {
+            message.setStatus(Setting.READ_MESSAGE);
+        }
+        if (message.getStatus() == Setting.UNREAD_APPLICATION) {
+            message.setStatus(Setting.READ_APPLICATION);
+        }
         messageMapper.updateByPrimaryKey(message);
     }
 }

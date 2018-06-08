@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.web.dao.InstituteMapper">
-  <resultMap id="BaseResultMap" type="com.web.bean.Institute">
+<mapper namespace="com.web.dao.ApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.web.bean.Application">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="institute_id" jdbcType="INTEGER" property="instituteId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name
+    id, user_id, institute_id, title, identity
   </sql>
-  <select id="selectByExample" parameterType="com.web.bean.InstituteExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.web.bean.ApplicationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from b_institute
+    from b_application
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,62 +86,90 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from b_institute
+    from b_application
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from b_institute
-    where name = #{name};
+    from b_application
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from b_institute
+    delete from b_application
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.web.bean.InstituteExample">
-    delete from b_institute
+  <delete id="deleteByExample" parameterType="com.web.bean.ApplicationExample">
+    delete from b_application
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.web.bean.Institute">
+  <insert id="insert" parameterType="com.web.bean.Application">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into b_institute (name)
-    values (#{name,jdbcType=VARCHAR})
+    insert into b_application (user_id, institute_id, title, 
+      identity)
+    values (#{userId,jdbcType=INTEGER}, #{instituteId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.web.bean.Institute">
+  <insert id="insertSelective" parameterType="com.web.bean.Application">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into b_institute
+    insert into b_application
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="instituteId != null">
+        institute_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="identity != null">
+        identity,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="instituteId != null">
+        #{instituteId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.web.bean.InstituteExample" resultType="java.lang.Long">
-    select count(*) from b_institute
+  <select id="countByExample" parameterType="com.web.bean.ApplicationExample" resultType="java.lang.Long">
+    select count(*) from b_application
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update b_institute
+    update b_application
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.instituteId != null">
+        institute_id = #{record.instituteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identity != null">
+        identity = #{record.identity,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -146,25 +177,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update b_institute
+    update b_application
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR}
+      user_id = #{record.userId,jdbcType=INTEGER},
+      institute_id = #{record.instituteId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      identity = #{record.identity,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.web.bean.Institute">
-    update b_institute
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.bean.Application">
+    update b_application
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="instituteId != null">
+        institute_id = #{instituteId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.web.bean.Institute">
-    update b_institute
-    set name = #{name,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.web.bean.Application">
+    update b_application
+    set user_id = #{userId,jdbcType=INTEGER},
+      institute_id = #{instituteId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -78,9 +78,11 @@
         <!--<table tableName="`s_user`" domainObjectName="User">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="`b_message`" domainObjectName="Message">
-        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        <!--<table tableName="`b_message`" domainObjectName="Message">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+        <table tableName="`b_application`" domainObjectName="Application">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-
     </context>
 </generatorConfiguration>
