@@ -1,5 +1,6 @@
 package com.web.service;
 
+import com.web.bean.Scholar;
 import com.web.dao.ScholarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,9 @@ public class ScholarService {
 
     public boolean scholarExist(Integer id) {
         return null != scholarMapper.selectByPrimaryKey(id);
+    }
+
+    public void addScholar(Scholar scholar) {
+        scholarMapper.insert(scholar);
     }
 }

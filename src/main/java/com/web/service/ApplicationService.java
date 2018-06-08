@@ -23,4 +23,8 @@ public class ApplicationService {
     public List<Application> selectAll() {
         return applicationMapper.selectAll();
     }
+
+    public Application getApplication(Integer applicationId) {
+        return applicationMapper.selectByPrimaryKey(applicationId);
+    }
 }
