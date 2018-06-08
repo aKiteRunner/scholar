@@ -3,6 +3,8 @@ package com.web.dao;
 import com.web.bean.Paper;
 import com.web.bean.PaperExample;
 import java.util.List;
+
+import com.web.bean.PaperForSearch;
 import org.apache.ibatis.annotations.Param;
 
 public interface PaperMapper {
@@ -31,4 +33,7 @@ public interface PaperMapper {
     int updateByPrimaryKeySelective(Paper record);
 
     int updateByPrimaryKey(Paper record);
+
+    //elastic
+    List<Paper> selectPaperForSearch();
 }

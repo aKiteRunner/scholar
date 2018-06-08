@@ -83,12 +83,15 @@ public class UpdateInfo {
         JSONObject jsonObject = new JSONObject(json);
         String oldPw = jsonObject.getString("oldPw");
         String newPw = jsonObject.getString("newPw");
+        String newPwConf = jsonObject.getString("newPwConf");
         String rightPw = user.getPassword();
         String encodeedPassword = "";
         if(!Md5.checkpassword(oldPw, rightPw)){
             map.put("errorInfo", "原密码输入错误");
         }else if(newPw.length() < 8 || newPw.length() > 16){
             map.put("errorInfo", "新密码长度不合规范");
+        }else if(!newPw.equals(newPwConf)) {
+            map.put("errorInfo", "两次输入的密码不一致");
         }else{
             try{
                 encodeedPassword = Md5.EncoderByMd5(newPw);

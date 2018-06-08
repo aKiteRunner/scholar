@@ -106,6 +106,11 @@
     where b_paper.discipline_id = #{disciplineId}
     order by popularity;
   </select>
+  <select id="selectPaperForSearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from b_paper
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from b_paper
     where id = #{id,jdbcType=INTEGER}
