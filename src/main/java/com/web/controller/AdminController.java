@@ -69,12 +69,7 @@ public class AdminController {
             // 如果同意，将其加入到专家数据库，并发送站内信通知
             Scholar scholar = new Scholar();
             scholar.setId(user.getId());
-            scholar.setCredit(user.getCredit());
-            scholar.setDegree(user.getDegree());
-            scholar.setEmail(user.getEmail());
             scholar.setUsername(user.getUsername());
-            scholar.setPassword(user.getPassword());
-            scholar.setPhone(user.getPhone());
             scholar.setIdentity(application.getIdentity());
             scholar.setInstituteId(application.getInstituteId());
             scholar.setTitle(application.getTitle());

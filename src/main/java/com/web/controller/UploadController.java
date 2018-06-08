@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 
 @Controller
@@ -79,6 +80,7 @@ public class UploadController {
                 paper.setSubjectId(subjectService.selectByName(subject).getId());
                 paper.setName(file.getOriginalFilename());
                 paper.setPath(storedFile.getAbsolutePath());
+                paper.setTime(new Date());
                 paperService.insertPaper(paper);
                 Integer paperId = paperService.selectByName(file.getOriginalFilename()).getId();
                 System.out.println(paperId);
@@ -122,7 +124,7 @@ public class UploadController {
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         // 热度加一
         paperService.addPopularity(paperId, Setting.POPULARITY_PER_DOWNLOAD);
-        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
+        return new ResponseEntity<>(FileUtils.readFileToByteArray(file),
                 headers, HttpStatus.CREATED);
     }
 
@@ -186,7 +188,7 @@ public class UploadController {
         Integer userId = (Integer) session.getAttribute("id");
         BigDecimal price = new BigDecimal(money);
         HashMap<String, String> map;
-        map = new HashMap<String, String>();
+        map = new HashMap<>();
         if (!paperService.paperExist(paperId)) {
             map.put("errorInfo", "该文献不存在");
         } else if (!scholarPaperService.paperAccessible(userId, paperId)) {

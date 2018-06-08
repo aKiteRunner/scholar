@@ -11,7 +11,7 @@ public class DisciplineExample {
     protected List<Criteria> oredCriteria;
 
     public DisciplineExample() {
-        oredCriteria = new ArrayList<Criteria>();
+        oredCriteria = new ArrayList<>();
     }
 
     public void setOrderByClause(String orderByClause) {
@@ -53,8 +53,7 @@ public class DisciplineExample {
     }
 
     protected Criteria createCriteriaInternal() {
-        Criteria criteria = new Criteria();
-        return criteria;
+        return new Criteria();
     }
 
     public void clear() {
@@ -68,7 +67,7 @@ public class DisciplineExample {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<Criterion>();
+            criteria = new ArrayList<>();
         }
 
         public boolean isValid() {
@@ -291,6 +290,66 @@ public class DisciplineExample {
 
         public Criteria andSuperDisciplineIdNotBetween(Integer value1, Integer value2) {
             addCriterion("super_discipline_id not between", value1, value2, "superDisciplineId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityIsNull() {
+            addCriterion("popularity is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityIsNotNull() {
+            addCriterion("popularity is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityEqualTo(Integer value) {
+            addCriterion("popularity =", value, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityNotEqualTo(Integer value) {
+            addCriterion("popularity <>", value, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityGreaterThan(Integer value) {
+            addCriterion("popularity >", value, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityGreaterThanOrEqualTo(Integer value) {
+            addCriterion("popularity >=", value, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityLessThan(Integer value) {
+            addCriterion("popularity <", value, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityLessThanOrEqualTo(Integer value) {
+            addCriterion("popularity <=", value, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityIn(List<Integer> values) {
+            addCriterion("popularity in", values, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityNotIn(List<Integer> values) {
+            addCriterion("popularity not in", values, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityBetween(Integer value1, Integer value2) {
+            addCriterion("popularity between", value1, value2, "popularity");
+            return (Criteria) this;
+        }
+
+        public Criteria andPopularityNotBetween(Integer value1, Integer value2) {
+            addCriterion("popularity not between", value1, value2, "popularity");
             return (Criteria) this;
         }
     }

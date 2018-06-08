@@ -4,14 +4,11 @@
   <resultMap id="BaseResultMap" type="com.web.bean.Scholar">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="CHAR" property="password" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="degree" jdbcType="INTEGER" property="degree" />
-    <result column="credit" jdbcType="INTEGER" property="credit" />
-    <result column="phone" jdbcType="CHAR" property="phone" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="identity" jdbcType="VARCHAR" property="identity" />
     <result column="institute_id" jdbcType="INTEGER" property="instituteId" />
+    <result column="popularity" jdbcType="INTEGER" property="popularity" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, email, degree, credit, phone, title, identity, institute_id
+    id, username, title, identity, institute_id, popularity, avatar
   </sql>
   <select id="selectByExample" parameterType="com.web.bean.ScholarExample" resultMap="BaseResultMap">
     select
@@ -108,13 +105,11 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into s_scholar (username, password, email, 
-      degree, credit, phone, 
-      title, identity, institute_id
+    insert into s_scholar (username, title, identity, 
+      institute_id, popularity, avatar
       )
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
-      #{degree,jdbcType=INTEGER}, #{credit,jdbcType=INTEGER}, #{phone,jdbcType=CHAR}, 
-      #{title,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{instituteId,jdbcType=INTEGER}
+    values (#{username,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, 
+      #{instituteId,jdbcType=INTEGER}, #{popularity,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.web.bean.Scholar">
@@ -126,21 +121,6 @@
       <if test="username != null">
         username,
       </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="degree != null">
-        degree,
-      </if>
-      <if test="credit != null">
-        credit,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
       <if test="title != null">
         title,
       </if>
@@ -150,25 +130,16 @@
       <if test="instituteId != null">
         institute_id,
       </if>
+      <if test="popularity != null">
+        popularity,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=CHAR},
-      </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="degree != null">
-        #{degree,jdbcType=INTEGER},
-      </if>
-      <if test="credit != null">
-        #{credit,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=CHAR},
       </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
@@ -178,6 +149,12 @@
       </if>
       <if test="instituteId != null">
         #{instituteId,jdbcType=INTEGER},
+      </if>
+      <if test="popularity != null">
+        #{popularity,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -196,21 +173,6 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=CHAR},
-      </if>
-      <if test="record.email != null">
-        email = #{record.email,jdbcType=VARCHAR},
-      </if>
-      <if test="record.degree != null">
-        degree = #{record.degree,jdbcType=INTEGER},
-      </if>
-      <if test="record.credit != null">
-        credit = #{record.credit,jdbcType=INTEGER},
-      </if>
-      <if test="record.phone != null">
-        phone = #{record.phone,jdbcType=CHAR},
-      </if>
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
@@ -219,6 +181,12 @@
       </if>
       <if test="record.instituteId != null">
         institute_id = #{record.instituteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.popularity != null">
+        popularity = #{record.popularity,jdbcType=INTEGER},
+      </if>
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -229,14 +197,11 @@
     update s_scholar
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=CHAR},
-      email = #{record.email,jdbcType=VARCHAR},
-      degree = #{record.degree,jdbcType=INTEGER},
-      credit = #{record.credit,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=CHAR},
       title = #{record.title,jdbcType=VARCHAR},
       identity = #{record.identity,jdbcType=VARCHAR},
-      institute_id = #{record.instituteId,jdbcType=INTEGER}
+      institute_id = #{record.instituteId,jdbcType=INTEGER},
+      popularity = #{record.popularity,jdbcType=INTEGER},
+      avatar = #{record.avatar,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -247,21 +212,6 @@
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=CHAR},
-      </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="degree != null">
-        degree = #{degree,jdbcType=INTEGER},
-      </if>
-      <if test="credit != null">
-        credit = #{credit,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=CHAR},
-      </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
@@ -271,20 +221,23 @@
       <if test="instituteId != null">
         institute_id = #{instituteId,jdbcType=INTEGER},
       </if>
+      <if test="popularity != null">
+        popularity = #{popularity,jdbcType=INTEGER},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.web.bean.Scholar">
     update s_scholar
     set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=CHAR},
-      email = #{email,jdbcType=VARCHAR},
-      degree = #{degree,jdbcType=INTEGER},
-      credit = #{credit,jdbcType=INTEGER},
-      phone = #{phone,jdbcType=CHAR},
       title = #{title,jdbcType=VARCHAR},
       identity = #{identity,jdbcType=VARCHAR},
-      institute_id = #{instituteId,jdbcType=INTEGER}
+      institute_id = #{instituteId,jdbcType=INTEGER},
+      popularity = #{popularity,jdbcType=INTEGER},
+      avatar = #{avatar,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

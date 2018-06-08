@@ -7,6 +7,8 @@ public class Discipline {
 
     private Integer superDisciplineId;
 
+    private Integer popularity;
+
     public Integer getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class Discipline {
 
     public void setSuperDisciplineId(Integer superDisciplineId) {
         this.superDisciplineId = superDisciplineId;
+    }
+
+    public Integer getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
     }
 }

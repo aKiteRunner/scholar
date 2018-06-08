@@ -1,6 +1,7 @@
 package com.web.bean;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Paper {
     private Integer id;
@@ -20,6 +21,8 @@ public class Paper {
     private Integer disciplineId;
 
     private String abstract1;
+
+    private Date time;
 
     public Integer getId() {
         return id;
@@ -91,5 +94,13 @@ public class Paper {
 
     public void setAbstract1(String abstract1) {
         this.abstract1 = abstract1 == null ? null : abstract1.trim();
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

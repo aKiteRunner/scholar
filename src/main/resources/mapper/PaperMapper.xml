@@ -11,6 +11,7 @@
     <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
     <result column="discipline_id" jdbcType="INTEGER" property="disciplineId" />
     <result column="abstract1" jdbcType="VARCHAR" property="abstract1" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, path, popularity, degree, price, subject_id, discipline_id, abstract1
+    id, name, path, popularity, degree, price, subject_id, discipline_id, abstract1, 
+    time
   </sql>
   <select id="selectByExample" parameterType="com.web.bean.PaperExample" resultMap="BaseResultMap">
     select
@@ -101,33 +103,33 @@
   </select>
   <select id="selectByDiscipline" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-      <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List" />
     from b_paper, b_discipline
     where b_paper.discipline_id = #{disciplineId}
   </select>
   <select id="selectByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List" />
     from b_paper, b_paper_order
     where b_paper.id = b_paper_order.paper_id and b_paper_order.user_id = #{userId};
   </select>
   <select id="orderByAscendingPopularity" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List" />
     from b_paper
     order by popularity asc
     limit #{number};
   </select>
   <select id="orderByDescendingPopularity" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List" />
     from b_paper
     order by popularity desc
     limit #{number};
   </select>
   <select id="selectPaperForSearch" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List" />
     from b_paper
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -146,10 +148,12 @@
     </selectKey>
     insert into b_paper (name, path, popularity, 
       degree, price, subject_id, 
-      discipline_id, abstract1)
+      discipline_id, abstract1, time
+      )
     values (#{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{popularity,jdbcType=DOUBLE}, 
       #{degree,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{subjectId,jdbcType=INTEGER}, 
-      #{disciplineId,jdbcType=INTEGER}, #{abstract1,jdbcType=VARCHAR})
+      #{disciplineId,jdbcType=INTEGER}, #{abstract1,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.web.bean.Paper">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -181,6 +185,9 @@
       <if test="abstract1 != null">
         abstract1,
       </if>
+      <if test="time != null">
+        time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -206,6 +213,9 @@
       </if>
       <if test="abstract1 != null">
         #{abstract1,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -245,6 +255,9 @@
       <if test="record.abstract1 != null">
         abstract1 = #{record.abstract1,jdbcType=VARCHAR},
       </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -260,7 +273,8 @@
       price = #{record.price,jdbcType=DECIMAL},
       subject_id = #{record.subjectId,jdbcType=INTEGER},
       discipline_id = #{record.disciplineId,jdbcType=INTEGER},
-      abstract1 = #{record.abstract1,jdbcType=VARCHAR}
+      abstract1 = #{record.abstract1,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -292,6 +306,9 @@
       <if test="abstract1 != null">
         abstract1 = #{abstract1,jdbcType=VARCHAR},
       </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -304,7 +321,8 @@
       price = #{price,jdbcType=DECIMAL},
       subject_id = #{subjectId,jdbcType=INTEGER},
       discipline_id = #{disciplineId,jdbcType=INTEGER},
-      abstract1 = #{abstract1,jdbcType=VARCHAR}
+      abstract1 = #{abstract1,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
