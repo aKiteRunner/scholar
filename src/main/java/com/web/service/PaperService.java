@@ -3,10 +3,13 @@ package com.web.service;
 import com.web.bean.Discipline;
 import com.web.bean.Paper;
 import com.web.bean.PaperExample;
+import com.web.bean.PaperForSearch;
+import com.web.bean.PaperForSearch;
 import com.web.dao.PaperMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +25,20 @@ public class PaperService {
 
     public Paper selectById(Integer id) {
         return paperMapper.selectByPrimaryKey(id);
+    }
+
+    public List<PaperForSearch> selectPaperForSearch(){
+        List<Paper> list = paperMapper.selectPaperForSearch();
+        List<PaperForSearch> pfsList = new ArrayList<>();
+        for(int i = 0; i <list.size(); i++ ){
+            int id = list.get(i).getId();
+            String name = list.get(i).getName();
+            double popularity = list.get(i).getPopularity();
+            String abstract1 = list.get(i).getAbstract1();
+            PaperForSearch pfs = new PaperForSearch(id, name, popularity, abstract1);
+            pfsList.add(pfs);
+        }
+        return pfsList;
     }
 
     public Paper selectByName(String name) {

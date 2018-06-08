@@ -3,14 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/scholar_war</output-path>
     <root id="archive" name="scholar_war.war">
       <element id="artifact" artifact-name="scholar:war exploded" />
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
-      </element>
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: javax.servlet.jsp:jsp-api:2.1" />
-        </element>
-      </element>
     </root>
   </artifact>
 </component>
