@@ -1,6 +1,5 @@
 package com.web.bean;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +12,7 @@ public class PaperExample {
     protected List<Criteria> oredCriteria;
 
     public PaperExample() {
-        oredCriteria = new ArrayList<>();
+        oredCriteria = new ArrayList<Criteria>();
     }
 
     public void setOrderByClause(String orderByClause) {
@@ -55,7 +54,8 @@ public class PaperExample {
     }
 
     protected Criteria createCriteriaInternal() {
-        return new Criteria();
+        Criteria criteria = new Criteria();
+        return criteria;
     }
 
     public void clear() {
@@ -69,7 +69,7 @@ public class PaperExample {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<>();
+            criteria = new ArrayList<Criterion>();
         }
 
         public boolean isValid() {
@@ -435,52 +435,52 @@ public class PaperExample {
             return (Criteria) this;
         }
 
-        public Criteria andPriceEqualTo(BigDecimal value) {
+        public Criteria andPriceEqualTo(Integer value) {
             addCriterion("price =", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotEqualTo(BigDecimal value) {
+        public Criteria andPriceNotEqualTo(Integer value) {
             addCriterion("price <>", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThan(BigDecimal value) {
+        public Criteria andPriceGreaterThan(Integer value) {
             addCriterion("price >", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andPriceGreaterThanOrEqualTo(Integer value) {
             addCriterion("price >=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThan(BigDecimal value) {
+        public Criteria andPriceLessThan(Integer value) {
             addCriterion("price <", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andPriceLessThanOrEqualTo(Integer value) {
             addCriterion("price <=", value, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIn(List<BigDecimal> values) {
+        public Criteria andPriceIn(List<Integer> values) {
             addCriterion("price in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotIn(List<BigDecimal> values) {
+        public Criteria andPriceNotIn(List<Integer> values) {
             addCriterion("price not in", values, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andPriceBetween(Integer value1, Integer value2) {
             addCriterion("price between", value1, value2, "price");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andPriceNotBetween(Integer value1, Integer value2) {
             addCriterion("price not between", value1, value2, "price");
             return (Criteria) this;
         }

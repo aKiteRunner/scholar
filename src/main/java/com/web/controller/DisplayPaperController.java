@@ -1,16 +1,15 @@
 package com.web.controller;
 
+import com.web.bean.Comment;
 import com.web.bean.Paper;
-import com.web.service.DisciplineService;
-import com.web.service.PaperService;
+import com.web.bean.User;
+import com.web.bean.UserPaper;
+import com.web.service.*;
 import com.web.utils.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Comparator;
@@ -22,11 +21,17 @@ import java.util.stream.Collectors;
 public class DisplayPaperController {
     private final DisciplineService disciplineService;
     private final PaperService paperService;
+    private final UserService userService;
+    private final UserPaperService userPaperService;
+    private final CommentService commentService;
 
     @Autowired
-    public DisplayPaperController(DisciplineService disciplineService, PaperService paperService) {
+    public DisplayPaperController(DisciplineService disciplineService, PaperService paperService, UserService userService, UserPaperService userPaperService, CommentService commentService) {
         this.disciplineService = disciplineService;
         this.paperService = paperService;
+        this.userService = userService;
+        this.userPaperService = userPaperService;
+        this.commentService = commentService;
     }
 
     // 返回按照热度排行
@@ -59,11 +64,51 @@ public class DisplayPaperController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/popularpaper/", method = RequestMethod.GET)
+    @RequestMapping(value = "/popularpaper", method = RequestMethod.GET)
     public HashMap<String, List<Paper>> displayPopularPaper() {
         HashMap<String, List<Paper>> map = new HashMap<>();
         List<Paper> papers = paperService.mostPopularPaper(Setting.INDEX_PAPER_NUMBER);
         map.put("popularPaper", papers);
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/buypaper", method = RequestMethod.POST)
+    public HashMap<String, String> buyPaper(HttpSession session, @RequestParam Integer paperId) {
+        // 判断是否登录
+        Integer userId = (Integer) session.getAttribute("id");
+        User user = userService.getUser(userId);
+        Paper paper = paperService.selectById(paperId);
+        HashMap<String, String> map = new HashMap<>();
+        Integer credit = user.getCredit();
+        Integer price = paper.getPrice();
+        if (userPaperService.paperAccessible(userId, paperId)) {
+            map.put("errorInfo", "您已经拥有此文献");
+        } else if (credit < price){
+            map.put("errorInfo", "金额不足无法购买");
+        } else {
+            credit -= price;
+            user.setCredit(credit);
+            userService.updateUser(user);
+            UserPaper userPaper = new UserPaper();
+            userPaper.setUserId(userId);
+            userPaper.setPaperId(paperId);
+            userPaperService.insertUserPaper(userPaper);
+            map.put("info", "购买成功");
+        }
+        return map;
+    }
+
+    // 查看文献和评论
+    @RequestMapping(value = "paper/{paperId}", method = RequestMethod.GET)
+    public String displayPaper(@PathVariable Integer paperId, Model model) {
+        if (!paperService.paperExist(paperId)) {
+            return "404";
+        }
+        Paper paper = paperService.selectById(paperId);
+        model.addAttribute("paper", paper);
+        List<Comment> comments = commentService.paperComment(paperId);
+        model.addAttribute("comment", comments);
+        return "paper";
     }
 }

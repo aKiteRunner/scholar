@@ -7,7 +7,7 @@
     <result column="path" jdbcType="VARCHAR" property="path" />
     <result column="popularity" jdbcType="DOUBLE" property="popularity" />
     <result column="degree" jdbcType="INTEGER" property="degree" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="price" jdbcType="INTEGER" property="price" />
     <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
     <result column="discipline_id" jdbcType="INTEGER" property="disciplineId" />
     <result column="abstract1" jdbcType="VARCHAR" property="abstract1" />
@@ -151,7 +151,7 @@
       discipline_id, abstract1, time
       )
     values (#{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{popularity,jdbcType=DOUBLE}, 
-      #{degree,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{subjectId,jdbcType=INTEGER}, 
+      #{degree,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{subjectId,jdbcType=INTEGER}, 
       #{disciplineId,jdbcType=INTEGER}, #{abstract1,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -203,7 +203,7 @@
         #{degree,jdbcType=INTEGER},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DECIMAL},
+        #{price,jdbcType=INTEGER},
       </if>
       <if test="subjectId != null">
         #{subjectId,jdbcType=INTEGER},
@@ -244,7 +244,7 @@
         degree = #{record.degree,jdbcType=INTEGER},
       </if>
       <if test="record.price != null">
-        price = #{record.price,jdbcType=DECIMAL},
+        price = #{record.price,jdbcType=INTEGER},
       </if>
       <if test="record.subjectId != null">
         subject_id = #{record.subjectId,jdbcType=INTEGER},
@@ -270,7 +270,7 @@
       path = #{record.path,jdbcType=VARCHAR},
       popularity = #{record.popularity,jdbcType=DOUBLE},
       degree = #{record.degree,jdbcType=INTEGER},
-      price = #{record.price,jdbcType=DECIMAL},
+      price = #{record.price,jdbcType=INTEGER},
       subject_id = #{record.subjectId,jdbcType=INTEGER},
       discipline_id = #{record.disciplineId,jdbcType=INTEGER},
       abstract1 = #{record.abstract1,jdbcType=VARCHAR},
@@ -295,7 +295,7 @@
         degree = #{degree,jdbcType=INTEGER},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DECIMAL},
+        price = #{price,jdbcType=INTEGER},
       </if>
       <if test="subjectId != null">
         subject_id = #{subjectId,jdbcType=INTEGER},
@@ -318,7 +318,7 @@
       path = #{path,jdbcType=VARCHAR},
       popularity = #{popularity,jdbcType=DOUBLE},
       degree = #{degree,jdbcType=INTEGER},
-      price = #{price,jdbcType=DECIMAL},
+      price = #{price,jdbcType=INTEGER},
       subject_id = #{subjectId,jdbcType=INTEGER},
       discipline_id = #{disciplineId,jdbcType=INTEGER},
       abstract1 = #{abstract1,jdbcType=VARCHAR},

@@ -48,15 +48,15 @@
         <!--<table tableName="`b_credit_order`" domainObjectName="CreditOrder">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="`b_discipline`" domainObjectName="Discipline">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="`b_discipline`" domainObjectName="Discipline">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
         <!--<table tableName="`b_institute`" domainObjectName="Institute">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="`b_paper`" domainObjectName="Paper">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="`b_paper`" domainObjectName="Paper">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
         <!--<table tableName="`b_paper_order`" domainObjectName="PaperOrder">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
@@ -72,9 +72,9 @@
         <!--<table tableName="`s_admin`" domainObjectName="Admin">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="`s_scholar`" domainObjectName="Scholar">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+        <!--<table tableName="`s_scholar`" domainObjectName="Scholar">-->
+            <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
         <!--<table tableName="`s_user`" domainObjectName="User">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
@@ -84,5 +84,8 @@
         <!--<table tableName="`b_application`" domainObjectName="Application">-->
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
         <!--</table>-->
+        <table tableName="`b_comment`" domainObjectName="Comment">
+        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>
