@@ -6,7 +6,9 @@ public class Setting {
     public static final int CREDIT_EXP = 10;
     public static final int LOGIN_EXP = 1;
     public static final String UPLOAD_ROOT = "src/main/webapp/resources/upload/";
-    public static final double POPULARITY_PER_DOWNLOAD = 1.0;
+    public static final double POPULARITY_PER_DOWNLOAD = 2.0;
+    public static final double POPULARITY_PER_CLICK = 1.0;
+    public static final double POPULARITY_PER_PURCHASE = 3.0;
     public static final int INDEX_PAPER_NUMBER = 3;
     public static final byte UNREAD_MESSAGE = 0;
     public static final byte READ_MESSAGE = 1;

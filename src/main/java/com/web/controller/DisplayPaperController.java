@@ -94,6 +94,7 @@ public class DisplayPaperController {
             userPaper.setUserId(userId);
             userPaper.setPaperId(paperId);
             userPaperService.insertUserPaper(userPaper);
+            paperService.addPopularity(paperId, Setting.POPULARITY_PER_PURCHASE);
             map.put("info", "购买成功");
         }
         return map;
@@ -106,6 +107,7 @@ public class DisplayPaperController {
             return "404";
         }
         Paper paper = paperService.selectById(paperId);
+        paperService.addPopularity(paperId, Setting.POPULARITY_PER_CLICK);
         model.addAttribute("paper", paper);
         List<Comment> comments = commentService.paperComment(paperId);
         model.addAttribute("comment", comments);
