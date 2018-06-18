@@ -87,6 +87,11 @@
     from r_scholar_paper
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByPaper" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select scholar_id
+    from r_scholar_paper
+    where paper_id = #{paperId,jdbcType=INTEGER}
+  </select>
   <select id="selectByScholarAndPaper" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

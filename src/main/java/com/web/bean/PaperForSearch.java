@@ -1,5 +1,7 @@
 package com.web.bean;
 
+import java.util.Date;
+
 public class PaperForSearch {
     private Integer id;
 
@@ -9,11 +11,23 @@ public class PaperForSearch {
 
     private String abstract1;
 
-    public PaperForSearch(int id, String name, double popularity, String abstract1){
+    private String scholarname;
+
+    private Date time;
+
+    public PaperForSearch(int id, String name, double popularity, String abstract1, String scholarname, Date time){
         this.id = id;
         this.name = name;
         this.popularity = popularity;
         this.abstract1 = abstract1;
+        this.scholarname = scholarname;
+        this.time = time;
+    }
+
+    public void setTime(Date time){ this.time = time; }
+
+    public void setScholarname(String scholarname) {
+        this.scholarname = scholarname;
     }
 
     public void setId(Integer id) {
@@ -47,4 +61,10 @@ public class PaperForSearch {
     public String getAbstract1() {
         return abstract1;
     }
+
+    public String getScholarname() {
+        return scholarname;
+    }
+
+    public Date getTime() { return time; }
 }

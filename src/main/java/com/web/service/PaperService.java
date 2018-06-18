@@ -17,10 +17,14 @@ import java.util.List;
 @Service
 public class PaperService {
     private final PaperMapper paperMapper;
+    private final ScholarPaperService scholarPaperService;
+    private final ScholarService scholarService;
 
     @Autowired
-    public PaperService(PaperMapper paperMapper) {
+    public PaperService(PaperMapper paperMapper, ScholarPaperService scholarPaperService, ScholarService scholarService) {
         this.paperMapper = paperMapper;
+        this.scholarPaperService = scholarPaperService;
+        this.scholarService = scholarService;
     }
 
     public Paper selectById(Integer id) {
@@ -35,7 +39,10 @@ public class PaperService {
             String name = list.get(i).getName();
             double popularity = list.get(i).getPopularity();
             String abstract1 = list.get(i).getAbstract1();
-            PaperForSearch pfs = new PaperForSearch(id, name, popularity, abstract1);
+            int scholarId = scholarPaperService.getScholarId(id);
+            String scholarname = scholarService.getName(scholarId);
+            Date time = list.get(i).getTime();
+            PaperForSearch pfs = new PaperForSearch(id, name, popularity, abstract1, scholarname, time);
             pfsList.add(pfs);
         }
         return pfsList;

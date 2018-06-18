@@ -1,5 +1,6 @@
 package com.web.test;
 
+import org.elasticsearch.common.text.Text;
 import com.web.bean.PaperForSearch;
 import com.web.bean.User;
 import com.web.dao.UserMapper;
@@ -11,6 +12,7 @@ import org.elasticsearch.action.deletebyquery.DeleteByQueryAction;
 import org.elasticsearch.action.deletebyquery.DeleteByQueryRequestBuilder;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
@@ -18,6 +20,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.plugin.deletebyquery.DeleteByQueryPlugin;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.highlight.HighlightBuilder;
+import org.elasticsearch.search.highlight.HighlightField;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -26,8 +30,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.swing.*;
+import javax.swing.text.Highlighter;
 import java.math.BigDecimal;
 import java.net.InetAddress;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -62,25 +68,30 @@ public class Test {
         }
     }
 
-    @org.junit.Test
-    public void createDocumentByJson() throws Exception{
-        List<PaperForSearch> plist = paperService.selectPaperForSearch();
-        for(PaperForSearch pfs : plist) {
-            System.out.println(pfs.getId() + pfs.getName());
-
-            Map<String, Object> source = new HashMap<String, Object>();
-            source.put("id", pfs.getId());
-            source.put("name", pfs.getName());
-            source.put("popularity", pfs.getPopularity());
-            source.put("abstract1", pfs.getAbstract1());
-
-            // 也可以转化java的bean
-            String json = MAPPER.writeValueAsString(source);
-            IndexResponse response = this.client.prepareIndex("pfs", "PaperForSearch")
-                    .setSource(json)
-                    .execute()
-                    .actionGet();
-        }
+//    @org.junit.Test
+//    public void createDocumentByJson() throws Exception{
+//        List<PaperForSearch> plist = paperService.selectPaperForSearch();
+//        for(PaperForSearch pfs : plist) {
+//            System.out.println(pfs.getId() + pfs.getName());
+//
+//            Map<String, Object> source = new HashMap<String, Object>();
+//            source.put("id", pfs.getId());
+//            source.put("name", pfs.getName());
+//            source.put("popularity", pfs.getPopularity());
+//            source.put("abstract1", pfs.getAbstract1());
+//            source.put("scholarName", pfs.getScholarname());
+////            System.out.println(pfs.getTime().toString());
+////            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+////            String str = sdf.format(pfs.getTime());
+////            System.out.println(str);
+////            source.put("time", str);
+//            // 也可以转化java的bean
+//            String json = MAPPER.writeValueAsString(source);
+//            IndexResponse response = this.client.prepareIndex("pfs", "PaperForSearch")
+//                    .setSource(json)
+//                    .execute()
+//                    .actionGet();
+//        }
 
         // 获取结果
 //        String index = response.getIndex();
@@ -94,33 +105,81 @@ public class Test {
 //        System.out.println("文档id是: " + id);
 //        System.out.println("版本是: " + version);
 //        System.out.println("是否创建: " + created);
-    }
+//    }
 
-    @org.junit.Test
-    public void testQuery() {
-        SearchResponse searchResponse = this.client.prepareSearch("pfs").setTypes("PaperForSearch")
-                // 搜索会忽略大小写,使用小写来搜索
-                .setQuery(multiMatchQuery("1521","name", "abstract1"))
-                .get();
-
-        // 查询的总数(命中数)
-        SearchHits hits = searchResponse.getHits();
-        long totalHits = hits.getTotalHits();
-        System.out.println("总记录数: " + totalHits);
-        // 遍历查询的结果
-        Iterator<SearchHit> iterator = hits.iterator();
-        while (iterator.hasNext()) {
-            SearchHit next = iterator.next();
-            // System.out.println(next.getSourceAsString());
-
-            Map<String, Object> source = next.getSource();
-            Integer id = (Integer) source.get("id");
-            String name = (String) source.get("name");
-
-            System.out.println("id: " + id);
-            System.out.println("name: " + name);
-        }
-    }
+//    @org.junit.Test
+//    public void testQuery() {
+//        SearchRequestBuilder searchRequestBuilder = this.client.prepareSearch("pfs").setTypes("PaperForSearch")
+//                .setQuery(multiMatchQuery("华为","name", "abstract1", "scholarName"));
+//
+//        searchRequestBuilder.addHighlightedField("abstract1").addHighlightedField("name").addHighlightedField("scholarName");
+//        searchRequestBuilder.setHighlighterPreTags("<em>");
+//        searchRequestBuilder.setHighlighterPostTags("</em>");
+//        // 设置摘要大小
+//        searchRequestBuilder.setHighlighterFragmentSize(10);
+//        SearchResponse response = searchRequestBuilder.get();
+//        // 查询的总数(命中数)
+//        SearchHits hits = response.getHits();
+//        long totalHits = hits.getTotalHits();
+//        System.out.println("总记录数: " + totalHits);
+//        // 遍历查询的结果
+//        Iterator<SearchHit> iterator = hits.iterator();
+//        while (iterator.hasNext()) {
+//            SearchHit next = iterator.next();
+//            // System.out.println(next.getSourceAsString());
+//
+//            Map<String, Object> source = next.getSource();
+//            Map<String, HighlightField> highlighterMap = next.getHighlightFields();
+//
+//            Integer id = (Integer) source.get("id");
+//            Double popularity = (Double) source.get("popularity");
+//
+//            HighlightField highlightField;
+//            Text[] texts;
+//            String name = "";
+//            String abstract1 = "";
+//            String scholarName = "";
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+//            String time= sdf.format(paperService.selectById(id).getTime());
+//
+//            if(highlighterMap.get("name") != null) {
+//                highlightField = highlighterMap.get("name");
+//                texts = highlightField.getFragments();
+//                for (Text text : texts) {
+//                    name += text;
+//                }
+//            }else{
+//                name = (String)source.get("name");
+//            }
+//
+//            if(highlighterMap.get("abstract1") != null) {
+//                highlightField = highlighterMap.get("abstract1");
+//                texts = highlightField.getFragments();
+//                for (Text text : texts) {
+//                    abstract1 += text;
+//                }
+//            } else{
+//                abstract1= (String)source.get("abstract");
+//            }
+//
+//            if(highlighterMap.get("scholarName") != null) {
+//                highlightField = highlighterMap.get("scholarName");
+//                texts = highlightField.getFragments();
+//                for (Text text : texts) {
+//                    scholarName += text;
+//                }
+//            }else{
+//                scholarName = (String)source.get("scholarName");
+//            }
+//
+//            System.out.println("id: " + id);
+//            System.out.println("name: " + name);
+//            System.out.println("popularity: " + popularity);
+//            System.out.println("abstract: " + abstract1);
+//            System.out.println("scholarName: " + scholarName);
+//            System.out.println("time: " + time);
+//        }
+//    }
 
 
 
