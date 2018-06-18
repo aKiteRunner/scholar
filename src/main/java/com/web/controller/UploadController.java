@@ -59,6 +59,7 @@ public class UploadController {
     public String uploadFile(@RequestParam(value = "file") MultipartFile file,
                              @RequestParam(value = "subject") String subject,
                              @RequestParam(value = "discipline") String discipline,
+                             @RequestParam(value = "price") Integer price,
                              HttpSession session,
                              Model model) {
         // 文件大小必须大于0，必须为专家用户
@@ -81,6 +82,7 @@ public class UploadController {
                 paper.setName(file.getOriginalFilename());
                 paper.setPath(storedFile.getAbsolutePath());
                 paper.setTime(new Date());
+                paper.setPrice(price);
                 paperService.insertPaper(paper);
                 Integer paperId = paperService.selectByName(file.getOriginalFilename()).getId();
                 System.out.println(paperId);
@@ -180,15 +182,13 @@ public class UploadController {
     @ResponseBody
     // 前端传form, JSON返回
     public HashMap<String, String> changePaperPrice(@RequestParam(value = "paperId") Integer paperId,
-                                                    @RequestParam("price") String money,
+                                                    @RequestParam("price") Integer price,
                                                     HttpSession session) {
         if (session.getAttribute("logined") == null) {
             return null;
         }
         Integer userId = (Integer) session.getAttribute("id");
-        BigDecimal price = new BigDecimal(money);
-        HashMap<String, String> map;
-        map = new HashMap<>();
+        HashMap<String, String> map = new HashMap<>();
         if (!paperService.paperExist(paperId)) {
             map.put("errorInfo", "该文献不存在");
         } else if (!scholarPaperService.paperAccessible(userId, paperId)) {

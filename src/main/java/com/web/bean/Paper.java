@@ -1,6 +1,5 @@
 package com.web.bean;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Paper {
@@ -14,7 +13,7 @@ public class Paper {
 
     private Integer degree;
 
-    private BigDecimal price;
+    private Integer price;
 
     private Integer subjectId;
 
@@ -64,11 +63,11 @@ public class Paper {
         this.degree = degree;
     }
 
-    public BigDecimal getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

@@ -82,7 +82,7 @@ public class PaperService {
         paperMapper.updateByPrimaryKey(paper);
     }
 
-    public void updatePrice(Integer paperId, BigDecimal price) {
+    public void updatePrice(Integer paperId, Integer price) {
         Paper paper = selectById(paperId);
         paper.setPrice(price);
         paperMapper.updateByPrimaryKey(paper);

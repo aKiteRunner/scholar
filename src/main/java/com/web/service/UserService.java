@@ -78,4 +78,8 @@ public class UserService {
     public void updatePw(User user) { userMapper.updateByPrimaryKey(user); }
 
     public void updateUserName(User user) { userMapper.updateByPrimaryKey(user); }
+
+    public void updateUser(User user) {
+        userMapper.updateByPrimaryKey(user);
+    }
 }
