@@ -1,20 +1,20 @@
 <%--
   Created by IntelliJ IDEA.
   User: 52460
-  Date: 2018/6/4
-  Time: 20:01
+  Date: 2018/6/18
+  Time: 20:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>注册</title>
+    <title>Paper</title>
     <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="static/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
     <!--theme-style-->
-    <link href="static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="static/css/style.css?v=1324" rel="stylesheet" type="text/css" media="all" />
     <!--//theme-style-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -49,9 +49,13 @@
                     <li><a href="index.jsp">首页</a></li>
                     <li><a href="services.html">发现</a></li>
                     <li><a href="projects.html">仓库</a></li>
-                    <li><a href="typo.html">帮助</a> </li>
                     <li><a href="quality.html">个人</a> </li>
                     <li><a href="login.jsp">登录</a></li>
+                    <li>
+                        <form>
+                            <button><span class="glyphicon glyphicon-search"></span></button>
+                        </form>
+                    </li>
                 </ul>
                 <!--script-->
                 <script>
@@ -71,9 +75,9 @@
                 <li><a href="services.html">发现</a></li>
                 <li><a href="projects.html">仓库</a></li>
                 <li><a href="index.jsp"><img src="static/images/logo.png"></a></li>
-                <li><a href="typo.html">帮助</a> </li>
                 <li><a href="quality.html">个人</a> </li>
                 <li><a href="login.jsp">登录</a></li>
+
                 <div class="clearfix"></div>
             </ul>
         </div>
@@ -81,31 +85,55 @@
 </div>
 <!--//header-->
 <!--w3l-->
-<div class="register">
-    <div class="register-top">
-        <h2>注册</h2>
-        <form>
-            <input type="text" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
-            <input type="password" id="pw1" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
-            <input type="password" id="pw2" value="password" onfocus="this.value = '';" onkeyup="confirmpw()" ><span id="message"></span>
-            <input type="text" value="email.com" onfocus="this.value='';" >
-            <input type="text" value="0123-456789" onfocus="this.value='';">
-        </form>
-        <script>
-            function confirmpw() {
-                var pw1 = document.getElementById("pw1").value;
-                var pw2 = document.getElementById("pw2").value;
-                if(pw1 == pw2) {
-                    document.getElementById("message").innerHTML="<span class=' glyphicon glyphicon-ok' ></span>";
-                    document.getElementById("submit").disabled = false;
-                }
-                else {
-                    document.getElementById("message").innerHTML="<span class='glyphicon glyphicon-remove'></span>";
-                    document.getElementById("submit").disabled = true;
-                }
-            }
-        </script>
+<div class="main container">
+    <div class="paper_dis col-md-9">
+        <%! private  int papernum=0;
+        %>
+        <% for (papernum=1;papernum<=10;papernum++)%><%{%>
+            <div class="paper" onmouseover="this.style.background='#ffecfc'" onmouseout="this.style.background = '#eeeeee'">
+                <div class="paper_title">
+                   5 月编程语言榜：C 再度暴涨，Scala 成功上位
+                </div>
+                <div class="paper_abstract">
+                   <span>学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择，选错一件衣服可以重来，而选错一个学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择是抉择而不是选择，选错一件衣服可以重来，而选错一个学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择，选错一件衣服可以重来，而选错一个</span>
+                </div>
+                <div class="paper_mes">
+                    <div class="paper_author col-md-2">
+                       <span class="glyphicon glyphicon-user"></span> 孟教授
+                    </div>
+                    <div class="paper_time col-md-2">
+                        2018-6-18
+                    </div>
+                    <div class="paper_right col-md-4 col-md-offset-3">
+                        <div class="paper_readnum col-md-6">
+                            阅读量 15
+                        </div>
+                        <div class="paper_commentnum col-md-6">
+                            <span class="glyphicon glyphicon-comment"></span>评论
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%}%>
     </div>
+    <div class="paper_aside col-md-2 col-md-offset-1">
+        <div class="news_hot">
+            <span class="glyphicon glyphicon-list"></span> 最近新闻
+        </div>
+        <%! private  int newsnum=0;
+        %>
+        <% for (newsnum=1;newsnum<=10;newsnum++)%><%{%>
+            <div class="news_content">
+                    <div class="news_img col-md-4">
+                <img src="static/images/logo.png" style="width:auto; height:auto; max-width:100%; max-height:100%;">
+                </div>
+                <div class="news_title col-md-8">
+                   新闻标题
+                </div>
+            </div>
+        <%}%>
+    </div>
+
 </div>
 <div class="footer">
     <div class="container">

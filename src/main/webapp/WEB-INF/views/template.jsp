@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>注册</title>
+    <title>模板</title>
     <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="static/js/jquery.min.js"></script>
@@ -49,7 +49,6 @@
                     <li><a href="index.jsp">首页</a></li>
                     <li><a href="services.html">发现</a></li>
                     <li><a href="projects.html">仓库</a></li>
-                    <li><a href="typo.html">帮助</a> </li>
                     <li><a href="quality.html">个人</a> </li>
                     <li><a href="login.jsp">登录</a></li>
                 </ul>
@@ -71,7 +70,6 @@
                 <li><a href="services.html">发现</a></li>
                 <li><a href="projects.html">仓库</a></li>
                 <li><a href="index.jsp"><img src="static/images/logo.png"></a></li>
-                <li><a href="typo.html">帮助</a> </li>
                 <li><a href="quality.html">个人</a> </li>
                 <li><a href="login.jsp">登录</a></li>
                 <div class="clearfix"></div>
@@ -81,37 +79,13 @@
 </div>
 <!--//header-->
 <!--w3l-->
-<div class="register">
-    <div class="register-top">
-        <h2>注册</h2>
-        <form>
-            <input type="text" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
-            <input type="password" id="pw1" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
-            <input type="password" id="pw2" value="password" onfocus="this.value = '';" onkeyup="confirmpw()" ><span id="message"></span>
-            <input type="text" value="email.com" onfocus="this.value='';" >
-            <input type="text" value="0123-456789" onfocus="this.value='';">
-        </form>
-        <script>
-            function confirmpw() {
-                var pw1 = document.getElementById("pw1").value;
-                var pw2 = document.getElementById("pw2").value;
-                if(pw1 == pw2) {
-                    document.getElementById("message").innerHTML="<span class=' glyphicon glyphicon-ok' ></span>";
-                    document.getElementById("submit").disabled = false;
-                }
-                else {
-                    document.getElementById("message").innerHTML="<span class='glyphicon glyphicon-remove'></span>";
-                    document.getElementById("submit").disabled = true;
-                }
-            }
-        </script>
-    </div>
-</div>
+
+
 <div class="footer">
     <div class="container">
         <div class="col-md-3 latest-proj wow fadeInLeft animated" data-wow-delay=".5s">
-            <h3>Gryffindor</h3>
-            <img src="static/images/logo.png" class="img-responsive" alt="">
+                <h3>Gryffindor</h3>
+                    <img src="static/images/logo.png" class="img-responsive" alt="">
             <div class="clearfix"></div>
         </div>
         <div class="col-md-3 location wow fadeInRight animated" data-wow-delay=".5s">
@@ -124,7 +98,7 @@
         <div class="col-md-3 location wow fadeInRight animated" data-wow-delay=".5s">
             <h3>所在</h3>
             <address>
-                北京航空航天大学<br>
+               北京航空航天大学<br>
                 软件学院<br>
                 <abbr title="Phone">电话：</abbr> 0123456789
             </address>
