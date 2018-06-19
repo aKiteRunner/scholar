@@ -21,4 +21,9 @@ public class ScholarPaperService {
     public boolean paperAccessible(Integer scholarId, Integer paperId) {
         return null != scholarPaperMapper.selectByScholarAndPaper(scholarId, paperId);
     }
+
+    public int getScholarId(Integer paperId){
+        int scholarId = scholarPaperMapper.selectByPaper(paperId);
+        return scholarId;
+    }
 }

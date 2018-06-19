@@ -21,4 +21,9 @@ public class ScholarService {
     public void addScholar(Scholar scholar) {
         scholarMapper.insert(scholar);
     }
+
+    public String getName(int id){
+        Scholar scholar = scholarMapper.selectByPrimaryKey(id);
+        return scholar.getUsername();
+    }
 }
