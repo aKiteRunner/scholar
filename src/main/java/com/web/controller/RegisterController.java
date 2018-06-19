@@ -21,7 +21,12 @@ public class RegisterController {
         this.userService = userService;
     }
 
-    @ResponseBody
+    @RequestMapping(value = "/registerGet", method = RequestMethod.GET)
+    public String RegistGet(Model model){
+        return "register";
+    }
+
+
     @RequestMapping(value = "/register", method = RequestMethod.POST)
  //   {username}/{password1}/{password2}/{email}/{degree}/{credit}/{phone}/{exp}
     public String Regist(@RequestParam(value = "userName") String userName, @RequestParam(value = "password1") String password1,
@@ -38,7 +43,7 @@ public class RegisterController {
             model.addAttribute("errorInfo", "密码的长度不多于16位不少于8位");
         }else if(!password2.equals(password1)){
             model.addAttribute("errorInfo", "两次输入的密码不一致");
-        }else if(!email.matches("^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$")){
+        }else if(!email.matches("^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$" )){
             model.addAttribute("errorInfo", "输入的邮箱的不合法");
         }else if(phone.length() != 11){
             model.addAttribute("errorInfo", "手机号不正确");

@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    //    以斜线开始，不以斜线结束(例如/crud)
+    pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
 <html>
 <head>
     <title>注册</title>
@@ -82,14 +87,21 @@
 <!--//header-->
 <!--w3l-->
 <div class="register">
+    <c:if test="${errorInfo != null}">
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Warning!</strong> ${errorInfo}
+        </div>
+    </c:if>
     <div class="register-top">
         <h2>注册</h2>
-        <form>
-            <input type="text" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
-            <input type="password" id="pw1" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
-            <input type="password" id="pw2" value="password" onfocus="this.value = '';" onkeyup="confirmpw()" ><span id="message"></span>
-            <input type="text" value="email.com" onfocus="this.value='';" >
-            <input type="text" value="0123-456789" onfocus="this.value='';">
+        <form action="register" method="post">
+            <input type="text" value="用户名" name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
+            <input type="password" id="pw1" name="password1" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
+            <input type="password" id="pw2" name="password2" value="password" onfocus="this.value = '';" onkeyup="confirmpw()" ><span id="message"></span>
+            <input type="text" value="email.com" name="email" onfocus="this.value='';" >
+            <input type="text" value="0123-456789" name="phone" onfocus="this.value='';">
+            <input type="submit" value="注册">
         </form>
         <script>
             function confirmpw() {
@@ -151,6 +163,7 @@
         <p>Copyright &copy; 2018.Gryffindor Group.</p>
     </div>
 </div>
-<!--//footer-->
+
 </body>
+
 </html>
