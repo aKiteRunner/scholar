@@ -27,15 +27,19 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @ResponseBody
+    @RequestMapping(value = "/loginGet", method = RequestMethod.GET)
+    public String loginGet(){
+        return "login";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(HttpServletRequest request, @RequestParam(value = "userName") String userName, @RequestParam(value = "password") String password, Model model) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if(!userService.userExist(userName)){
-            model.addAttribute("errorInfo", "您输入的用户");
+            model.addAttribute("errorInfo", "用户名或密码不正确");
         }else{
             String rightPassword = userService.selectPassword(userName);
             if(!Md5.checkpassword(password, rightPassword)){
-                model.addAttribute("errorInfo", "您输入的用户");
+                model.addAttribute("errorInfo", "用户名或密码不正确");
             }else{
                 //没写专家情况
                 userService.updateExpAndDegree(userName, Setting.LOGIN_EXP);
