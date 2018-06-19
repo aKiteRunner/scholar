@@ -22,11 +22,10 @@ public class UserInfoController {
         this.userService = userService;
     }
 
-    @ResponseBody
     @RequestMapping(value = "setting/userInfo", method = RequestMethod.GET)
     public String userInfo(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
-        if(session.getAttribute("logined") == null){
+        if(session.getAttribute("logined") != null){
             model.addAttribute("errorInfo", "您还未登录");
             return "index";
         }else {
@@ -47,10 +46,4 @@ public class UserInfoController {
             return "userInfo";
         }
     }
-
-
-
-
-
-
 }
