@@ -1,9 +1,6 @@
 package com.web.controller;
 
-import com.web.bean.Comment;
-import com.web.bean.Paper;
-import com.web.bean.User;
-import com.web.bean.UserPaper;
+import com.web.bean.*;
 import com.web.service.*;
 import com.web.utils.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -24,14 +22,18 @@ public class DisplayPaperController {
     private final UserService userService;
     private final UserPaperService userPaperService;
     private final CommentService commentService;
+    private final ScholarPaperService scholarPaperService;
+    private final ScholarService scholarService;
 
     @Autowired
-    public DisplayPaperController(DisciplineService disciplineService, PaperService paperService, UserService userService, UserPaperService userPaperService, CommentService commentService) {
+    public DisplayPaperController(DisciplineService disciplineService, PaperService paperService, UserService userService, UserPaperService userPaperService, CommentService commentService, ScholarPaperService scholarPaperService, ScholarService scholarService) {
         this.disciplineService = disciplineService;
         this.paperService = paperService;
         this.userService = userService;
         this.userPaperService = userPaperService;
         this.commentService = commentService;
+        this.scholarPaperService = scholarPaperService;
+        this.scholarService = scholarService;
     }
 
     // 返回按照热度排行
@@ -44,7 +46,24 @@ public class DisplayPaperController {
         papers = papers.stream()
                 .sorted(Comparator.comparing(Paper::getPopularity).reversed())
                 .collect(Collectors.toList());
-        model.addAttribute("paper", papers);
+        model.addAttribute("papers", papers);
+        return "papers";
+    }
+
+    @RequestMapping(value = "/discover", method = RequestMethod.GET)
+    public String displayAllPaper(Model model) {
+        List<Paper> papers = paperService.mostPopularPaper(Setting.INDEX_PAPER_NUMBER);
+        papers = papers.stream()
+                .sorted(Comparator.comparing(Paper::getPopularity).reversed())
+                .collect(Collectors.toList());
+        List<Object[]> list = new ArrayList<>();
+        for (Paper paper: papers) {
+            Object[] temp = new Object[2];
+            temp[0] = paper;
+            temp[1] = scholarService.getScholar(scholarPaperService.getScholarId(paper.getId()));
+            list.add(temp);
+        }
+        model.addAttribute("list", list);
         return "papers";
     }
 
