@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: 52460
@@ -49,7 +51,7 @@
                     <li><a href="index.jsp">首页</a></li>
                     <li><a href="services.html">发现</a></li>
                     <li><a href="projects.html">仓库</a></li>
-                    <li><a href="quality.html">个人</a> </li>
+                    <li><a href="">个人</a> </li>
                     <li><a href="login.jsp">登录</a></li>
                     <li>
                         <form>
@@ -89,24 +91,24 @@
     <div class="paper_dis col-md-9">
         <%! private  int papernum=0;
         %>
-        <% for (papernum=1;papernum<=10;papernum++)%><%{%>
+        <c:forEach var="paper" items="${list}">
             <div class="paper" onmouseover="this.style.background='#ffecfc'" onmouseout="this.style.background = '#eeeeee'">
                 <div class="paper_title">
-                   5 月编程语言榜：C 再度暴涨，Scala 成功上位
+                    ${paper[0].name}
                 </div>
                 <div class="paper_abstract">
-                   <span>学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择，选错一件衣服可以重来，而选错一个学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择是抉择而不是选择，选错一件衣服可以重来，而选错一个学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择，选错一件衣服可以重来，而选错一个</span>
+                    <span>${paper[0].abstract1}</span>
                 </div>
                 <div class="paper_mes">
                     <div class="paper_author col-md-2">
-                       <span class="glyphicon glyphicon-user"></span> 孟教授
+                        <span class="glyphicon glyphicon-user"></span> ${paper[1].username}
                     </div>
                     <div class="paper_time col-md-2">
-                        2018-6-18
+                            日期 <fmt:formatDate type="date" value="${paper[0].time}" />
                     </div>
                     <div class="paper_right col-md-4 col-md-offset-3">
                         <div class="paper_readnum col-md-6">
-                            阅读量 15
+                            阅读量 ${paper[0].popularity}
                         </div>
                         <div class="paper_commentnum col-md-6">
                             <span class="glyphicon glyphicon-comment"></span>评论
@@ -114,7 +116,7 @@
                     </div>
                 </div>
             </div>
-        <%}%>
+        </c:forEach>
     </div>
     <div class="paper_aside col-md-2 col-md-offset-1">
         <div class="news_hot">

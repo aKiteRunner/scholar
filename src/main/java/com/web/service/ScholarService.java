@@ -26,4 +26,8 @@ public class ScholarService {
         Scholar scholar = scholarMapper.selectByPrimaryKey(id);
         return scholar.getUsername();
     }
+
+    public Scholar getScholar(int id) {
+        return scholarMapper.selectByPrimaryKey(id);
+    }
 }
