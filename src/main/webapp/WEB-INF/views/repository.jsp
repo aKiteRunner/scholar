@@ -100,8 +100,6 @@
                 <input type="checkbox" checked="checked">查看购买
             </label>
         </div>
-        <%! private  int papernum=0;
-        %>
         <c:forEach var="paper" items="${list}">
             <div class="paper" onmouseover="this.style.background='#ffecfc'" onmouseout="this.style.background = '#eeeeee'">
                 <div class="paper_title ">

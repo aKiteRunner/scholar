@@ -53,7 +53,6 @@ public class DisplayPaperController {
         papers = papers.stream()
                 .sorted(Comparator.comparing(Paper::getPopularity).reversed())
                 .collect(Collectors.toList());
-        System.out.println(papers);
         List<Object[]> list = new ArrayList<>();
         for (Paper paper: papers) {
             Object[] temp = new Object[2];
@@ -62,7 +61,6 @@ public class DisplayPaperController {
             list.add(temp);
         }
         model.addAttribute("list", list);
-        System.out.println(list);
         return "paper";
     }
 
@@ -73,14 +71,24 @@ public class DisplayPaperController {
             return "redirect:login";
         }
         Integer userId = (Integer) session.getAttribute("id");
+        System.out.println(userId);
         List<Paper> papers = paperService.selectByUser(userId);
         papers = papers.stream().
                 sorted(Comparator.comparing(Paper::getId).reversed()).
                 collect(Collectors.toList());
+        List<Object[]> list = new ArrayList<>();
+        for (Paper paper: papers) {
+            Object[] temp = new Object[2];
+            temp[0] = paper;
+            temp[1] = scholarService.getScholar(scholarPaperService.getScholarId(paper.getId()));
+            list.add(temp);
+        }
         User user = userService.getUser(userId);
         model.addAttribute("paper", papers);
         model.addAttribute("user", user);
         model.addAttribute("curExp", Setting.DEGREE_EXP - user.getExp());
+        model.addAttribute("list", list);
+        System.out.println(list);
         return "repository";
     }
 
