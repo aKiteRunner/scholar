@@ -18,7 +18,7 @@
 <body>
 <h1></h1>
 <script src="/static/js/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
 <ul class="nav nav-pills nav-stacked" id="Navibar" style="float: left; width: 8%;">
     <a href="#a" class="active" onclick="userinfo()">个人信息</a>
     <a href="#b">修改信息</a>

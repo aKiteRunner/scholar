@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 public class LogoutController {
 
 
-    @ResponseBody
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String login(HttpServletRequest request, Model model) {
         //session

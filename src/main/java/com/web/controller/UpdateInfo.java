@@ -29,6 +29,7 @@ public class UpdateInfo {
     public HashMap<String, Object> updateInfo(@RequestBody String json, HttpSession session){
         HashMap<String, Object> map = new HashMap<String, Object>();
         // 先登录
+
         if (session.getAttribute("logined") == null) {
             return null;
         }else{
