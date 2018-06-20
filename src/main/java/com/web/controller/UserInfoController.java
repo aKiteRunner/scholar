@@ -22,7 +22,6 @@ public class UserInfoController {
         this.userService = userService;
     }
 
-    @ResponseBody
     @RequestMapping(value = "setting/userInfo", method = RequestMethod.GET)
     public String userInfo(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
@@ -31,7 +30,7 @@ public class UserInfoController {
             return "index";
         }else {
             String username = (String) session.getAttribute("username");
-            String userId = (String) session.getAttribute("id");
+            int userId = (int) session.getAttribute("id");
             User user = userService.getUser(username);
             String email = user.getEmail();
             String phone = user.getPhone();
