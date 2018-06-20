@@ -15,10 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -39,35 +38,53 @@ public class MessageController {
     // 返回所有站内信并标记为已读, AJAX
     @RequestMapping(value = "/setting/sentmessage", method = RequestMethod.GET)
     @ResponseBody
-    public HashMap<String, List<Message>> showSentMessage(HttpSession session) {
+    public HashMap<String, List<Map>> showSentMessage(HttpSession session) {
         // 先登录
         if (session.getAttribute("logined") == null) {
             return null;
         }
         Integer userId = (Integer) session.getAttribute("id");
-        HashMap<String, List<Message>> map = new HashMap<String, List<Message>>();
+        HashMap<String, List<Map>> map = new HashMap<>();
         List<Message> sentMessage = messageService.selectSentMessage(userId);
-        sentMessage = sentMessage.parallelStream().
+        sentMessage = sentMessage.stream().
                 sorted(Comparator.comparing(Message::getSendTime).reversed()).
                 collect(Collectors.toList());
-        map.put("sentMessage", sentMessage);
+        List list = new ArrayList();
+        for (Message message : sentMessage) {
+            Map temp = new HashMap();
+            temp.put("content", message.getContent());
+            temp.put("receiver", userService.getUser(message.getReceiverId()).getUsername());
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            temp.put("time", sdfDate.format(message.getSendTime()));
+            list.add(temp);
+        }
+        map.put("sentMessage", list);
         return map;
     }
 
     @RequestMapping(value = "/setting/receivedmessage", method = RequestMethod.GET)
     @ResponseBody
-    public HashMap<String, List<Message>> showReceivedMessage(HttpSession session) {
+    public HashMap<String, List<Map>> showReceivedMessage(HttpSession session) {
         // 先登录
         if (session.getAttribute("logined") == null) {
             return null;
         }
         Integer userId = (Integer) session.getAttribute("id");
-        HashMap<String, List<Message>> map = new HashMap<>();
+        HashMap<String, List<Map>> map = new HashMap<>();
         List<Message> receivedMessage = messageService.selectReceivedMessage(userId);
-        receivedMessage = receivedMessage.parallelStream().
+        receivedMessage = receivedMessage.stream().
                 sorted(Comparator.comparing(Message::getSendTime).reversed()).
                 collect(Collectors.toList());
-        map.put("sentMessage", receivedMessage);
+        List list = new ArrayList();
+        for (Message message : receivedMessage) {
+            Map temp = new HashMap();
+            temp.put("content", message.getContent());
+            temp.put("sender", userService.getUser(message.getSenderId()).getUsername());
+            SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            temp.put("time", sdfDate.format(message.getSendTime()));
+            list.add(temp);
+        }
+        map.put("receivedMessage", list);
         return map;
     }
 

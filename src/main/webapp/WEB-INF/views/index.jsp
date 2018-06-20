@@ -57,8 +57,8 @@
                     <li><a href="paper.jsp">发现</a></li>
                     <li><a href="template.jsp">仓库</a></li>
                     <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
-                    <li><a href="quality.html">个人</a> </li>
-                    <li><a href="login.jsp">登录</a></li>
+                    <li><a href="/setting">个人</a> </li>
+                    <li><a href="/loginGet">登录</a></li>
                 </ul>
                 <!--script-->
                 <script>
@@ -79,8 +79,8 @@
                 <li><a href="paper.jsp">发现</a></li>
                 <li><a href="template.jsp">仓库</a></li>
                 <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
-                <li><a href="quality.html">个人</a> </li>
-                <li><a href="${APP_PATH}/loginGet">登录</a></li>
+                <li><a href="/setting">个人</a> </li>
+                <li><a href="/loginGet">登录</a></li>
                 <li class="">
                     <button class="" onclick="search_show(this,event)"><span class="glyphicon glyphicon-search"></span></button>
                 </li>
