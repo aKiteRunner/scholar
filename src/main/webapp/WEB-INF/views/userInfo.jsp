@@ -20,7 +20,7 @@
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <ul class="nav nav-pills nav-stacked" id="Navibar" style="float: left; width: 8%;">
-    <a href="#a" class="active" onclick="userinfo()">个人信息</a>
+    <a href="#a" class="active" onclick="userInfo()">个人信息</a>
     <a href="#b">修改信息</a>
     <a href="#c">积分充值</a>
     <a href="#d">站内信</a>
@@ -32,23 +32,23 @@
         <h1 style="margin-top: 0px;">个人信息</h1>
     </div>
 
-    <p id="Hello">你好，<strong class="text-danger">${username}</strong></p>
+    <p id="Hello">你好，<strong class="text-danger" id="username">${username}</strong></p>
 
     <h3 class="infoTitle">邮箱</h3>
-    <p class="infoDetail">${email}</p>
+    <p class="infoDetail" id="email">${email}</p>
 
     <h3 class="infoTitle">手机</h3>
-    <p class="infoDetail">${phone}</p>
+    <p class="infoDetail" id="phone">${phone}</p>
 
     <h3 class="infoTitle">积分</h3>
-    <p class="infoDetail">${credit}</p>
+    <p class="infoDetail" id="credit">${credit}</p>
 
     <h3 class="infoTitle">等级</h3>
-    <p class="infoDetail">${degree} 距离升级还需要<strong class="text-danger">${exp}</strong>积分</p>
+    <p class="infoDetail" id="degree">${degree}</p>
     <div class="progress" style="width:200px;">
-        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+        <div id="bar" class="progress-bar" role="progressbar" aria-valuenow="${exp}" aria-valuemin="0" aria-valuemax="${maxExp}"
              style="width:60%;">
-            60%
+            60%60%
         </div>
     </div>
 
@@ -268,9 +268,28 @@
         wdiv.style.display = 'block'
     }
 </script>
-<script>
-function userinfo() {
-    alert("fuckyou");
-}
+<script type="text/javascript">
+
+    function userInfo() {
+        $.ajax({
+            url : '/setting/userInfo',
+            type : 'GET',
+            data : null, // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                document.getElementById("username").innerHTML = response["username"];
+                document.getElementById("email").innerHTML = response["email"];
+                document.getElementById("phone").innerHTML = response["phone"];
+                document.getElementById("credit").innerHTML = response["credit"];
+                document.getElementById("degree").innerHTML = response["degree"];
+                document.getElementById("bar").setAttribute("aria-valuenow", response["exp"]);
+                document.getElementById("bar").setAttribute("aria-valuemax", response["maxExp"]);
+            },
+            error : function(msg) {
+            }
+        });
+    }
 </script>
 </html>
