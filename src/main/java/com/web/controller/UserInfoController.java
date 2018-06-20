@@ -25,12 +25,12 @@ public class UserInfoController {
     @RequestMapping(value = "setting/userInfo", method = RequestMethod.GET)
     public String userInfo(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
-        if(session.getAttribute("logined") != null){
-            model.addAttribute("errorInfo", "您还未登录");
-            return "index";
-        }else {
-            String username = (String) session.getAttribute("username");
-            String userId = (String) session.getAttribute("id");
+//        if(session.getAttribute("logined") != null){
+//            model.addAttribute("errorInfo", "您还未登录");
+//            return "index";
+//        }else {
+//            String username = (String) session.getAttribute("username");
+        String username = "abc123";
             User user = userService.getUser(username);
             String email = user.getEmail();
             String phone = user.getPhone();
@@ -44,6 +44,6 @@ public class UserInfoController {
             model.addAttribute("degree", degree);
             model.addAttribute("exp", exp);
             return "userInfo";
-        }
+//        }
     }
 }

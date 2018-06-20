@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Main</title>
-    <link rel="stylesheet" type="text/css" href="static/css/style.css?v=1324">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css?v=1324">
     <!-- Bootstrap -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,8 +17,8 @@
 </head>
 <body>
 <h1></h1>
-<script src="static/js/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
 <ul class="nav nav-pills nav-stacked" id="Navibar" style="float: left; width: 8%;">
     <a href="#a" class="active" onclick="userinfo()">个人信息</a>
     <a href="#b">修改信息</a>
@@ -104,7 +104,7 @@
     </div>
     <div class="co-top">
         <div class="co-le1">
-            <img src="static/images/1.jpg" class="img-responsive" alt="">
+            <img src="/static/images/1.jpg" class="img-responsive" alt="">
         </div>
         <div class="co-rg1">
             <h5>充值10积分</h5>
@@ -114,7 +114,7 @@
     </div>
     <div class="co-top">
         <div class="co-le1">
-            <img src="static/images/1.jpg" class="img-responsive" alt="">
+            <img src="/static/images/1.jpg" class="img-responsive" alt="">
         </div>
         <div class="co-rg1">
             <h5>充值20积分</h5>
@@ -124,7 +124,7 @@
     </div>
     <div class="co-top">
         <div class="co-le1">
-            <img src="static/images/1.jpg" class="img-responsive" alt="">
+            <img src="/static/images/1.jpg" class="img-responsive" alt="">
         </div>
         <div class="co-rg1">
             <h5>充值50积分</h5>
@@ -134,7 +134,7 @@
     </div>
     <div class="co-top">
         <div class="co-le1">
-            <img src="static/images/1.jpg" class="img-responsive" alt="">
+            <img src="/static/images/1.jpg" class="img-responsive" alt="">
         </div>
         <div class="co-rg1">
             <h5>自选充值金额</h5>
@@ -269,6 +269,7 @@
     }
 </script>
 <script>
+
 function userinfo() {
     alert("fuckyou");
 }
