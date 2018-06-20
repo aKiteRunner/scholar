@@ -147,10 +147,10 @@
             <form class="form-inline">
                 <div class="form-group">
                     <p class="recharge">充值
-                        <input type="number" class="form-control" placeholder="100" style="width: 80px;">
+                        <input type="number" class="form-control" placeholder="100" style="width: 80px;" id="number">
                         元</p>
                 </div>
-                <button type="submit" class="btn btn-default" style="margin-left: 20px;">确定</button>
+                <button type="submit" class="btn btn-default" style="margin-left: 20px;" onclick="topUPDiy()">确定</button>
             </form>
         </div>
         <div class="clearfix"></div>
@@ -325,6 +325,7 @@
         wdiv.style.display = 'block'
     }
 </script>
+
 <script type="text/javascript">
 
     function userInfo() {
@@ -452,6 +453,28 @@
         });
     }
 
+    function topUPDiy(){
+        var v = document.getElementById("number").value;
+        $.ajax({
+            url : '/setting/topup',
+            type : 'POST',
+            data : JSON.stringify({"price":v}), // Request body
+            // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    window.alert(response["info"]);
+                }else{
+                    window.alert(response["errorInfo"]);
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
 
     function sendMessage() {
         var data = {
@@ -477,6 +500,7 @@
         });
         return false;
     }
+
 
 </script>
 </html>
