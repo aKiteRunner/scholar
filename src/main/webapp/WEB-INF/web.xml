@@ -69,7 +69,9 @@
   <servlet-mapping>
     <servlet-name>SpringMVC</servlet-name>
     <url-pattern>/</url-pattern>
+    <url-pattern>/js/*</url-pattern>
+    <url-pattern>/css/*</url-pattern>
+    <url-pattern>/image/*</url-pattern>
   </servlet-mapping>
-
 
 </web-app>

@@ -59,8 +59,8 @@ public class UserService {
     public void updateExpAndDegree(String userName, int expAdd){
         int exp = selectExp(userName);
         int expNew = exp + expAdd;
-        if(expNew >= 100) {
-            User user = new User(userName, null, null, 0, 0, null, expNew - 100);
+        if(expNew >= Setting.DEGREE_EXP) {
+            User user = new User(userName, null, null, 0, 0, null, expNew - Setting.DEGREE_EXP);
             updateExp(user);
             updateDegree(user);
         }else{

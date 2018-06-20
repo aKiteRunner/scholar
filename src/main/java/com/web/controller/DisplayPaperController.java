@@ -64,7 +64,7 @@ public class DisplayPaperController {
             list.add(temp);
         }
         model.addAttribute("list", list);
-        return "papers";
+        return "paper";
     }
 
     // 选出该用户下的所有文献，并按照时间即ID倒序

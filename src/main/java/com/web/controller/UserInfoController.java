@@ -30,7 +30,7 @@ public class UserInfoController {
             return "index";
         }else {
             String username = (String) session.getAttribute("username");
-            int userId = (int) session.getAttribute("id");
+            String userId = (String) session.getAttribute("id");
             User user = userService.getUser(username);
             String email = user.getEmail();
             String phone = user.getPhone();

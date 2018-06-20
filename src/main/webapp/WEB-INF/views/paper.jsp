@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="static/css/lightbox.css">
     <!--JS for animate-->
     <link href="static/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="static/js/wow.min.js"></script>
     <script>
         new WOW().init();
@@ -37,6 +38,8 @@
     <!--//end-animate-->
 </head>
 <body>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--header-->
 <div class="header-1">
     <div class="container">
@@ -89,12 +92,32 @@
 <!--w3l-->
 <div class="main container">
     <div class="paper_dis col-md-9">
+        <div  class="checkbox" style="margin-left: 15%;">
+            <label>
+                <input type="checkbox" checked="checked">查看本人
+            </label>
+            <label>
+                <input type="checkbox" checked="checked">查看购买
+            </label>
+        </div>
         <%! private  int papernum=0;
         %>
         <c:forEach var="paper" items="${list}">
             <div class="paper" onmouseover="this.style.background='#ffecfc'" onmouseout="this.style.background = '#eeeeee'">
-                <div class="paper_title">
+                <div class="paper_title ">
                     ${paper[0].name}
+                </div>
+                <div class="dropdown col-md-2" style="float:right; margin-right: 5px;">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                            style="background-color: inherit; border-width: 0;"
+                    >
+                        管理
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">转让文献</a></li>
+                        <li><a href="#">修改价格</a></li>
+                    </ul>
                 </div>
                 <div class="paper_abstract">
                     <span>${paper[0].abstract1}</span>
@@ -104,7 +127,7 @@
                         <span class="glyphicon glyphicon-user"></span> ${paper[1].username}
                     </div>
                     <div class="paper_time col-md-2">
-                            日期 <fmt:formatDate type="date" value="${paper[0].time}" />
+                             <fmt:formatDate type="date" value="${paper[0].time}" />
                     </div>
                     <div class="paper_right col-md-4 col-md-offset-3">
                         <div class="paper_readnum col-md-6">
@@ -118,24 +141,28 @@
             </div>
         </c:forEach>
     </div>
-    <div class="paper_aside col-md-2 col-md-offset-1">
-        <div class="news_hot">
-            <span class="glyphicon glyphicon-list"></span> 最近新闻
-        </div>
-        <%! private  int newsnum=0;
-        %>
-        <% for (newsnum=1;newsnum<=10;newsnum++)%><%{%>
-            <div class="news_content">
-                    <div class="news_img col-md-4">
-                <img src="static/images/logo.png" style="width:auto; height:auto; max-width:100%; max-height:100%;">
-                </div>
-                <div class="news_title col-md-8">
-                   新闻标题
-                </div>
+    <div class="paper_aside sidebar-module col-md-2" style="margin-top: 40px;">
+        <h4>用户名</h4>
+        <ol class="list-unstyled">
+            <li>科林麦克兰莫</li>
+        </ol>
+        <h4>邮箱</h4>
+        <ol class="list-unstyled">
+            <li>fuckqq@qq.com</li>
+        </ol>
+        <h4>手机</h4>
+        <ol class="list-unstyled">
+            <li>1899999999</li>
+        </ol>
+        <h4>等级</h4>
+        <ol class="list-unstyled">127 </ol>
+        <ol class="list-unstyled">距离升级还需要<strong class="text-danger">298</strong>积分</ol>
+        <div class="progress" style="width:200px;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%;">
+                60%
             </div>
-        <%}%>
+        </div>
     </div>
-
 </div>
 <div class="footer">
     <div class="container">
