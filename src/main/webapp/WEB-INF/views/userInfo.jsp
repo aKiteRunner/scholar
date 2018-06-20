@@ -21,7 +21,7 @@
 <script src="/static/js/bootstrap.min.js"></script>
 <ul class="nav nav-pills nav-stacked" id="Navibar" style="float: left; width: 8%;">
     <a href="#a" class="active" onclick="userInfo()">个人信息</a>
-    <a href="#b">修改信息</a>
+    <a href="#b" onclick="updateInfo()">修改信息</a>
     <a href="#c">积分充值</a>
     <a href="#d">站内信</a>
     <!-- <li role="presentation" class="active"><a href="#a" >个人信息</a></li> -->
@@ -59,38 +59,44 @@
     </div>
     <form class="form-horizontal">
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
-            <div class="col-sm-4">
-                <input class="form-control" id="inputEmail3" value="科林麦克兰莫">
+            <label for="updateUserName" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="updateUserName">
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-default" onclick="updateUserNameF()">更改昵称</button>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-4">
-                <input type="email" class="form-control" id="inputEmail3" value="fuckqq@qq.com">
+            <label for="updateEmail" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-3">
+                <input type="email" class="form-control" id="updateEmail">
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-default" data-dismiss="alert" onclick="updateEmailF()">更改邮箱</button>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">原密码</label>
+            <label for="oldPw" class="col-sm-2 control-label">原密码</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="inputPassword3">
+                <input type="password" class="form-control" id="oldPw">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">新密码</label>
+            <label for="newPw" class="col-sm-2 control-label">新密码</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="inputPassword3">
+                <input type="password" class="form-control" id="newPw">
             </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">确认新密码</label>
+            <label for="newPwConf" class="col-sm-2 control-label">确认新密码</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="inputPassword3">
+                <input type="password" class="form-control" id="newPwConf">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-default" data-dismiss="alert" onclick="$().alert()">保存更改</button>
+                <button type="submit" class="btn btn-default" data-dismiss="alert" onclick="updatePasswordF()">更改密码</button>
             </div>
         </div>
     </form>
@@ -107,7 +113,7 @@
             <img src="/static/images/1.jpg" class="img-responsive" alt="">
         </div>
         <div class="co-rg1">
-            <h5>充值10积分</h5>
+            <h5><a onclick="topUp(10)">充值10积分</a></h5>
             <p>您仅需￥10，即可获得10积分</p>
         </div>
         <div class="clearfix"></div>
@@ -117,7 +123,7 @@
             <img src="/static/images/1.jpg" class="img-responsive" alt="">
         </div>
         <div class="co-rg1">
-            <h5>充值20积分</h5>
+            <h5><a onclick="topUp(20)">充值20积分</a></h5>
             <p>您仅需￥20，即可获得20积分</p>
         </div>
         <div class="clearfix"></div>
@@ -127,7 +133,7 @@
             <img src="/static/images/1.jpg" class="img-responsive" alt="">
         </div>
         <div class="co-rg1">
-            <h5>充值50积分</h5>
+            <h5><a onclick="topUp(50)">充值50积分</a></h5>
             <p>您仅需￥50，即可获得50积分</p>
         </div>
         <div class="clearfix"></div>
@@ -291,5 +297,111 @@
             }
         });
     }
+
+    function updateInfo() {
+        $.ajax({
+            url : '/setting/updateInfo',
+            type : 'GET',
+            data : null, // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                document.getElementById("updateUserName").value = response["username"];
+                document.getElementById("updateEmail").value = response["email"];
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    function updateUserNameF() {
+        var v = document.getElementById("updateUserName").value;
+        $.ajax({
+            url : '/setting/unCh',
+            type : 'POST',
+            data : JSON.stringify({"username" : v}), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+               if(response["errorInfo"] == null){
+                   window.alert(response["username"] + response["info"]);
+               }else{
+                   window.alert(response["errorInfo"]);
+               }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    function updateEmailF() {
+        var v = document.getElementById("updateEmail").value;
+        $.ajax({
+            url : '/setting/emCh',
+            type : 'POST',
+            data : JSON.stringify({"email" : v}), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    window.alert(response["info"]);
+                }else{
+                    window.alert(response["errorInfo"]);
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    function updatePasswordF() {
+        var v1= document.getElementById("oldPw").value;
+        var v2 = document.getElementById("newPw").value;
+        var v3 = document.getElementById("newPwConf").value;
+        $.ajax({
+            url : '/setting/pwCh',
+            type : 'POST',
+            data : JSON.stringify({ "oldPw":v1, "newPw":v2, "newPwConf":v3 }), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    window.alert(response["info"]);
+                }else{
+                    window.alert(response["errorInfo"]);
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    function topUp(val){
+        $.ajax({
+            url : '/setting/topup',
+            type : 'POST',
+            data : JSON.stringify({"price":val}), // Request body
+            // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    window.alert(response["info"]);
+                }else{
+                    window.alert(response["errorInfo"]);
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+
+
 </script>
 </html>

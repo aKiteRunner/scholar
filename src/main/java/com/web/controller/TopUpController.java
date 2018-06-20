@@ -33,10 +33,12 @@ public class TopUpController {
     @ResponseBody
     // price 代表用户付款金额
     // credit 为兑换后的积分总额
-    public HashMap<String, String> topUp(@RequestParam("price") String price, HttpSession session) {
+    public HashMap<String, String> topUp(@RequestBody String json, HttpSession session) {
         if (session.getAttribute("logined") == null) {
             return null;
         }
+        JSONObject jsonObject = new JSONObject(json);
+        int price = jsonObject.getInt("price");
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, String> map = new HashMap<>();
         try {
@@ -48,6 +50,10 @@ public class TopUpController {
             order.setTime(new Date());
             order.setUserId(userId);
             creditOrderService.insertOrder(order);
+            User user = userService.getUser((userId));
+            int oldCredit = user.getCredit();
+            user.setCredit(credit + oldCredit);
+            userService.updateCredit(user);
             userService.updateExpAndDegree(userService.getUser(userId).getUsername(), Setting.CREDIT_EXP);
             map.put("info", "操作成功");
         } catch (NumberFormatException e) {

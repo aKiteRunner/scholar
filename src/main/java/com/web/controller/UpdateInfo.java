@@ -26,16 +26,19 @@ public class UpdateInfo {
 
     @ResponseBody
     @RequestMapping(value = "/setting/updateInfo", method = RequestMethod.GET)
-    public HashMap<String, Object> updateInfo(@RequestBody String json, HttpSession session){
+    public HashMap<String, Object> updateInfo(HttpSession session){
         HashMap<String, Object> map = new HashMap<String, Object>();
         // 先登录
 
-        if (session.getAttribute("logined") == null) {
-            return null;
-        }else{
-            JSONObject jsonObject = new JSONObject(json);
-            String username = (String) session.getAttribute("username");
+//        if (session.getAttribute("logined") == null) {
+//            return null;
+//        }else{
+
+
+//            String username = (String) session.getAttribute("username");
+            String username = "abc123";
             User user = userService.getUser(username);
+            System.out.println(username);
             String email = user.getEmail();
             String phone = user.getPhone();
             int credit = user.getCredit();
@@ -47,7 +50,7 @@ public class UpdateInfo {
             map.put("credit", credit);
             map.put("degree", degree);
             map.put("exp", exp);
-        }
+//        }
         return  map;
     }
 

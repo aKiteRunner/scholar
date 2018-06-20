@@ -82,4 +82,8 @@ public class UserService {
     public void updateUser(User user) {
         userMapper.updateByPrimaryKey(user);
     }
+
+    public void updateCredit(User user){
+        userMapper.updateByPrimaryKey(user);
+    }
 }
