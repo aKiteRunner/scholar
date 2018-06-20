@@ -15,7 +15,7 @@
 <head>
     <title>登录/注册</title>
     <!-- Custom Theme files -->
-    <link href="static/css/login.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/static/css/login.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- Custom Theme files -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -33,7 +33,7 @@
         </div>
     </c:if>
     <div align="center" style="padding-bottom:75px">
-        <img src="static/images/logo.png">
+        <img src="/static/images/logo.png">
     </div>
     <div class="login-top">
         <h2>登录</h2>
@@ -41,7 +41,7 @@
             <input type="text" name="userName" value="用户名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
             <input type="password" name="password" value="密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
 
-            
+
         <div class="forgot">
             <a href="#">忘记密码</a>
             <input type="submit" value="登录" >
