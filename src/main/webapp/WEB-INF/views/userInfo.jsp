@@ -193,16 +193,12 @@
     <div class="panel panel-default" id="writeLetter">
         <form class="form-inline" style="margin-top: 10px; margin-bottom: 10px;">
             <div class="form-group">
-                <label for="exampleInputName2">收件人</label>
-                <input type="text" class="form-control" id="exampleInputName2">
+                <label for="receiverName">收件人</label>
+                <input type="text" class="form-control" id="receiverName">
             </div>
-            <div class="form-group">
-                <label for="exampleInputEmail2">标题</label>
-                <input type="text" class="form-control" id="exampleInputEmail2">
-            </div>
-            <button type="submit" class="btn btn-default">发送</button>
+            <input type="button" class="btn btn-default" onclick="sendMessage()" value="发送">
         </form>
-        <textarea class="form-control" rows="10"></textarea>
+        <textarea class="form-control" rows="10" id="content"></textarea>
     </div>
 
 </div> <!-- /container -->
@@ -341,6 +337,31 @@
             error : function(msg) {
             }
         });
+    }
+    
+    function sendMessage() {
+        var data = {
+            "content": document.getElementById("content").value,
+            "receiverName": document.getElementById("receiverName").value
+        }
+        $.ajax({
+            url : '/setting/sendmessage',
+            type : 'POST',
+            data : JSON.stringify(data), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if (response['errorInfo'] == null) {
+                    alert(response['info']);
+                    document.getElementById("content").value = null
+                    document.getElementById("receiverName").value = null
+                } else {
+                    alert(response['errorInfo']);
+                }
+            }
+        });
+        return false;
     }
 </script>
 </html>

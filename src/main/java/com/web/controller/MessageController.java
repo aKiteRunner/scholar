@@ -3,6 +3,7 @@ package com.web.controller;
 import com.web.bean.Application;
 import com.web.bean.Institute;
 import com.web.bean.Message;
+import com.web.bean.User;
 import com.web.service.ApplicationService;
 import com.web.service.InstituteService;
 import com.web.service.MessageService;
@@ -91,22 +92,25 @@ public class MessageController {
     @RequestMapping(value = "/setting/sendmessage", method = RequestMethod.POST)
     @ResponseBody
     // 传receiverId, content
-    public HashMap<String, String> sendMessage(@RequestParam Integer receiverId,
-                                               @RequestParam String content,
+    public HashMap<String, String> sendMessage(@RequestBody String json,
                                                HttpSession session) {
         // 先登录
         if (session.getAttribute("logined") == null) {
             return null;
         }
+        JSONObject jsonObject = new JSONObject(json);
+        String receiverName = jsonObject.getString("receiverName");
+        String content = jsonObject.getString("content");
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, String> map = new HashMap<>();
-        if (!userService.userExist(receiverId)) {
+        if (!userService.userExist(receiverName)) {
             map.put("errorInfo", "用户不存在");
             return map;
         }
+        User receiver = userService.getUser(receiverName);
         Message message = new Message();
         message.setSenderId(userId);
-        message.setReceiverId(receiverId);
+        message.setReceiverId(receiver.getId());
         message.setContent(content);
         message.setStatus((byte) 0);
         message.setSendTime(new Date());

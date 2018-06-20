@@ -54,7 +54,7 @@
                 <span class="icon"><img src="/static/images/menu.png" alt=""> </span>
                 <ul>
                     <li><a href="index.jsp">首页</a></li>
-                    <li><a href="paper.jsp">发现</a></li>
+                    <li><a href="/discover">发现</a></li>
                     <li><a href="template.jsp">仓库</a></li>
                     <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
                     <li><a href="/setting">个人</a> </li>
@@ -76,7 +76,7 @@
 
             <ul>
                 <li><a href="index.jsp">首页</a></li>
-                <li><a href="paper.jsp">发现</a></li>
+                <li><a href="/discover">发现</a></li>
                 <li><a href="template.jsp">仓库</a></li>
                 <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
                 <li><a href="/setting">个人</a> </li>
