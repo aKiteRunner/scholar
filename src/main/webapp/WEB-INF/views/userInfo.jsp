@@ -32,19 +32,19 @@
         <h1 style="margin-top: 0px;">个人信息</h1>
     </div>
 
-    <p id="Hello">你好，<strong class="text-danger">科林麦克兰莫</strong></p>
+    <p id="Hello">你好，<strong class="text-danger">${username}</strong></p>
 
     <h3 class="infoTitle">邮箱</h3>
-    <p class="infoDetail">fuckqq@qq.com</p>
+    <p class="infoDetail">${email}</p>
 
     <h3 class="infoTitle">手机</h3>
-    <p class="infoDetail">1899999999</p>
+    <p class="infoDetail">${phone}</p>
 
     <h3 class="infoTitle">积分</h3>
-    <p class="infoDetail">1573</p>
+    <p class="infoDetail">${credit}</p>
 
     <h3 class="infoTitle">等级</h3>
-    <p class="infoDetail">127 距离升级还需要<strong class="text-danger">298</strong>积分</p>
+    <p class="infoDetail">${degree} 距离升级还需要<strong class="text-danger">${exp}</strong>积分</p>
     <div class="progress" style="width:200px;">
         <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
              style="width:60%;">

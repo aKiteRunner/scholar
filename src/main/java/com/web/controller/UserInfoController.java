@@ -2,6 +2,7 @@ package com.web.controller;
 
 import com.web.bean.User;
 import com.web.service.UserService;
+import com.web.utils.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +43,7 @@ public class UserInfoController {
             model.addAttribute("phone", phone);
             model.addAttribute("credit", credit);
             model.addAttribute("degree", degree);
-            model.addAttribute("exp", exp);
+            model.addAttribute("exp", Setting.DEGREE_EXP - exp);
             return "userInfo";
 //        }
     }
