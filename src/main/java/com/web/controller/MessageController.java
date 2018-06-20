@@ -47,7 +47,7 @@ public class MessageController {
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, List<Message>> map = new HashMap<String, List<Message>>();
         List<Message> sentMessage = messageService.selectSentMessage(userId);
-        sentMessage = sentMessage.parallelStream().
+        sentMessage = sentMessage.stream().
                 sorted(Comparator.comparing(Message::getSendTime).reversed()).
                 collect(Collectors.toList());
         map.put("sentMessage", sentMessage);
@@ -67,7 +67,7 @@ public class MessageController {
         receivedMessage = receivedMessage.parallelStream().
                 sorted(Comparator.comparing(Message::getSendTime).reversed()).
                 collect(Collectors.toList());
-        map.put("sentMessage", receivedMessage);
+        map.put("receivedMessage", receivedMessage);
         return map;
     }
 

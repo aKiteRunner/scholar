@@ -48,7 +48,7 @@
     <div class="progress" style="width:200px;">
         <div id="bar" class="progress-bar" role="progressbar" aria-valuenow="${exp}" aria-valuemin="0" aria-valuemax="${maxExp}"
              style="width:60%;">
-            60%60%
+            60%
         </div>
     </div>
 
@@ -162,10 +162,10 @@
     </ul>
     <div class="panel panel-default" id="receivedLetter">
         <!-- Default panel contents -->
-        <p class="panel-heading" style="font-size: 13px;">共<strong class="text-danger">3</strong>封站内信</p>
+        <p class="panel-heading" style="font-size: 13px;">共<strong class="text-danger" id="letterNum">3</strong>封站内信</p>
 
         <!-- Table -->
-        <table class="table">
+        <table class="table" id="receivedTable">
             <tr>
                 <td>#</td>
                 <td>标题</td>
@@ -186,7 +186,7 @@
         <p class="panel-heading" style="font-size: 13px;">已发送<strong class="text-danger">3</strong>封站内信</p>
 
         <!-- Table -->
-        <table class="table">
+        <table class="table" id="sentTable">
             <tr>
                 <td>#</td>
                 <td>标题</td>
@@ -249,7 +249,31 @@
         rdiv.style.display = 'block'
         pdiv.style.display = 'none'
         wdiv.style.display = 'none'
-
+        $.ajax({
+            url : '/setting/receivedmessage',
+            type : 'GET',
+            data : null, // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                console.log(response);
+                var table = document.getElementById("receivedTable");
+                table.innerHTML = "<tr>\n" +
+                    "                <td>#</td>\n" +
+                    "                <td>标题</td>\n" +
+                    "                <td>收件人</td>\n" +
+                    "                <td>发件时间</td>\n" +
+                    "            </tr>";
+                for (x = 0; x < response["receivedMessage"].length; x++) {
+                    message = response["receivedMessage"][x];
+                    console.log(message);
+                    table.innerHTML += "<tr><td>" + x +"</td>" + "<td>" + message["content"] +"</td>" + "</tr>";
+                }
+            },
+            error : function(msg) {
+            }
+        });
     }
     pl.onclick = function (e) {
         rl.className = ''
@@ -258,6 +282,19 @@
         rdiv.style.display = 'none'
         pdiv.style.display = 'block'
         wdiv.style.display = 'none'
+        $.ajax({
+            url : '/setting/sentmessage',
+            type : 'GET',
+            data : null, // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                console.log(response);
+            },
+            error : function(msg) {
+            }
+        });
     }
     wl.onclick = function (e) {
         rl.className = ''
