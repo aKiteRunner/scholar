@@ -9,10 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -56,6 +53,7 @@ public class DisplayPaperController {
         papers = papers.stream()
                 .sorted(Comparator.comparing(Paper::getPopularity).reversed())
                 .collect(Collectors.toList());
+        System.out.println(papers);
         List<Object[]> list = new ArrayList<>();
         for (Paper paper: papers) {
             Object[] temp = new Object[2];
@@ -64,6 +62,7 @@ public class DisplayPaperController {
             list.add(temp);
         }
         model.addAttribute("list", list);
+        System.out.println(list);
         return "paper";
     }
 
@@ -71,14 +70,17 @@ public class DisplayPaperController {
     @RequestMapping(value = "/repository", method = RequestMethod.GET)
     public String displayPaperByUser(Model model, HttpSession session) {
         if (session.getAttribute("logined") == null) {
-            return "login";
+            return "redirect:login";
         }
         Integer userId = (Integer) session.getAttribute("id");
         List<Paper> papers = paperService.selectByUser(userId);
         papers = papers.stream().
                 sorted(Comparator.comparing(Paper::getId).reversed()).
                 collect(Collectors.toList());
+        User user = userService.getUser(userId);
         model.addAttribute("paper", papers);
+        model.addAttribute("user", user);
+        model.addAttribute("curExp", Setting.DEGREE_EXP - user.getExp());
         return "repository";
     }
 

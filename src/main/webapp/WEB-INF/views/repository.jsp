@@ -11,12 +11,12 @@
 <html>
 <head>
     <title>Paper</title>
-    <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
     <!-- Custom Theme files -->
     <!--theme-style-->
-    <link href="static/css/style.css?v=1324" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/style.css?v=1324" rel="stylesheet" type="text/css" media="all" />
     <!--//theme-style-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -25,13 +25,13 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,500' rel='stylesheet' type='text/css'>
     <!--flexslider-->
-    <link rel="stylesheet" href="static/css/flexslider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />
     <!--//flexslider-->
-    <link rel="stylesheet" href="static/css/lightbox.css">
+    <link rel="stylesheet" href="/static/css/lightbox.css">
     <!--JS for animate-->
-    <link href="static/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/static/css/animate.css" rel="stylesheet" type="text/css" media="all">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="static/js/wow.min.js"></script>
+    <script src="/static/js/wow.min.js"></script>
     <script>
         new WOW().init();
     </script>
@@ -46,10 +46,10 @@
         <!---->
         <div class="header-logo">
             <div class="logo">
-                <a href="index.jsp"><img src="static/images/logo.png" alt="" ></a>
+                <a href="index.jsp"><img src="/static/images/logo.png" alt="" ></a>
             </div>
             <div class="top-nav">
-                <span class="icon"><img src="static/images/menu.png" alt=""> </span>
+                <span class="icon"><img src="/static/images/menu.png" alt=""> </span>
                 <ul>
                     <li><a href="index.jsp">首页</a></li>
                     <li><a href="services.html">发现</a></li>
@@ -79,7 +79,7 @@
                 <li><a href="index.jsp">首页</a></li>
                 <li><a href="services.html">发现</a></li>
                 <li><a href="projects.html">仓库</a></li>
-                <li><a href="index.jsp"><img src="static/images/logo.png"></a></li>
+                <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
                 <li><a href="quality.html">个人</a> </li>
                 <li><a href="login.jsp">登录</a></li>
 
@@ -144,19 +144,19 @@
     <div class="paper_aside sidebar-module col-md-2" style="margin-top: 40px;">
         <h4>用户名</h4>
         <ol class="list-unstyled">
-            <li>科林麦克兰莫</li>
+            <li>${user.username}</li>
         </ol>
         <h4>邮箱</h4>
         <ol class="list-unstyled">
-            <li>fuckqq@qq.com</li>
+            <li>${user.email}</li>
         </ol>
         <h4>手机</h4>
         <ol class="list-unstyled">
-            <li>1899999999</li>
+            <li>${user.phone}</li>
         </ol>
         <h4>等级</h4>
-        <ol class="list-unstyled">127 </ol>
-        <ol class="list-unstyled">距离升级还需要<strong class="text-danger">298</strong>积分</ol>
+        <ol class="list-unstyled">${user.degree}</ol>
+        <ol class="list-unstyled">距离升级还需要<strong class="text-danger">${curExp}</strong>积分</ol>
         <div class="progress" style="width:200px;">
             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%;">
                 60%

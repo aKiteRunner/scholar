@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: 52460
@@ -92,34 +94,38 @@
 <!--w3l-->
 <div class="main container">
    <div class="paper_dis col-md-9">
-        <%! private  int papernum=0;
-        %>
-        <% for (papernum=1;papernum<=10;papernum++)%><%{%>
-        <div class="paper" onmouseover="this.style.background='#ffecfc'" onmouseout="this.style.background = '#ffffff'">
-            <div class="paper_title">
-                <a href="download.jsp" >5 月编程语言榜：C 再度暴涨，Scala 成功上位</a>
-            </div>
-            <div class="paper_abstract">
-                <span>学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多学什么语言，比穿什么衣服的学什么语言，比穿什么衣服的学什么语言，比穿什么衣服的学什么语言，比穿什么衣服的学什么语言，比穿什么衣服的学什么语言，比穿什么衣服的什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择，选错一件衣服可以重来，而选错一个学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择是抉择而不是选择，选错一件衣服可以重来，而选错一个学什么语言，比穿什么衣服的问题更难，因为职业的背后，更多是抉择而不是选择，选错一件衣服可以重来，而选错一个</span>
-            </div>
-            <div class="paper_mes">
-                <div class="paper_author col-md-2">
-                    <span class="glyphicon glyphicon-user"></span> 孟教授
-                </div>
-                <div class="paper_time col-md-2">
-                    2018-6-18
-                </div>
-                <div class="paper_right col-md-4 col-md-offset-3">
-                    <div class="paper_readnum col-md-6">
-                        阅读量 15
-                    </div>
-                    <div class="paper_commentnum col-md-6">
-                        <span class="glyphicon glyphicon-comment"></span>评论
-                    </div>
-                </div>
-            </div>
-        </div>
-        <%}%>
+       <c:forEach var="paper" items="${list}">
+           <div class="paper" onmouseover="this.style.background='#ffecfc'" onmouseout="this.style.background = '#eeeeee'">
+               <div class="paper_title ">
+                       ${paper[0].name}
+               </div>
+               <div class="dropdown col-md-2" style="float:right; margin-right: 5px;">
+                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                       <li><a href="#">转让文献</a></li>
+                       <li><a href="#">修改价格</a></li>
+                   </ul>
+               </div>
+               <div class="paper_abstract">
+                   <span>${paper[0].abstract1}</span>
+               </div>
+               <div class="paper_mes">
+                   <div class="paper_author col-md-2">
+                       <span class="glyphicon glyphicon-user"></span> ${paper[1].username}
+                   </div>
+                   <div class="paper_time col-md-2">
+                       <fmt:formatDate type="date" value="${paper[0].time}" />
+                   </div>
+                   <div class="paper_right col-md-4 col-md-offset-3">
+                       <div class="paper_readnum col-md-6">
+                           阅读量 ${paper[0].popularity}
+                       </div>
+                       <div class="paper_commentnum col-md-6">
+                           <span class="glyphicon glyphicon-comment"></span>评论
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </c:forEach>
     </div>
     <div class="paper_aside col-md-2 col-md-offset-1">
         <div class="news_hot">
