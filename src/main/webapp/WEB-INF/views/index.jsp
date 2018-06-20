@@ -53,9 +53,9 @@
             <div class="top-nav">
                 <span class="icon"><img src="/static/images/menu.png" alt=""> </span>
                 <ul>
-                    <li><a href="index.jsp">首页</a></li>
+                    <li><a href="/index">首页</a></li>
                     <li><a href="/discover">发现</a></li>
-                    <li><a href="template.jsp">仓库</a></li>
+                    <li><a href="/repository">仓库</a></li>
                     <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
                     <li><a href="/setting">个人</a> </li>
                     <li><a href="/loginGet">登录</a></li>
@@ -75,9 +75,9 @@
         <div class="top-menu wow fadeInLeft animated" data-wow-delay=".5s">
 
             <ul>
-                <li><a href="index.jsp">首页</a></li>
+                <li><a href="/index">首页</a></li>
                 <li><a href="/discover">发现</a></li>
-                <li><a href="template.jsp">仓库</a></li>
+                <li><a href="/repository">仓库</a></li>
                 <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
                 <li><a href="/setting">个人</a> </li>
                 <li><a href="/loginGet">登录</a></li>
