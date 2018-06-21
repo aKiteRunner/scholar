@@ -17,4 +17,12 @@ public class InstituteService {
     public Institute selectByName(String name) {
         return instituteMapper.selectByName(name);
     }
+
+    public boolean instituteExist(Integer id) {
+        return null != instituteMapper.selectByPrimaryKey(id);
+    }
+
+    public boolean instituteExist(String name) {
+        return null != instituteMapper.selectByName(name);
+    }
 }

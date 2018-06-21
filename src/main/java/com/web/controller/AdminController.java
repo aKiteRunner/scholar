@@ -40,6 +40,11 @@ public class AdminController {
         return "index";
     }
 
+    @RequestMapping(value = "template", method = RequestMethod.GET)
+    public String template() {
+        return "template";
+    }
+
     @RequestMapping(value = "admin/application", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String, List<Application>> displayApplication(HttpSession session) {

@@ -72,6 +72,10 @@ public class PaperService {
         return paperMapper.selectByDiscipline(disciplineId);
     }
 
+    public List<Paper> selectByInstitute(Integer instituteId) {
+        return paperMapper.selectByInstitute(instituteId);
+    }
+
     public List<Paper> selectByUser(Integer userId) {
         return paperMapper.selectByUser(userId);
     }
