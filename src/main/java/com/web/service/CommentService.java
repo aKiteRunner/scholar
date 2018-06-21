@@ -35,4 +35,8 @@ public class CommentService {
         comment.setTime(new Date());
         commentMapper.insert(comment);
     }
+
+    public List<Comment> allPaperComment(Integer paperId) {
+        return commentMapper.selectByPaper(paperId);
+    }
 }

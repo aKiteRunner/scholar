@@ -13,6 +13,18 @@
     <result column="abstract1" jdbcType="VARCHAR" property="abstract1" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
+  <resultMap id="ResultMap" type="com.web.bean.Paper">
+    <id column="pid" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="popularity" jdbcType="DOUBLE" property="popularity" />
+    <result column="degree" jdbcType="INTEGER" property="degree" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
+    <result column="discipline_id" jdbcType="INTEGER" property="disciplineId" />
+    <result column="abstract1" jdbcType="VARCHAR" property="abstract1" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -107,11 +119,11 @@
     from b_paper, b_discipline
     where b_paper.discipline_id = #{disciplineId}
   </select>
-  <select id="selectByUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByUser" parameterType="java.lang.Integer" resultMap="ResultMap">
     select
-    <include refid="Base_Column_List" />
-    from b_paper, b_paper_order
-    where b_paper.id = b_paper_order.paper_id and b_paper_order.user_id = #{userId};
+      b_paper.id pid, name, path, popularity, degree, b_paper.price, subject_id, discipline_id, abstract1
+    from b_paper, r_user_paper
+    where b_paper.id = r_user_paper.paper_id and r_user_paper.user_id = #{userId};
   </select>
   <select id="orderByAscendingPopularity" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select

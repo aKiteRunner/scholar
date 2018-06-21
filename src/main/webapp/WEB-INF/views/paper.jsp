@@ -9,12 +9,18 @@
 <html>
 <head>
     <title>Paper</title>
-    <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom Theme files -->
     <!--theme-style-->
-    <link href="static/css/style.css?v=1425" rel="stylesheet" type="text/css" media="all" />
+    <link href="/static/css/style.css?v=1425" rel="stylesheet" type="text/css" media="all" />
     <!--//theme-style-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,12 +29,12 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,500' rel='stylesheet' type='text/css'>
     <!--flexslider-->
-    <link rel="stylesheet" href="static/css/flexslider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />
     <!--//flexslider-->
-    <link rel="stylesheet" href="static/css/lightbox.css">
+    <link rel="stylesheet" href="/static/css/lightbox.css">
     <!--JS for animate-->
-    <link href="static/css/animate.css" rel="stylesheet" type="text/css" media="all">
-    <script src="static/js/wow.min.js"></script>
+    <link href="/static/css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <script src="/static/js/wow.min.js"></script>
     <script>
         new WOW().init();
     </script>
@@ -41,10 +47,10 @@
         <!---->
         <div class="header-logo">
             <div class="logo">
-                <a href="index.jsp"><img src="static/images/logo.png" alt="" ></a>
+                <a href="index.jsp"><img src="/static/images/logo.png" alt="" ></a>
             </div>
             <div class="top-nav">
-                <span class="icon"><img src="static/images/menu.png" alt=""> </span>
+                <span class="icon"><img src="/static/images/menu.png" alt=""> </span>
                 <ul>
                     <li><a href="index.jsp">首页</a></li>
                     <li><a href="paper.jsp">发现</a></li>
@@ -74,7 +80,7 @@
                 <li><a href="index.jsp">首页</a></li>
                 <li><a href="paper.jsp">发现</a></li>
                 <li><a href="projects.html">仓库</a></li>
-                <li><a href="index.jsp"><img src="static/images/logo.png"></a></li>
+                <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
                 <li><a href="quality.html">个人</a> </li>
                 <li><a href="login.jsp">登录</a></li>
                 <li>
@@ -98,12 +104,10 @@
                        ${paper[0].name}
                </div>
                <div class="dropdown col-md-2" style="float:right; margin-right: 5px;">
-                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
-                           style="background-color: inherit; border-width: 0;"
-                   >
-                       管理
-                       <span class="caret"></span>
-                   </button>
+                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                       <li><a href="#">转让文献</a></li>
+                       <li><a href="#">修改价格</a></li>
+                   </ul>
                </div>
                <div class="paper_abstract">
                    <span>${paper[0].abstract1}</span>
@@ -136,7 +140,7 @@
         <% for (newsnum=1;newsnum<=10;newsnum++)%><%{%>
             <div class="news_content">
                     <div class="news_img col-md-4">
-                <img src="static/images/logo.png" style="width:auto; height:auto; max-width:100%; max-height:100%;">
+                <img src="/static/images/logo.png" style="width:auto; height:auto; max-width:100%; max-height:100%;">
                 </div>
                 <div class="news_title col-md-8">
                    新闻标题
@@ -150,7 +154,7 @@
     <div class="container">
         <div class="col-md-3 latest-proj wow fadeInLeft animated" data-wow-delay=".5s">
             <h3>Gryffindor</h3>
-            <img src="static/images/logo.png" class="img-responsive" alt="">
+            <img src="/static/images/logo.png" class="img-responsive" alt="">
             <div class="clearfix"></div>
         </div>
         <div class="col-md-3 location wow fadeInRight animated" data-wow-delay=".5s">

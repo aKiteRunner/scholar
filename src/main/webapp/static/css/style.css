@@ -1,6 +1,9 @@
 body{
 	font-family: 'Source Sans Pro', sans-serif;
-	background:#fff;
+	background: #e4e4e4;
+    min-width: 1300px;
+    margin:0 auto;
+    position: absolute;
 }
 body a{
 	transition: 0.5s all;
@@ -20,9 +23,10 @@ h1,h2,h3,h4,h5,h6,p,label{
 .header{
 	background:url(../images/13.jpg) no-repeat center;
 	width:100%;
-	min-height: 750px;
+	min-height: 53.5em;
 	display: block;
 	background-size: cover;
+
 }
 .header-logo{
 	display:none;
@@ -2153,14 +2157,13 @@ address-1 {
 }
 }
 .main{
-
     width:100%;
 }
 .paper_dis{
     margin-top:20px;
 }
 .paper{
-    background: #eeeeee;
+    background: #ffffff;
     margin:30px 15px 15px 15%;
     border-radius: 20px;
 
@@ -2242,9 +2245,24 @@ span.glyphicon.glyphicon-list{
     font-weight: 500;
     font-family: 'Ubuntu', sans-serif;
 }
-/*.search_button input{*/
+.search_button input {
+    border:0;
+    background-color: #382e37;
+    color:#999999;
+    text-align: center;
+    line-height: 2.5em;
+    width:260px;
+    border-radius: 25px;
     /*visibility: hidden;*/
-/*}*/
+}
+.paper_title a:hover{
+    color: #d91e28;
+    text-decoration: none;
+}
+.paper_title a{
+    color: #040402;
+    text-decoration: none;
+}
 span.glyphicon.glyphicon-search
 {
     color: #ffffff;
@@ -2456,7 +2474,78 @@ span.glyphicon.glyphicon-search
         width: 200px;
     }
 }
+.detail_main{
+    float: left;
+    margin-left:5em;
+    border-width: 0  2px 0 0 ;
+    border-style: solid;
+    border-color: #ffffff;
+}
+.paper_detail{
+    width:100%;
+    background-color: #ffffff;
+}
+.detail_docum{
+    margin-top: 1em;
+    width:100%;
+}
+.detail_title{
+    margin-top:50px;
+    vertical-align: center;
+    margin-bottom: 4px;
+    font-size: 2.0em;
+    font-weight: 600;
+    font-synthesis: style;
+    line-height: 50px;
+    color: #1a1a1a;
+    text-align: center;
+    border-radius: 20px;
+    font-family: "Microsoft YaHei UI";
+}
+.detail_abstract{
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    width:100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 15;
+    -webkit-box-orient: vertical;
+    margin-top:3em;
+    padding:0em 2.5em 2.5em 2.5em;
+    font-family: "Microsoft YaHei UI";
+}
+.detail_abstract p{
+    line-height: 1.5em;
+    overflow: hidden;
+}
+.abstract_title{
+    font-size:24px;
+    margin-top:10px;
+    font-weight: bold;
+    line-height:50px;
+    height:50px;
+    width:50px;
+    text-align: center;
+    font-family: "Microsoft YaHei UI";
+}
+.comment_aside{
 
+}
+.abstract_author{
+    float:right;
+    font-size:20px;
+    width:200px;
+    height:70px;
+    font-weight: bold;
+    line-height: 35px;
+    text-align: center;
+    border-radius:25px;
+    font-family: "Microsoft YaHei UI";
+    margin-bottom:1em;
+}
+.abstract_author span.glyphicon.glyphicon-user{
+    color: #eaeb4d;
+    font-size:1em;
+}
 li
 {
     list-style: none;
@@ -2568,6 +2657,165 @@ li
     height: 20px;
     line-height: 18px!important;
     vertical-align: middle!important;
+}
+.display_down{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.download_box{
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 2.5em;
+    margin-bottom: 2em;
+    height:100%;
+}
+.comment textarea{
+    height:6em;
+    width:100%;
+    line-height: 2em;
+    border-top-left-radius:0em;
+    border-top-right-radius:1.5em;
+    border-bottom-left-radius:1.5em;
+    border-bottom-right-radius:1.5em;
+    margin-bottom: 2em;
+    border:0;
+    clos:50;
+    rows:5;
+    warp:virtual;
+    resize: none;
+}
+.detail_comment{
+    height:40em;
+    background-color: #a8081d;
+
+}
+.dis_comment{
+    background-color: #ffffff;
+    float:left;
+    width: 7em;
+    height:2em;
+    line-height: 2em;
+    text-align: center;
+    vertical-align: middle;
+    border-top-left-radius:1.5em;
+    border-top-right-radius:1.5em;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #e4e4e4;
+}
+.submit_comment{
+    background-color: #ffffff;
+    float:right;
+    width: 5em;
+    border-width:1px;
+    border-color:#0f0f0f;
+    border-style:solid;
+    height:1.9em;
+    line-height: 2em;
+    vertical-align: middle;
+    text-align: center;
+    vertical-align: middle;
+    border-radius:1.5em;
+}
+.top_of_comment{
+    width:100%;
+    height:2em
+}
+.comment span.glyphicon.glyphicon-comment
+{
+    margin-bottom: -2em;
+    color: #a896a0;
+    font-size: 2em;
+}
+.vertical_line{
+    background-color: #0f0f0f;
+    height:1000px;
+    width: 0.5px;
+}
+.download_box span.glyphicon.glyphicon-download{
+    color: #a896a0;
+    font-size: 4em;
+    vertical-align: middle;
+}
+.download_icon{
+    vertical-align: middle;
+    height:100px;
+}
+.download_font
+{
+    color: #a896a0;
+    font-size: 2.5em;
+    vertical-align: middle;
+}
+.comment_main{
+    width:100%;
+
+}
+.comment_content
+{
+    margin-top: 20px;
+    border-radius: 15px;
+    background: #ffffff;
+    margin-left:4em;
+    padding-right: 1em;
+}
+.comment_hot span.glyphicon.glyphicon-comment{
+    color: #a896a0;
+    font-size: 4em;
+    vertical-align: middle;
+}
+.comment_hot h2{
+    color: #a896a0;
+    font-size: 2.5em;
+    vertical-align: middle;
+    float: right;
+}
+.comment_hot{
+    margin-top:7em;
+    margin-left:4em;
+}
+.comment_user{
+    height:1em;
+    line-height: 1em;
+    margin-left: 2em;
+}
+.comment_user span.glyphicon.glyphicon-user{
+    color: #a896a0;
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-top: 1em;
+    margin-left: 2em;
+}
+.comment_user h2{
+    color: #040402;
+    font-size: 1.5em;
+    vertical-align: middle;
+    margin-top: 1em;
+    margin-right: 10em;
+    float:right;
+}
+.comment_word{
+    height:80px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-left: 1em;
+    width:100%;
+}
+
+.page_test{
+    margin-left:35%;
+}
+.page_test2{
+    margin-left:15%;
+}
+.page_test li{
+    height:1.5em;
+    font-size:1.5em;
+}
+.page_test2 li{
+    height:1.5em;
+    font-size:1.0em;
 }
 /*
     padding: 8px;

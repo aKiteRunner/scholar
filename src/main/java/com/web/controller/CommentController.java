@@ -1,19 +1,19 @@
 package com.web.controller;
 
 import com.web.bean.Comment;
+import com.web.bean.Paper;
 import com.web.exception.ParameterInvalidException;
 import com.web.service.CommentService;
 import com.web.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -32,8 +32,12 @@ public class CommentController {
                                            @RequestParam("paperId") Integer paperId,
                                            @RequestParam("content") String content) {
         // 检查登录
-        Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, String> map = new HashMap<>();
+        if (session.getAttribute("loinged")== null) {
+            map.put("errorInfo", "请登录");
+            return map;
+        }
+        Integer userId = (Integer) session.getAttribute("id");
         try {
             commentService.addComment(userId, paperId, content);
             map.put("info", "评论成功");

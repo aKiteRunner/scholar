@@ -9,10 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -71,14 +68,25 @@ public class DisplayPaperController {
     @RequestMapping(value = "/repository", method = RequestMethod.GET)
     public String displayPaperByUser(Model model, HttpSession session) {
         if (session.getAttribute("logined") == null) {
-            return "login";
+            return "redirect:login";
         }
         Integer userId = (Integer) session.getAttribute("id");
         List<Paper> papers = paperService.selectByUser(userId);
         papers = papers.stream().
                 sorted(Comparator.comparing(Paper::getId).reversed()).
                 collect(Collectors.toList());
+        List<Object[]> list = new ArrayList<>();
+        for (Paper paper: papers) {
+            Object[] temp = new Object[2];
+            temp[0] = paper;
+            temp[1] = scholarService.getScholar(scholarPaperService.getScholarId(paper.getId()));
+            list.add(temp);
+        }
+        User user = userService.getUser(userId);
         model.addAttribute("paper", papers);
+        model.addAttribute("user", user);
+        model.addAttribute("curExp", Setting.DEGREE_EXP - user.getExp());
+        model.addAttribute("list", list);
         return "repository";
     }
 
@@ -129,7 +137,7 @@ public class DisplayPaperController {
         paperService.addPopularity(paperId, Setting.POPULARITY_PER_CLICK);
         model.addAttribute("paper", paper);
         List<Comment> comments = commentService.paperComment(paperId);
-        model.addAttribute("comment", comments);
-        return "paper";
+        model.addAttribute("comments", comments);
+        return "download";
     }
 }

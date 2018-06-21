@@ -108,11 +108,13 @@ public class UploadController {
 
     @RequestMapping(value = "/download/{paperId}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> download(@PathVariable Integer paperId,
-                                           HttpSession httpSession,
-                                           Model model) throws Exception {
+                                           HttpSession httpSession) throws Exception {
         //下载文件路径
         // 用UserPaperService判断用户是否拥有此文献
         Integer userId = (Integer) httpSession.getAttribute("id");
+        if (userId == null) {
+            userId = 0;
+        }
         Paper paper = paperService.selectById(paperId);
         if (paper == null || !userPaperService.paperAccessible(userId, paperId)) {
             return null;
@@ -153,22 +155,25 @@ public class UploadController {
 
     @RequestMapping(value = "/giftpaper/", method = RequestMethod.POST)
     @ResponseBody
-    public HashMap<String, String> giftPaper(@RequestParam(value = "paperId") Integer paperId,
-                                             @RequestParam(value = "userId") Integer userId,
+    public HashMap<String, String> giftPaper(@RequestBody String json,
                                              HttpSession httpSession) {
         if (httpSession.getAttribute("logined") == null) {
             return null;
         }
         HashMap<String, String> map = new HashMap<>();
         Integer scholarId = (Integer) httpSession.getAttribute("id");
+        JSONObject jsonObject = new JSONObject(json);
+        String receiverName = jsonObject.getString("receiver");
+        int paperId = jsonObject.getInt("paperId");
         // 用ScholarPaperService判断专家是否拥有此文献
         if (!paperService.paperExist(paperId)) {
             map.put("errorInfo", "该文献不存在");
-        } else if (!userService.userExist(userId)) {
+        } else if (!userService.userExist(receiverName)) {
             map.put("errorInfo", "该用户不存在");
         } else if (!scholarPaperService.paperAccessible(scholarId, paperId)) {
             map.put("errorInfo", "没有权限");
         } else {
+            int userId = userService.getUser(receiverName).getId();
             UserPaper userPaper = new UserPaper();
             userPaper.setPaperId(paperId);
             userPaper.setUserId(userId);
@@ -181,12 +186,14 @@ public class UploadController {
     @RequestMapping(value = "/changeprice/", method = RequestMethod.POST)
     @ResponseBody
     // 前端传form, JSON返回
-    public HashMap<String, String> changePaperPrice(@RequestParam(value = "paperId") Integer paperId,
-                                                    @RequestParam("price") Integer price,
+    public HashMap<String, String> changePaperPrice(@RequestBody String json,
                                                     HttpSession session) {
         if (session.getAttribute("logined") == null) {
             return null;
         }
+        JSONObject jsonObject = new JSONObject(json);
+        int paperId = jsonObject.getInt("paperId");
+        int price = jsonObject.getInt("price");
         Integer userId = (Integer) session.getAttribute("id");
         HashMap<String, String> map = new HashMap<>();
         if (!paperService.paperExist(paperId)) {
@@ -197,6 +204,7 @@ public class UploadController {
             paperService.updatePrice(paperId, price);
             map.put("info", "修改成功");
         }
+        System.out.println(map);
         return map;
     }
 }
