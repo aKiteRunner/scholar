@@ -71,7 +71,6 @@ public class DisplayPaperController {
             return "redirect:login";
         }
         Integer userId = (Integer) session.getAttribute("id");
-        System.out.println(userId);
         List<Paper> papers = paperService.selectByUser(userId);
         papers = papers.stream().
                 sorted(Comparator.comparing(Paper::getId).reversed()).
@@ -88,7 +87,6 @@ public class DisplayPaperController {
         model.addAttribute("user", user);
         model.addAttribute("curExp", Setting.DEGREE_EXP - user.getExp());
         model.addAttribute("list", list);
-        System.out.println(list);
         return "repository";
     }
 
@@ -139,7 +137,7 @@ public class DisplayPaperController {
         paperService.addPopularity(paperId, Setting.POPULARITY_PER_CLICK);
         model.addAttribute("paper", paper);
         List<Comment> comments = commentService.paperComment(paperId);
-        model.addAttribute("comment", comments);
-        return "paper";
+        model.addAttribute("comments", comments);
+        return "download";
     }
 }

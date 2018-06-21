@@ -11,9 +11,17 @@
 <html>
 <head>
     <title>Paper</title>
-    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/static/js/jquery.min.js"></script>
+    <%--！！！！！！！！！！！！！！！！！！！前面5条不要删！！！！！！！！！！！！！！！！--%>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <!-- Custom Theme files -->
     <!--theme-style-->
     <link href="/static/css/style.css?v=1324" rel="stylesheet" type="text/css" media="all" />
@@ -22,8 +30,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,500' rel='stylesheet' type='text/css'>
     <!--flexslider-->
     <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />
     <!--//flexslider-->
@@ -38,8 +44,79 @@
     <!--//end-animate-->
 </head>
 <body>
-<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="modal" id="giftModal" tabindex="-1" role="dialog" aria-labelledby="giftModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="giftModalTitle">转让文献</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="text" id="receiver" placeholder="用户名">
+                    </div>
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="number" id="paperId" placeholder="文献编号">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" onclick="giftPaper()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="priceModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="priceModalTitle">修改价格</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="number" id="price" placeholder="价格">
+                    </div>
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="number" id="paperId2" placeholder="文献编号">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="changePrice()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="information"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--header-->
 <div class="header-1">
     <div class="container">
@@ -113,8 +190,8 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a href="#">转让文献</a></li>
-                        <li><a href="#">修改价格</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#giftModal">转让文献</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#priceModal">修改价格</a></li>
                     </ul>
                 </div>
                 <div class="paper_abstract">
@@ -162,6 +239,66 @@
         </div>
     </div>
 </div>
+
+<script>
+    function giftPaper() {
+        var receiverName = document.getElementById("receiver").value;
+        var paperId = document.getElementById("paperId").value;
+        $('#giftModal').modal('hide');
+        $.ajax({
+            url : '/giftpaper/',
+            type : 'POST',
+            data : JSON.stringify({"receiver" : receiverName, "paperId": paperId}), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    infomation(false, response["info"])
+                }else{
+                    infomation(true, response["errorInfo"])
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    function changePrice() {
+        var price = document.getElementById("price").value;
+        var paperId = document.getElementById("paperId2").value;
+        $('#priceModal').modal('hide');
+        $.ajax({
+            url : '/changeprice/',
+            type : 'POST',
+            data : JSON.stringify({"price" : price, "paperId": paperId}), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    infomation(false, response["info"])
+                }else{
+                    infomation(true, response["errorInfo"])
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    // 如果错误，第一个参数传true,否则false.第二个参数为信息
+    function infomation(error, info) {
+        $('#infoModal').modal('show');
+        if (error) {
+            document.getElementById('infoModalTitle').innerText = '警告';
+        } else {
+            document.getElementById('infoModalTitle').innerText = '提示';
+        }
+        document.getElementById('information').innerText = info;
+    }
+</script>
+
 <div class="footer">
     <div class="container">
         <div class="col-md-3 latest-proj wow fadeInLeft animated" data-wow-delay=".5s">

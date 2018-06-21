@@ -30,6 +30,5 @@ public interface ScholarPaperMapper {
 
     ScholarPaper selectByScholarAndPaper(@Param("scholarId") Integer scholarId,@Param("paperId") Integer paperId);
 
-    //xml没写
     int selectByPaper(Integer paperId);
 }
