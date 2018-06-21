@@ -1,9 +1,6 @@
 package com.web.service;
 
-import com.web.bean.Discipline;
-import com.web.bean.Paper;
-import com.web.bean.PaperExample;
-import com.web.bean.PaperForSearch;
+import com.web.bean.*;
 import com.web.bean.PaperForSearch;
 import com.web.dao.PaperMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +18,7 @@ public class PaperService {
     private final ScholarService scholarService;
 
     @Autowired
-    public PaperService(PaperMapper paperMapper, ScholarPaperService scholarPaperService, ScholarService scholarService) {
+    public PaperService(PaperMapper paperMapper, ScholarPaperService scholarPaperService, ScholarService scholarService, UserService userService) {
         this.paperMapper = paperMapper;
         this.scholarPaperService = scholarPaperService;
         this.scholarService = scholarService;
@@ -90,5 +87,9 @@ public class PaperService {
         Paper paper = selectById(paperId);
         paper.setPrice(price);
         paperMapper.updateByPrimaryKey(paper);
+    }
+
+    public Scholar getAuthor(Integer paperId) {
+        return scholarService.getScholar(paperMapper.selectScholarId(paperId));
     }
 }

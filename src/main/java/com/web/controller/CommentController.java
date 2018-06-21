@@ -47,7 +47,6 @@ public class CommentController {
         } catch (ParameterInvalidException e) {
             map.put("errorInfo", e.getMessage());
         }
-        System.out.println("!");
         return map;
     }
 }

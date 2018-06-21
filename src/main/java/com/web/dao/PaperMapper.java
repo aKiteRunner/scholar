@@ -38,6 +38,8 @@ public interface PaperMapper {
 
     int updateByPrimaryKey(Paper record);
 
+    int selectScholarId(Integer paperId);
+
     //elastic
     List<Paper> selectPaperForSearch();
 }

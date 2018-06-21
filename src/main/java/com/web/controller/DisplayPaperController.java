@@ -3,6 +3,7 @@ package com.web.controller;
 import com.web.bean.*;
 import com.web.service.*;
 import com.web.utils.Setting;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,7 +77,7 @@ public class DisplayPaperController {
             list.add(temp);
         }
         model.addAttribute("list", list);
-        return "new_paper";
+        return "paper";
     }
 
     // 选出该用户下的所有文献，并按照时间即ID倒序
@@ -98,10 +99,10 @@ public class DisplayPaperController {
             list.add(temp);
         }
         User user = userService.getUser(userId);
-        model.addAttribute("paper", papers);
         model.addAttribute("user", user);
-        model.addAttribute("curExp", Setting.DEGREE_EXP - user.getExp());
         model.addAttribute("list", list);
+        model.addAttribute("count", paperService.selectByUser(userId).size());
+        model.addAttribute("isScholar", scholarService.scholarExist(userId));
         return "repository";
     }
 
@@ -115,13 +116,18 @@ public class DisplayPaperController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/buypaper", method = RequestMethod.POST)
-    public HashMap<String, String> buyPaper(HttpSession session, @RequestParam Integer paperId) {
+    @RequestMapping(value = "/buypaper/", method =RequestMethod.POST)
+    public HashMap<String, String> buyPaper(HttpSession session, @RequestBody String json) {
         // 判断是否登录
+        HashMap<String, String> map = new HashMap<>();
+        if (session.getAttribute("logined") == null) {
+            map.put("errorInfo", "请登录");
+        }
+        JSONObject jsonObject = new JSONObject(json);
+        int paperId = jsonObject.getInt("paperId");
         Integer userId = (Integer) session.getAttribute("id");
         User user = userService.getUser(userId);
         Paper paper = paperService.selectById(paperId);
-        HashMap<String, String> map = new HashMap<>();
         Integer credit = user.getCredit();
         Integer price = paper.getPrice();
         if (userPaperService.paperAccessible(userId, paperId)) {
@@ -160,8 +166,10 @@ public class DisplayPaperController {
             temp.put("time", comment.getTime());
             list.add(temp);
         }
-        System.out.println(list);
+        Scholar scholar =  paperService.getAuthor(paperId);
         model.addAttribute("comments", list);
+        model.addAttribute("scholar", scholar);
+        model.addAttribute("institute", instituteService.getInstitute(scholar.getInstituteId()).getName());
         return "download";
     }
 }
