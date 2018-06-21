@@ -92,6 +92,11 @@
     from b_institute
     where name = #{name};
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from b_institute
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from b_institute
     where id = #{id,jdbcType=INTEGER}

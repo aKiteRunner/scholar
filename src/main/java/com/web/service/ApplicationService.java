@@ -27,4 +27,8 @@ public class ApplicationService {
     public Application getApplication(Integer applicationId) {
         return applicationMapper.selectByPrimaryKey(applicationId);
     }
+
+    public void delete(Integer applicationId){
+        applicationMapper.deleteByPrimaryKey(applicationId);
+    }
 }

@@ -3,11 +3,13 @@ package com.web.controller;
 import com.web.bean.*;
 import com.web.service.ApplicationService;
 import com.web.service.MessageService;
+import com.web.service.InstituteService;
 import com.web.service.ScholarService;
 import com.web.service.UserService;
 import com.web.utils.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,13 +28,15 @@ public class AdminController {
     private final UserService userService;
     private final ScholarService scholarService;
     private final MessageService messageService;
+    private final InstituteService instituteService;
 
     @Autowired
-    public AdminController(ApplicationService applicationService, UserService userService, ScholarService scholarService, MessageService messageService) {
+    public AdminController(ApplicationService applicationService, UserService userService, ScholarService scholarService, MessageService messageService, InstituteService instituteService) {
         this.applicationService = applicationService;
         this.userService = userService;
         this.scholarService = scholarService;
         this.messageService = messageService;
+        this.instituteService = instituteService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -41,25 +45,27 @@ public class AdminController {
     }
 
     @RequestMapping(value = "admin/application", method = RequestMethod.GET)
-    @ResponseBody
-    public HashMap<String, List<Application>> displayApplication(HttpSession session) {
+    public String displayApplication(HttpSession session, Model model) {
         if (Setting.ADMIN_ID != (Integer) session.getAttribute("id")) {
             return null;
         }
-        HashMap<String, List<Application>> map = new HashMap<>();
+
         List<Application> applications = applicationService.selectAll();
         applications = applications.stream()
                 .sorted(Comparator.comparing(Application::getId).reversed())
                 .collect(Collectors.toList());
-        map.put("application", applications);
-        return map;
+        List<Institute> institutes = instituteService.selectAll();
+        model.addAttribute("applications", applications);
+        model.addAttribute("institutes", institutes);
+        return "admin";
     }
 
     @RequestMapping(value = "admin/checkapplication", method = RequestMethod.POST)
     @ResponseBody
-    public HashMap<String, String> checkApplication(HttpSession session,
+    public String checkApplication(HttpSession session,
                                                     @RequestParam("approve") Boolean approve,
-                                                    @RequestParam("applicationId") Integer applicationId) {
+                                                    @RequestParam("applicationId") Integer applicationId,
+                                                    Model model) {
         if (Setting.ADMIN_ID != (Integer) session.getAttribute("id")) {
             return null;
         }
@@ -85,9 +91,16 @@ public class AdminController {
             // 如果不同意，发送站内信通知
             message.setContent("您的申请未通过");
         }
+        applicationService.delete(applicationId);
         messageService.insertMessage(message);
-        HashMap<String, String> map = new HashMap<>();
-        map.put("info", "成功");
-        return map;
+        model.addAttribute("info", "成功");
+        List<Application> applications = applicationService.selectAll();
+        applications = applications.stream()
+                .sorted(Comparator.comparing(Application::getId).reversed())
+                .collect(Collectors.toList());
+        List<Institute> institutes = instituteService.selectAll();
+        model.addAttribute("applications", applications);
+        model.addAttribute("institutes", institutes);
+        return "admin";
     }
 }
