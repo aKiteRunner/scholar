@@ -61,12 +61,12 @@
         <!---->
         <div class="header-logo">
             <div class="logo">
-                <a href="index.jsp"><img src="/static/images/logo.png" alt="" ></a>
+                <a href="old_index.jsp"><img src="/static/images/logo.png" alt="" ></a>
             </div>
             <div class="top-nav">
                 <span class="icon"><img src="/static/images/menu.png" alt=""> </span>
                 <ul>
-                    <li><a href="index.jsp">首页</a></li>
+                    <li><a href="old_index.jsp">首页</a></li>
                     <li><a href="paper.jsp">发现</a></li>
                     <li><a href="projects.html">仓库</a></li>
                     <li><a href="template.jsp">个人</a> </li>
@@ -91,10 +91,10 @@
         <div class="top-menu wow fadeInLeft animated" data-wow-delay=".5s">
 
             <ul>
-                <li><a href="index.jsp">首页</a></li>
+                <li><a href="old_index.jsp">首页</a></li>
                 <li><a href="paper.jsp">发现</a></li>
                 <li><a href="projects.html">仓库</a></li>
-                <li><a href="index.jsp"><img src="/static/images/logo.png"></a></li>
+                <li><a href="old_index.jsp"><img src="/static/images/logo.png"></a></li>
                 <li><a href="quality.html">个人</a> </li>
                 <li><a href="login.jsp">登录</a></li>
                 <li>

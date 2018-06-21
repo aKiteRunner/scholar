@@ -1,365 +1,262 @@
 <%--
   Created by IntelliJ IDEA.
-  User: marco sun
-  Date: 2017/12/7
-  Time: 9:44
+  User: 卡牌小希
+  Date: 2018/6/21
+  Time: 13:12
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored="false" %>
-<%
-    //    以斜线开始，不以斜线结束(例如/crud)
-    pageContext.setAttribute("APP_PATH", request.getContextPath());
-%>
 <html>
 <head>
-    <title>首页</title>
-    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/static/js/jquery.min.js"></script>
-    <!-- Custom Theme files -->
-    <!--theme-style-->
-    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!--//theme-style-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,500' rel='stylesheet' type='text/css'>
-    <!--flexslider-->
-    <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />
-    <!--//flexslider-->
-    <link rel="stylesheet" href="/static/css/lightbox.css">
-    <!--JS for animate-->
-    <link href="/static/css/animate.css" rel="stylesheet" type="text/css" media="all">
-    <script src="/static/js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <!--//end-animate-->
+    <title>模板</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
 </head>
-<body>
-<!--header-->
-<div class="header">
-    <div class="container">
-        <!---->
-        <div class="header-logo">
-            <div class="logo">
-                <a href="index.jsp"><img src="/static/images/logo.png" alt="" ></a>
+<body style="background: #f6f6f6">
+<div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="top-nav">
-                <span class="icon"><img src="/static/images/menu.png" alt=""> </span>
-                <ul>
-                    <li><a href="/index">首页</a></li>
-                    <li><a href="/discover">发现</a></li>
-                    <li><a href="/repository">仓库</a></li>
-                    <li><a href="/index"><img src="/static/images/logo.png"></a></li>
-                    <li><a href="/setting">个人</a> </li>
-                    <li><a href="/login">登录</a></li>
-                </ul>
-                <!--script-->
-                <script>
-                    $("span.icon").click(function(){
-                        $(".top-nav ul").slideToggle(500, function(){
-                        });
-                    });
-                </script>
+            <div class="modal-body">
+                <p id="information"></p>
             </div>
-            <div class="clearfix"> </div>
-        </div>
-        <!---->
-
-        <div class="top-menu wow fadeInLeft animated" data-wow-delay=".5s">
-
-            <ul>
-                <li><a href="/index">首页</a></li>
-                <li><a href="/discover">发现</a></li>
-                <li><a href="/repository">仓库</a></li>
-                <li><a href="/index"><img src="/static/images/logo.png"></a></li>
-                <li><a href="/setting">个人</a> </li>
-                <li><a href="/login">登录</a></li>
-                <li class="">
-                    <button class="" onclick="search_show(this,event)"><span class="glyphicon glyphicon-search"></span></button>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-        </div>
-        <!--script-->
-        <div class="banner">
-
-            <section class="slider">
-                <div class="flexslider">
-                    <ul class="slides">
-                        <li>
-                            <div class="banner-matter">
-
-                                <div class="ban-top">
-                                    <div class="standard-top1">
-                                        <h4>Only This Month</h4>
-                                        <h5>Save UpTo <span>25%</span></h5>
-                                        <h6>On Residential Projects</h6>
-                                        <div class="soc">
-                                            <ul>
-                                                <li><a href="#"><span class="fa"> </span></a></li>
-                                                <li><a href="#"><span class="tw"> </span></a></li>
-                                                <li><a href="#"><span class="g"> </span></a></li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h1>High Quality Building Design</h1>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="banner-matter">
-
-                                <div class="ban-top">
-                                    <div class="standard-top1">
-                                        <h4>Only This Month</h4>
-                                        <h5>Save UpTo <span>25%</span></h5>
-                                        <h6>On Residential Projects</h6>
-                                        <div class="soc">
-                                            <ul>
-                                                <li><a href="#"><span class="fa"> </span></a></li>
-                                                <li><a href="#"><span class="tw"> </span></a></li>
-                                                <li><a href="#"><span class="g"> </span></a></li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h1>We Build The Feature For You </h1>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="banner-matter">
-
-                                <div class="ban-top">
-                                    <div class="standard-top1">
-                                        <h4>Only This Month</h4>
-                                        <h5>Save UpTo <span>25%</span></h5>
-                                        <h6>On Residential Projects</h6>
-                                        <div class="soc">
-                                            <ul>
-                                                <li><a href="#"><span class="fa"> </span></a></li>
-                                                <li><a href="#"><span class="tw"> </span></a></li>
-                                                <li><a href="#"><span class="g"> </span></a></li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <h1>Commited To Best Quality</h1>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-            <script>window.jQuery || document.write('<script src="/static/js/jquery-3.2.1.min.js">\x3C/script>')</script>
-            <!--FlexSlider-->
-            <script defer src="/static/js/jquery.flexslider.js"></script>
-            <script type="text/javascript">
-                $(function(){
-                    SyntaxHighlighter.all();
-                });
-                $(window).load(function(){
-                    $('.flexslider').flexslider({
-                        animation: "slide",
-                        start: function(slider){
-                            $('body').removeClass('loading');
-                        }
-                    });
-                });
-            </script>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
         </div>
     </div>
 </div>
+
+<!--header-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand mb-0 h1" href="#">Gryffindor</a>
+    </nav>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/discover">发现<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/repository">仓库<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/setting">个人信息<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    学科
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/discipline/3">数学</a>
+                    <a class="dropdown-item" href="/discipline/4">物理学</a>
+                    <a class="dropdown-item" href="/discipline/5">天文学</a>
+                    <a class="dropdown-item" href="/discipline/6">工程科技</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    机构
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item" href="/institute/1">清华</a>
+                    <a class="dropdown-item" href="/institute/2">北大</a>
+                    <a class="dropdown-item" href="/institute/3">中科院</a>
+                    <a class="dropdown-item" href="/institute/4">北航</a>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <form class="form-inline my-2 my-lg-0" action="/search" method="post">
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                </form>
+            </li>
+        </ul>
+        <div href="/login" class="nav-item">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">登录/注册<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
 <!--//header-->
 <!--w3l-->
-<div class="w3l">
-    <div class="container">
-        <div class="col-md-3 plan-left wow fadeInLeft animated" data-wow-delay=".5s">
-            <div class="plan-top">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                <h3>Planning</h3>
-                <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-            </div>
-        </div>
-        <div class="col-md-3 plan-left wow fadeInLeft animated" data-wow-delay=".5s">
-            <div class="plan-top">
-                <span class="glyphicon glyphicon-object-align-right" aria-hidden="true"></span>
-                <h3>Modeling</h3>
-                <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-            </div>
-        </div>
-        <div class="col-md-3 plan-left wow fadeInRight animated" data-wow-delay=".5s">
-            <div class="plan-top">
-                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                <h3>Design</h3>
-                <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-            </div>
-        </div>
-        <div class="col-md-3 plan-left wow fadeInRight animated" data-wow-delay=".5s">
-            <div class="plan-top">
-                <span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
-                <h3>Analysis</h3>
-                <p>Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!--//w3l-->
-<!--w3ls-->
-<div class="w3ls">
-    <div class="container">
-        <div class="col-md-6 standards-left wow fadeInLeft animated" data-wow-delay=".5s">
-            <h2>We Have A Passion In Creating New And Unique Spaces</h2>
-            <p>Aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis dis parturient montes ascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi nunc odio gravida at cursus nec luctus a lorem.</p>
-            <p> Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Duis ultricies pharetra ultricies pharetra magna magna. Donec accumsan malesuada orci  Donec accumsan malesuada orci.</p>
-        </div>
-        <div class="col-md-3 standards-middle wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>Quality Standards :</h3>
-            <ul>
-                <li><a href="#">Quam andomised words.</a></li>
-                <li><a href="#">Volutpa andomised words</a></li>
-                <li><a href="#">Varius domised words.</a></li>
-                <li><a href="#">Morbi nunc odio gravida</a></li>
-                <li><a href="#">Sociis natoque penatibus</a></li>
-                <li><a href="#">Volutpa andomised words</a></li>
-            </ul>
-        </div>
-        <div class="col-md-3 standards-right wow fadeInRight animated" data-wow-delay=".5s">
-            <div class="standard-top">
-                <h4>Only This Month</h4>
-                <h5>Save UpTo <span>25%</span></h5>
-                <h6>On Residential Projects</h6>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!--//standards-->
-<!--wthree-->
-<div class="wthree">
-    <div class="container">
-        <div class="col-md-6 welcome-left wow fadeInLeft animated" data-wow-delay=".5s">
-            <h3>Welcome</h3>
-            <p>Donec alsuadrcnc sit amet eros. Lorem ips dolor sit at consc tetuer aiing elituris fermentum tumagna. Sed laoreet aliquam leot te dt elentu vel leifed elit.enean auctor wrnai.</p>
-            <p>Oua volutpat. Duis ac turpisteger rutrum ante eu lacuest um liberoisl porta vel sceleisque eget malesuada at neque. Vivam nibhus leo vel metus.</p>
-            <p>Nulla facilisi. Aenean nec eros. Vestibulum ante ipsumr imis in faucibus orci luctus et trices posu.</p>
-        </div>
-        <div class="col-md-6 welcome-left wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>NewsLetter</h3>
-            <p>Oua volutpat. Duis ac turpisteger rutrum ante eu lacuest um liberoisl porta vel sceleisque eget males.</p>
-            <div class="news">
-                <form action="#" method="post">
-                    <input type="text" name="email" placeholder="Enter your email to update" required=" ">
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!--//wthree-->
-<!--agile-->
-<div class="agile">
-    <div class="container">
-        <div class="col-md-3 services-left2 wow fadeInLeft animated" data-wow-delay=".5s">
-            <div class="view1 fifth-effect">
-                <a href="#" title="Full Image"><img src="/static/images/4.jpg" class="img-responsive" alt=""></a>
-                <div class="mask1"></div>
-            </div>
-            <div class="s-btm">
-                <h4>Luxury</h4>
-                <p>Donec convallis vitae mi sodales varius</p>
-            </div>
-        </div>
-        <div class="col-md-3 services-left2 wow fadeInLeft animated" data-wow-delay=".5s">
-            <div class="view1 fifth-effect">
-                <a href="#" title="Full Image"><img src="/static/images/5.jpg" class="img-responsive" alt=""></a>
-                <div class="mask1"></div>
-            </div>
-            <div class="s-btm">
-                <h4>Residential</h4>
-                <p>Donec convallis vitae mi sodales varius</p>
-            </div>
-        </div>
-        <div class="col-md-3 services-left2 wow fadeInRight animated" data-wow-delay=".5s">
-            <div class="view1 fifth-effect">
-                <a href="#" title="Full Image"><img src="/static/images/6.jpg" class="img-responsive" alt=""></a>
-                <div class="mask1"></div>
-            </div>
-            <div class="s-btm">
-                <h4>Industrial</h4>
-                <p>Donec convallis vitae mi sodales varius</p>
-            </div>
-        </div>
-        <div class="col-md-3 services-left2 wow fadeInRight animated" data-wow-delay=".5s">
-            <div class="view1 fifth-effect">
-                <a href="#" title="Full Image"><img src="/static/images/7.jpg" class="img-responsive" alt=""></a>
-                <div class="mask1"></div>
-            </div>
-            <div class="s-btm">
-                <h4>Commercial</h4>
-                <p>Donec convallis vitae mi sodales varius</p>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!--//agile-->
-<!--footer-->
-<div class="footer">
-    <div class="container">
-        <div class="col-md-3 latest-proj wow fadeInLeft animated" data-wow-delay=".5s">
-            <h3>Gryffindor</h3>
-            <img src="/static/images/logo.png" class="img-responsive" alt="">
-            <div class="clearfix"></div>
-        </div>
-        <div class="col-md-3 location wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>科技专家资源共享</h3>
-            <address>
-                我们提供最全面的，最权威的论文下载,在这里你可以享受知识分享的乐趣           </address>
-            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-            <p class="mai">欢迎加入我们</p>
-        </div>
-        <div class="col-md-3 location wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>所在</h3>
-            <address>
-                北京航空航天大学<br>
-                软件学院<br>
-                <abbr title="Phone">电话：</abbr> 0123456789
-            </address>
-            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-            <p class="mai">Email : <a class="email-link" href="mailto:info@example.com">xxxxxxxx.com</a></p>
-        </div>
-        <div class="col-md-3 cont wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>联系我们</h3>
-
-            <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>电话</h4>
-            <p>+1-234-567-8900</p>
-            <div class="copy-rights">
-                <ul>
-                    <li><a href="#"><span class="fa"> </span></a></li>
-                    <li><a href="#"><span class="tw"> </span></a></li>
-                    <li><a href="#"><span class="g"> </span></a></li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="foot-bt animated wow fadeInUp animated animated" data-wow-duration="1200ms" data-wow-delay="500ms">
-        <p>Copyright &copy; 2018.Gryffindor Group.</p>
-    </div>
-</div>
 <!--//footer-->
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark mt-4">
+
+    <div style="background-color: #888888;">
+        <div class="container">
+
+            <!-- Grid row-->
+            <div class="row py-4 d-flex align-items-center">
+
+                <!-- Grid column -->
+                <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+                    <!-- Facebook -->
+                    <a class="fb-ic">
+                        <i class="fa fa-facebook white-text mr-4"> </i>
+                    </a>
+                    <!-- Twitter -->
+                    <a class="tw-ic">
+                        <i class="fa fa-twitter white-text mr-4"> </i>
+                    </a>
+                    <!-- Google +-->
+                    <a class="gplus-ic">
+                        <i class="fa fa-google-plus white-text mr-4"> </i>
+                    </a>
+                    <!--Linkedin -->
+                    <a class="li-ic">
+                        <i class="fa fa-linkedin white-text mr-4"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a class="ins-ic">
+                        <i class="fa fa-instagram white-text"> </i>
+                    </a>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left mt-5">
+
+        <!-- Grid row -->
+        <div class="row mt-3">
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                <!-- Content -->
+                <h6 class="text-uppercase font-weight-bold">Company name</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Products</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <a href="#!">MDBootstrap</a>
+                </p>
+                <p>
+                    <a href="#!">MDWordPress</a>
+                </p>
+                <p>
+                    <a href="#!">BrandFlow</a>
+                </p>
+                <p>
+                    <a href="#!">Bootstrap Angular</a>
+                </p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <a href="#!">Your Account</a>
+                </p>
+                <p>
+                    <a href="#!">Become an Affiliate</a>
+                </p>
+                <p>
+                    <a href="#!">Shipping Rates</a>
+                </p>
+                <p>
+                    <a href="#!">Help</a>
+                </p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
+                <p>
+                    <i class="fa fa-envelope mr-3"></i> info@example.com</p>
+                <p>
+                    <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+                <p>
+                    <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">Copyright &copy; Gryffindor Group 2018.</div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<script>
+    function infomation(error, info) {
+        $('#infoModal').modal('show');
+        if (error) {
+            document.getElementById('infoModalTitle').innerText = '警告';
+        } else {
+            document.getElementById('infoModalTitle').innerText = '提示';
+        }
+        document.getElementById('information').innerText = info;
+    }
+
+</script>
 </body>
 </html>

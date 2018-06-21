@@ -36,6 +36,17 @@ public class DisplayPaperController {
         this.instituteService = instituteService;
     }
 
+    private List<Object[]> getPaperList(List<Paper> papers) {
+        List<Object[]> list = new ArrayList<>();
+        for (Paper paper: papers) {
+            Object[] temp = new Object[2];
+            temp[0] = paper;
+            temp[1] = scholarService.getScholar(scholarPaperService.getScholarId(paper.getId()));
+            list.add(temp);
+        }
+        return list;
+    }
+
     // 返回按照热度排行
     @RequestMapping(value = "/discipline/{disciplineId}", method = RequestMethod.GET)
     public String displayPaperByCategory(@PathVariable Integer disciplineId, Model model) {
@@ -46,8 +57,10 @@ public class DisplayPaperController {
         papers = papers.stream()
                 .sorted(Comparator.comparing(Paper::getPopularity).reversed())
                 .collect(Collectors.toList());
-        model.addAttribute("papers", papers);
-        return "papers";
+        System.out.println(papers);
+        List<Object[]> list = getPaperList(papers);
+        model.addAttribute("list", list);
+        return "paper";
     }
 
     @RequestMapping(value = "/institute/{instituteId}", method = RequestMethod.GET)
@@ -59,8 +72,9 @@ public class DisplayPaperController {
         papers = papers.stream()
                 .sorted(Comparator.comparing(Paper::getPopularity).reversed())
                 .collect(Collectors.toList());
-        model.addAttribute("papers", papers);
-        return "papers";
+        List<Object[]> list = getPaperList(papers);
+        model.addAttribute("list", list);
+        return "paper";
     }
 
     @RequestMapping(value = "/discover", method = RequestMethod.GET)
@@ -69,13 +83,7 @@ public class DisplayPaperController {
         papers = papers.stream()
                 .sorted(Comparator.comparing(Paper::getPopularity).reversed())
                 .collect(Collectors.toList());
-        List<Object[]> list = new ArrayList<>();
-        for (Paper paper: papers) {
-            Object[] temp = new Object[2];
-            temp[0] = paper;
-            temp[1] = scholarService.getScholar(scholarPaperService.getScholarId(paper.getId()));
-            list.add(temp);
-        }
+        List<Object[]> list = getPaperList(papers);
         model.addAttribute("list", list);
         return "paper";
     }
@@ -91,13 +99,7 @@ public class DisplayPaperController {
         papers = papers.stream().
                 sorted(Comparator.comparing(Paper::getId).reversed()).
                 collect(Collectors.toList());
-        List<Object[]> list = new ArrayList<>();
-        for (Paper paper: papers) {
-            Object[] temp = new Object[2];
-            temp[0] = paper;
-            temp[1] = scholarService.getScholar(scholarPaperService.getScholarId(paper.getId()));
-            list.add(temp);
-        }
+        List<Object[]> list = getPaperList(papers);
         User user = userService.getUser(userId);
         model.addAttribute("user", user);
         model.addAttribute("list", list);

@@ -108,15 +108,17 @@
             <div class="row">
                 <c:forEach var="paper" items="${list}">
                     <div class="jumbotron" style="background: #FFFFFF">
-                        <h5><i class="fas fa-book"></i><a href="#" class="btn">${paper[0].name}</a></h5>
+                        <h5><i class="fas fa-book"></i><a href="/paper/${paper[0].id}" class="btn">${paper[0].name}</a></h5>
                         <p class="lead">${paper[0].abstract1}</p>
                         <hr class="my-4">
                         <div class="row">
                             <div class="col-md-3">
-                                <i class="fas fa-address-card"></i>${paper[1].username}
+                                <i class="fas fa-address-card"></i>
+                                    ${paper[1].username}
                             </div>
                             <div class="col-md-3">
-                                <i class="fas fa-calendar-alt"></i>${paper[0].time}
+                                <i class="fas fa-calendar-alt"></i>
+                                    ${paper[0].time}
                             </div>
                             <div class="col-md-3">
                                 <i class="fas fa-fire"></i>
@@ -167,15 +169,6 @@
                     </div>
                 </li>
             </ul>
-
-            <form class="card p-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Promo code">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
 </div>
