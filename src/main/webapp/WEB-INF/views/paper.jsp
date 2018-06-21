@@ -136,8 +136,8 @@
                                     ${paper[1].username}
                             </div>
                             <div class="col-md-3">
-                                <i class="fas fa-calendar-alt"></i>
-                                    ${paper[0].time}
+                                <i class="fas fa-dollar-sign"></i>
+                                    ${paper[0].price}
                             </div>
                             <div class="col-md-3">
                                 <i class="fas fa-fire"></i>

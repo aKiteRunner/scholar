@@ -44,7 +44,7 @@
 <!--header-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand mb-0 h1" href="#">Gryffindor</a>
+        <a class="navbar-brand mb-0 h1" href="/">Gryffindor</a>
     </nav>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -137,8 +137,8 @@
                             ${scholar.username}
                         </div>
                         <div class="col-md-3">
-                            <i class="fas fa-calendar-alt"></i>
-                            ${paper.time}
+                            <i class="fas fa-dollar-sign"></i>
+                            ${paper.price}
                         </div>
                         <div class="col-md-3">
                             <i class="fas fa-fire"></i>

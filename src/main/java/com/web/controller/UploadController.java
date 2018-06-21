@@ -63,13 +63,6 @@ public class UploadController {
         this.scholarPaperService = scholarPaperService;
     }
 
-    @RequestMapping(value = "/setting/uploadfile", method = RequestMethod.GET)
-    public String uploadFile(HttpSession session) {
-        if (session.getAttribute("logined") == null) {
-            return "login";
-        }
-        return "uploadFile";
-    }
 
     @RequestMapping(value = "/setting/uploadfile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam(value = "file") MultipartFile file,
@@ -124,7 +117,7 @@ public class UploadController {
         for (Object s : model.asMap().values()) {
             System.out.println("values:" + s);
         }
-        return "userInfo";
+        return "redirect:/setting/";
     }
 
     @RequestMapping(value = "/download/{paperId}", method = RequestMethod.GET)
