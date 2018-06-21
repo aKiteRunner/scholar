@@ -1,5 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <style>
     *, ::after, ::before {
         box-sizing: border-box;
@@ -41,7 +41,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
@@ -55,16 +55,21 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form class="flatbox"  method="post" action="/login">
+<form class="flatbox">
     <div class="gslogen mb-4"><em>Gryffindor</em></div>
-    <h1 class="h3 mb-3 font-weight-normal">登录</h1>
+    <h1 class="h3 mb-3 font-weight-normal">注册</h1>
     <label class="sr-only" for="inputun">用户名</label>
     <input class="form-control" name="userName" id="inputun" autofocus="autofocus" required="required" type="text" placeholder="用户名" />
     <label class="sr-only" for="inputPassword">密码</label>
-    <input class="form-control" name="password" id="inputPassword" required="required" type="password" placeholder="密码" />
-    <button class="btn btn-lg btn-primary btn-block mt-4 mb-2" type="submit">登录</button>
-    <a href="#">忘记密码</a>
-    <div class="lbot mb-2 mt-2">新用户？<a href="/registerGet">注册</a></div>
+    <input class="form-control" name="password1" id="inputPassword" required="required" type="password" placeholder="密码" />
+    <label class="sr-only" for="reinputPassword">重复密码</label>
+    <input class="form-control" name="password2" id="reinputPassword" required="required" type="password" placeholder="重复密码" />
+    <div style="height: 20px;">&nbsp;</div>
+    <label class="sr-only" for="inputem">电子邮箱</label>
+    <input class="form-control" name="eamil" id="inputem" required="required" type="email" placeholder="电子邮箱" />
+    <label class="sr-only" for="inputpn">手机号</label>
+    <input class="form-control" name="phone" id="inputpn" required="required" type="number" placeholder="手机号" />
+    <button class="btn btn-lg btn-primary btn-block mt-4 mb-2" type="submit">注册</button>
 </form>
 </body>
 </html>

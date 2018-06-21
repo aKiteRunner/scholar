@@ -41,32 +41,36 @@ import java.util.Map;
 
 import static org.elasticsearch.index.query.QueryBuilders.multiMatchQuery;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class Test {
+    public static void main(String[] args) {
+        double a = 1.2;
+        System.out.println((int)a);
+    }
 //    @Autowired
 //    UserMapper userMapper;
 //
 //    @Autowired
 //    SqlSession sqlSession;
-    @Autowired
-    private PaperService paperService;
-
-
-    private static final String HOST = "127.0.0.1";
-    private static final int PORT = 9300;
-
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-    private TransportClient client = null;
-
-    @org.junit.Test
-    public void test(){
-
-        List<PaperForSearch> list = paperService.selectPaperForSearch();
-        for(PaperForSearch pfs : list){
-            System.out.println(pfs.getId() + pfs.getName());
-        }
-    }
+//    @Autowired
+//    private PaperService paperService;
+//
+//
+//    private static final String HOST = "127.0.0.1";
+//    private static final int PORT = 9300;
+//
+//    private static final ObjectMapper MAPPER = new ObjectMapper();
+//    private TransportClient client = null;
+//
+//    @org.junit.Test
+//    public void test(){
+//
+//        List<PaperForSearch> list = paperService.selectPaperForSearch();
+//        for(PaperForSearch pfs : list){
+//            System.out.println(pfs.getId() + pfs.getName());
+//        }
+//    }
 
 //    @org.junit.Test
 //    public void createDocumentByJson() throws Exception{
@@ -183,33 +187,33 @@ public class Test {
 
 
 
-    @org.junit.Test
-    public void deleteDocument(){
-        StringBuilder b = new StringBuilder();
-        b.append("{\"query\":{\"match_all\":{}}}");
-        DeleteByQueryRequestBuilder response = new DeleteByQueryRequestBuilder(client, DeleteByQueryAction.INSTANCE);
-        response.setIndices("pfs").setTypes("PaperForSearch").setSource(b.toString())
-                .execute()
-                .actionGet();
-
-
-    }
-
-
-    // 获取客户端
-    @Before
-    public void getClient() throws Exception{
-        client = TransportClient.builder()
-                .addPlugin(DeleteByQueryPlugin.class)
-                .build()
-                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(HOST), PORT));
-    }
+//    @org.junit.Test
+//    public void deleteDocument(){
+//        StringBuilder b = new StringBuilder();
+//        b.append("{\"query\":{\"match_all\":{}}}");
+//        DeleteByQueryRequestBuilder response = new DeleteByQueryRequestBuilder(client, DeleteByQueryAction.INSTANCE);
+//        response.setIndices("pfs").setTypes("PaperForSearch").setSource(b.toString())
+//                .execute()
+//                .actionGet();
+//
+//
+//    }
+//
+//
+//    // 获取客户端
+//    @Before
+//    public void getClient() throws Exception{
+//        client = TransportClient.builder()
+//                .addPlugin(DeleteByQueryPlugin.class)
+//                .build()
+//                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(HOST), PORT));
+//    }
 
     // 关闭客户端
-    @After
-    public void closeClient(){
-        if (this.client != null){
-            this.client.close();
-        }
-    }
+//    @After
+//    public void closeClient(){
+//        if (this.client != null){
+//            this.client.close();
+//        }
+//    }
 }

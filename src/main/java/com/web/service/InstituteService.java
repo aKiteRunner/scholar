@@ -28,5 +28,9 @@ public class InstituteService {
         return null != instituteMapper.selectByName(name);
     }
 
+    public Institute getInstitute(Integer id) {
+        return instituteMapper.selectByPrimaryKey(id);
+    }
+
     public List<Institute> selectAll() {return instituteMapper.selectAll();}
 }

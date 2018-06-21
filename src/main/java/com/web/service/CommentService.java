@@ -28,6 +28,9 @@ public class CommentService {
         if (!paperService.paperExist(paperId)) {
             throw new ParameterInvalidException("该文献不存在");
         }
+        if (content == null || content.trim().equals("")) {
+            throw new ParameterInvalidException("评论不能为空");
+        }
         Comment comment = new Comment();
         comment.setUserId(userId);
         comment.setPaperId(paperId);
