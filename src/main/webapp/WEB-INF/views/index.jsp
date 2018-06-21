@@ -175,116 +175,122 @@
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">最近新闻</span>
             </h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/blockchain_lemon/article/details/80749552" style=" color:black" target="_blank">刚刚！孟岩区块链通证经济课二期报满，三期报名开启</a>
-                        </h6>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/blockchain_lemon/article/details/80749541" style=" color:black" target="_blank">1分钟链圈 | 以太坊再现漏洞！或使Token供应</a>
-                        </h6>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/dQCFKyQDXYm3F8rB0/article/details/80730659" style=" color:black" target="_blank">OpenAI NLP最新进展：通过无监督学习提升语</a>
-                        </h6>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/guleileo/article/details/80729775" style=" color:black" target="_blank">AI从入门到放弃：BP神经网络算法推导及代码实现笔</a>
-                        </h6>
+            <div class="col-md-4 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">最近新闻</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/blockchain_lemon/article/details/80749552" style=" color:black"
+                                   target="_blank">刚刚！孟岩区块链通证经济课二期报满，三期报名开启</a>
+                            </h6>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/blockchain_lemon/article/details/80749541" style=" color:black" target="_blank">1分钟链圈 | 以太坊再现漏洞！或使Token供应</a>
+                            </h6>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/dQCFKyQDXYm3F8rB0/article/details/80730659"  style=" color:black"target="_blank">OpenAI NLP最新进展：通过无监督学习提升语</a>
+                            </h6>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/guleileo/article/details/80729775"  style=" color:black"target="_blank">AI从入门到放弃：BP神经网络算法推导及代码实现笔</a>
+                            </h6>
 
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/csdnnews/article/details/80732787" style=" color:black" target="_blank">电竞大数据平台 FunData 的系统架构演进</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/csdnnews/article/details/80731188" style=" color:black" target="_blank">程序员如果也能像C罗一样自律和勤奋，必将成为大神！</a>
-                        </h6>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/csdnsevenn/article/details/80750502" style=" color:black" target="_blank">也许你的账号密码就是这样泄露了！</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://edu.csdn.net/huiyiCourse/series_detail/108?utm_source=home4" style=" color:black" target="_blank">机器学习十二讲（核心算法各个击破）</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="http://ibmuniversity.csdn.net/" style=" color:black" target="_blank">人工智能、机器学习和认知计算入门指南</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://blog.csdn.net/csdnsevenn/article/details/80750499" style=" color:black" target="_blank">30岁那年转行，离开通信拥抱互联网</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="http://gitbook.cn/gitchat/geekbook/5b14bc2f18d5d2470992eee1?utm_source=jr18062002" style=" color:black" target="_blank">你不知道的 JavaScript</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="http://gitbook.cn/gitchat/column/5a56effae286423809d47f2d?utm_source=jr18062001" style=" color:black" target="_blank">程序员向架构师转型之路</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="https://edu.csdn.net/huiyiCourse/series_detail/102?utm_source=home4" style=" color:black" target="_blank">无人驾驶技术如何入门？</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">
-                            <a href="http://qualcomm.csdn.net/" style=" color:black" target="_blank">5G标准已经完成，下一步是什么</a>
-                        </h6>
-                        <p class="list-group-item-text"></p>
-                    </div>
-                </li>
-            </ul>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/csdnnews/article/details/80732787"  style=" color:black"target="_blank">电竞大数据平台 FunData 的系统架构演进</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/csdnnews/article/details/80731188" style=" color:black" target="_blank">程序员如果也能像C罗一样自律和勤奋，必将成为大神！</a>
+                            </h6>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/csdnsevenn/article/details/80750502"  style=" color:black"target="_blank">也许你的账号密码就是这样泄露了！</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://edu.csdn.net/huiyiCourse/series_detail/108?utm_source=home4"  style=" color:black"target="_blank">机器学习十二讲（核心算法各个击破）</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="http://ibmuniversity.csdn.net/"  style=" color:black"target="_blank">人工智能、机器学习和认知计算入门指南</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://blog.csdn.net/csdnsevenn/article/details/80750499"  style=" color:black"  target="_blank">30岁那年转行，离开通信拥抱互联网</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="http://gitbook.cn/gitchat/geekbook/5b14bc2f18d5d2470992eee1?utm_source=jr18062002"   style=" color:black" target="_blank">你不知道的 JavaScript</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="http://gitbook.cn/gitchat/column/5a56effae286423809d47f2d?utm_source=jr18062001"  style=" color:black"  target="_blank">程序员向架构师转型之路</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="https://edu.csdn.net/huiyiCourse/series_detail/102?utm_source=home4"  style=" color:black"  target="_blank">无人驾驶技术如何入门？</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">
+                                <a href="http://qualcomm.csdn.net/"   style=" color:black"   target="_blank">5G标准已经完成，下一步是什么</a>
+                            </h6>
+                            <p class="list-group-item-text"></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
