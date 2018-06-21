@@ -11,6 +11,15 @@ public class Application {
 
     private String identity;
 
+    public Application(){}
+
+    public Application(int userId, int instituteId, String title, String identity){
+        this.userId = userId;
+        this.instituteId = instituteId;
+        this.title = title;
+        this.identity =identity;
+    }
+
     public Integer getId() {
         return id;
     }

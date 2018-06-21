@@ -1,5 +1,13 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page isELIgnored="false" %>
+<%
+  //    以斜线开始，不以斜线结束(例如/crud)
+  pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,37 +35,37 @@
         </div>
         <div class="panel panel-default" id="receivedLetter" >
           <!-- Default panel contents -->
-          <p class="panel-heading" style="font-size: 13px;">共<strong class="text-danger">3</strong>封待审批站内信</p>
+          <p class="panel-heading" style="font-size: 13px;">共<strong class="text-danger">${fn:length(application)}</strong>封待审批站内信</p>
         
           <!-- Table -->
           <table class="table">
             <tr>
               <td>#</td>
-              <td>标题</td>
-              <td>发件人</td>
-              <td>发件时间</td>
+              <td>用户id</td>
+              <td>机构名称</td>
+              <td>头衔</td>
+              <td>内容</td>
               <td>是否通过审核</td>
             </tr>
+
+            <c:forEach var="app" items="${applications}">
             <tr class="approve">
-              <td>1</td>
-              <td><a href="#">澳门皇家赌场</a></td>
-              <td>fuck360@qq.com</td>
-              <td>2018-06-05</td>
+              <td>${app.id}</td>
+              <td>${app.userId}</td>
+              <c:forEach var="institute" items="${institutes}">
+                <c:if test="${ institute.id == app.instituteId}">
+                <td>${institute.name}</td>
+                </c:if>
+              </c:forEach>
+              <td>${app.title}</td>
+              <td>${app.identity}</td>
               <td>
-                <button class="btn btn-default" type="submit" style="height: 34px;">通过</button>
-                <button class="btn btn-default" type="submit">不通过</button>
+                <button class="btn btn-default" type="submit" style="height: 34px;" onclick="pass(${app.id})">通过</button>
+                <button class="btn btn-default" type="submit" onclick="unpass(${app.id})">不通过</button>
               </td>
             </tr>
-            <tr class="approve">
-                <td>2</td>
-                <td><a href="#">澳门皇家赌场</a></td>
-                <td>fuck360@qq.com</td>
-                <td>2018-06-05</td>
-                <td>
-                  <button class="btn btn-default" type="submit" style="height: 34px;">通过</button>
-                  <button class="btn btn-default" type="submit">不通过</button>
-                </td>
-              </tr>
+            </c:forEach>
+
           </table>
         </div>
       </div> <!-- /container -->
@@ -75,6 +83,16 @@
           }
           e.target.className='active'
       }
+
+      function pass(id) {
+          $.post("/admin/checkapplication", { approve: true, applicationId: id } );
+          window.location.href='/admin/application';
+      }
+
+      function unpass(id){
+          $.post("/admin/checkapplication", { approve: false, applicationId: id } );
+          window.location.href='/admin/application';
+  }
      
   </script>
 </html>

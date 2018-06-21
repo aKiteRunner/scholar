@@ -5,6 +5,8 @@ import com.web.dao.InstituteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InstituteService {
     private final InstituteMapper instituteMapper;
@@ -29,4 +31,6 @@ public class InstituteService {
     public Institute getInstitute(Integer id) {
         return instituteMapper.selectByPrimaryKey(id);
     }
+
+    public List<Institute> selectAll() {return instituteMapper.selectAll();}
 }

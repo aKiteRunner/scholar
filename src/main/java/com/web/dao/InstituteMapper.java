@@ -22,6 +22,8 @@ public interface InstituteMapper {
 
     Institute selectByName(String name);
 
+    List<Institute> selectAll();
+
     int updateByExampleSelective(@Param("record") Institute record, @Param("example") InstituteExample example);
 
     int updateByExample(@Param("record") Institute record, @Param("example") InstituteExample example);

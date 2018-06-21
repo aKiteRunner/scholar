@@ -1,12 +1,20 @@
 package com.web.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.bean.Paper;
+import com.web.bean.PaperForSearch;
 import com.web.bean.ScholarPaper;
 import com.web.bean.UserPaper;
 import com.web.exception.ParameterInvalidException;
 import com.web.service.*;
 import com.web.utils.Setting;
 import org.apache.commons.io.FileUtils;
+import org.elasticsearch.action.deletebyquery.DeleteByQueryAction;
+import org.elasticsearch.action.deletebyquery.DeleteByQueryRequestBuilder;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.plugin.deletebyquery.DeleteByQueryPlugin;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,8 +31,11 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UploadController {
@@ -35,6 +46,11 @@ public class UploadController {
     private final UserService userService;
     private final UserPaperService userPaperService;
     private final ScholarPaperService scholarPaperService;
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 9300;
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+    private TransportClient client = null;
 
     @Autowired
     public UploadController(SubjectService subjectService, DisciplineService disciplineService, ScholarService scholarService, PaperService paperService, UserService userService, UserPaperService userPaperService, ScholarPaperService scholarPaperService) {
@@ -57,7 +73,6 @@ public class UploadController {
 
     @RequestMapping(value = "/setting/uploadfile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam(value = "file") MultipartFile file,
-                             @RequestParam(value = "subject") String subject,
                              @RequestParam(value = "discipline") String discipline,
                              @RequestParam(value = "price") Integer price,
                              HttpSession session,
@@ -66,19 +81,17 @@ public class UploadController {
         Integer scholarId = (Integer) session.getAttribute("id");
         if (file.getSize() > 0 && scholarService.scholarExist(scholarId)) {
             try {
-                if (!disciplineService.disciplineExist(discipline)) {
-                    throw new ParameterInvalidException("所选学科不存在");
-                }
-                if (!subjectService.subjectExist(subject)) {
+
+                /*if (!subjectService.subjectExist(subject)) {
                     throw new ParameterInvalidException("所选文献等级不存在");
-                }
+                }*/
                 // 存储paper
                 File storedFile = new File(Setting.UPLOAD_ROOT + "/" + file.getOriginalFilename());
                 FileUtils.copyInputStreamToFile(file.getInputStream(), storedFile);
                 // 生成paper
                 Paper paper = new Paper();
-                paper.setDisciplineId(disciplineService.selectByName(discipline).getId());
-                paper.setSubjectId(subjectService.selectByName(subject).getId());
+                paper.setDisciplineId(Integer.parseInt(discipline));
+//                paper.setSubjectId(subjectService.selectByName(subject).getId());
                 paper.setName(file.getOriginalFilename());
                 paper.setPath(storedFile.getAbsolutePath());
                 paper.setTime(new Date());
@@ -96,14 +109,22 @@ public class UploadController {
                 userPaper.setPaperId(paperId);
                 userPaper.setUserId(scholarId);
                 userPaperService.insertUserPaper(userPaper);
+                model.addAttribute("info", "上传成功");
+                getClient();
+                deleteDocument();
+                createDocumentByJson();
+                closeClient();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 model.addAttribute("errorInfo", "文件上传失败");
-            } catch (ParameterInvalidException e) {
-                model.addAttribute("errorInfo", e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        return "uploadFile";
+        for (Object s : model.asMap().values()) {
+            System.out.println("values:" + s);
+        }
+        return "userInfo";
     }
 
     @RequestMapping(value = "/download/{paperId}", method = RequestMethod.GET)
@@ -206,6 +227,49 @@ public class UploadController {
         }
         System.out.println(map);
         return map;
+    }
+
+    public void getClient() throws Exception{
+        client = TransportClient.builder()
+                .addPlugin(DeleteByQueryPlugin.class)
+                .build()
+                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(HOST), PORT));
+    }
+
+    public void closeClient(){
+        if (this.client != null){
+            this.client.close();
+        }
+    }
+
+    public void createDocumentByJson() throws Exception{
+        List<PaperForSearch> plist = paperService.selectPaperForSearch();
+        for(PaperForSearch pfs : plist) {
+            System.out.println(pfs.getId() + pfs.getName());
+
+            Map<String, Object> source = new HashMap<String, Object>();
+            source.put("id", pfs.getId());
+            source.put("name", pfs.getName());
+            source.put("popularity", pfs.getPopularity());
+            source.put("abstract1", pfs.getAbstract1());
+            source.put("scholarName", pfs.getScholarname());
+
+            // 也可以转化java的bean
+            String json = MAPPER.writeValueAsString(source);
+            IndexResponse response = this.client.prepareIndex("pfs", "PaperForSearch")
+                    .setSource(json)
+                    .execute()
+                    .actionGet();
+        }
+    }
+
+    public void deleteDocument(){
+        StringBuilder b = new StringBuilder();
+        b.append("{\"query\":{\"match_all\":{}}}");
+        DeleteByQueryRequestBuilder response = new DeleteByQueryRequestBuilder(client, DeleteByQueryAction.INSTANCE);
+        response.setIndices("pfs").setTypes("PaperForSearch").setSource(b.toString())
+                .execute()
+                .actionGet();
     }
 }
 
