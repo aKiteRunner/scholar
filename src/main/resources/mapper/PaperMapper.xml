@@ -84,8 +84,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, path, popularity, degree, price, subject_id, discipline_id, abstract1, 
-    time
+    id, name, path, popularity, degree, price, subject_id, discipline_id, abstract1, time
   </sql>
   <select id="selectByExample" parameterType="com.web.bean.PaperExample" resultMap="BaseResultMap">
     select
@@ -116,8 +115,8 @@
   <select id="selectByDiscipline" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from b_paper, b_discipline
-    where b_paper.discipline_id = #{disciplineId}
+    from b_paper
+    where b_paper.discipline_id = #{disciplineId}.
   </select>
   <select id="selectByUser" parameterType="java.lang.Integer" resultMap="ResultMap">
     select
@@ -127,7 +126,7 @@
   </select>
   <select id="selectByInstitute" parameterType="java.lang.Integer" resultMap="ResultMap">
     select
-      b_paper.id pid, name, path, popularity, degree, b_paper.price, subject_id, discipline_id, abstract1
+      b_paper.id pid, name, path, popularity, degree, b_paper.price, subject_id, discipline_id, abstract1, b_paper.time
     from
       (select s_scholar.id from s_scholar where #{instituteId} = s_scholar.institute_id) scholar, r_scholar_paper, b_paper
     where b_paper.id = r_scholar_paper.paper_id and r_scholar_paper.scholar_id = scholar.id;

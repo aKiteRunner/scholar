@@ -68,11 +68,10 @@
                     学科
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">基础科学</a>
-                    <a class="dropdown-item" href="#">工程科技</a>
-                    <a class="dropdown-item" href="#">农业科技</a>
-                    <a class="dropdown-item" href="#">医药卫生</a>
-                    <a class="dropdown-item" href="#">哲学与人文</a>
+                    <a class="dropdown-item" href="/discipline/3">数学</a>
+                    <a class="dropdown-item" href="/discipline/4">物理学</a>
+                    <a class="dropdown-item" href="/discipline/5">天文学</a>
+                    <a class="dropdown-item" href="/discipline/6">工程科技</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -80,10 +79,10 @@
                     机构
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                    <a class="dropdown-item" href="#">清华</a>
-                    <a class="dropdown-item" href="#">北大</a>
-                    <a class="dropdown-item" href="#">中科院</a>
-                    <a class="dropdown-item" href="#">北航</a>
+                    <a class="dropdown-item" href="/institute/1">清华</a>
+                    <a class="dropdown-item" href="/institute/2">北大</a>
+                    <a class="dropdown-item" href="/institute/3">中科院</a>
+                    <a class="dropdown-item" href="/institute/4">北航</a>
                 </div>
             </li>
             <li class="nav-item ">

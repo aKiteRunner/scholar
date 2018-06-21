@@ -41,6 +41,58 @@
         </div>
     </div>
 </div>
+<div class="modal" id="giftModal" tabindex="-1" role="dialog" aria-labelledby="giftModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="giftModalTitle">转让文献</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="text" id="receiver" placeholder="用户名">
+                    </div>
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="number" id="paperId" placeholder="文献编号">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" onclick="giftPaper()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="priceModal" tabindex="-1" role="dialog" aria-labelledby="priceModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="priceModalTitle">修改价格</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="number" id="price" placeholder="价格">
+                    </div>
+                    <div class="form-group col-lg-offset-2 col-lg-12">
+                        <input class="form-control" type="number" id="paperId2" placeholder="文献编号">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="changePrice()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--header-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <nav class="navbar navbar-light bg-light">
@@ -201,10 +253,10 @@
             <div class="card p-2">
                 <div class="input-group text-center align-items-center">
                     <div class="col-md-6 mt-3 mb-3 ">
-                        <button type="submit" class="btn btn-outline"  style="border-radius: 1em">修改价格</button>
+                        <button type="submit" data-toggle="modal" data-target="#priceModal" class="btn btn-outline" onclick="changePrice()"  style="border-radius: 1em">修改价格</button>
                     </div>
                     <div class="col-md-6 mt-3 mb-3 " >
-                        <button type="submit" class="btn btn-outline" style="border-radius: 1em">删除文献</button>
+                        <button type="submit" data-toggle="modal" data-target="#giftModal" class="btn btn-outline" onclick="giftPaper()" style="border-radius: 1em">赠送文献</button>
                     </div>
                 </div>
             </div>
@@ -213,6 +265,57 @@
 </div>
 <!--//header-->
 <!--w3l-->
+<script>
+    function giftPaper() {
+        var receiverName = document.getElementById("receiver").value;
+        document.getElementById("receiver").value = "";
+        var paperId = document.getElementById("paperId").value;
+        document.getElementById("paperId").value = "";
+        $('#giftModal').modal('hide');
+        $.ajax({
+            url : '/giftpaper/',
+            type : 'POST',
+            data : JSON.stringify({"receiver" : receiverName, "paperId": paperId}), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    infomation(false, response["info"])
+                }else{
+                    infomation(true, response["errorInfo"])
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    function changePrice() {
+        var price = document.getElementById("price").value;
+        document.getElementById("price").value = "";
+        var paperId = document.getElementById("paperId2").value;
+        document.getElementById("paperId2").value = "";
+        $('#priceModal').modal('hide');
+        $.ajax({
+            url : '/changeprice/',
+            type : 'POST',
+            data : JSON.stringify({"price" : price, "paperId": paperId}), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if(response["errorInfo"] == null){
+                    infomation(false, response["info"])
+                }else{
+                    infomation(true, response["errorInfo"])
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+</script>
 <!--//footer-->
 <!-- Footer -->
 <footer class="page-footer font-small unique-color-dark mt-4">
