@@ -66,10 +66,11 @@
                     学科
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">数学</a>
-                    <a class="dropdown-item" href="#">生物</a>
-                    <a class="dropdown-item" href="#">物理</a>
-                    <a class="dropdown-item" href="#">哲学</a>
+                    <a class="dropdown-item" href="#">基础科学</a>
+                    <a class="dropdown-item" href="#">工程科技</a>
+                    <a class="dropdown-item" href="#">农业科技</a>
+                    <a class="dropdown-item" href="#">医药卫生</a>
+                    <a class="dropdown-item" href="#">哲学与人文</a>
                 </div>
             </li>
             <li class="nav-item dropdown">

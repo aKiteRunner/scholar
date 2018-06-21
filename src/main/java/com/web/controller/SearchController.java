@@ -12,12 +12,14 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.plugin.deletebyquery.DeleteByQueryPlugin;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,16 +45,18 @@ public class SearchController {
         this.paperService = paperService;
     }
 
-    @ResponseBody
+
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public List search(@RequestParam(value = "query") String query) throws Exception{
+    public String search(@RequestParam(value = "query") String query, Model model) throws Exception{
         List<HashMap<String, Object>> list = new ArrayList<>();
         getClient();
-        deleteDocument();
-        createDocumentByJson();
+//        deleteDocument();
+//        createDocumentByJson();
+//        wait(100);
         list = queryDocument(query);
         closeClient();
-        return list;
+        model.addAttribute("list", list);
+        return "search";
     }
 
     public void getClient() throws Exception{
@@ -101,14 +105,14 @@ public class SearchController {
     List<HashMap<String, Object>> queryDocument(String query) {
         List<HashMap<String, Object>> list = new ArrayList<>();
         SearchRequestBuilder searchRequestBuilder = this.client.prepareSearch("pfs").setTypes("PaperForSearch")
-                .setQuery(multiMatchQuery(query,"name", "abstract1", "scholarName"));
+                .setQuery(QueryBuilders.multiMatchQuery(query,"name", "abstract1", "scholarName"));
 
         searchRequestBuilder.addHighlightedField("abstract1").addHighlightedField("name").addHighlightedField("scholarName");
-        searchRequestBuilder.setHighlighterPreTags("<em>");
-        searchRequestBuilder.setHighlighterPostTags("</em>");
+        searchRequestBuilder.setHighlighterPreTags("<font color=\"red\">");
+        searchRequestBuilder.setHighlighterPostTags("</font>");
         // 设置摘要大小
         searchRequestBuilder.setHighlighterFragmentSize(10);
-        SearchResponse response = searchRequestBuilder.get();
+        SearchResponse response = searchRequestBuilder.execute().actionGet();
         // 查询的总数(命中数)
         SearchHits hits = response.getHits();
         long totalHits = hits.getTotalHits();

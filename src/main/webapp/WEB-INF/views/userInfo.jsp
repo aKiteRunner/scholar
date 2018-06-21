@@ -14,16 +14,27 @@
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h1></h1>
-<script src="/static/js/jquery.min.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
+
 <ul class="nav nav-pills nav-stacked" id="Navibar" style="float: left; width: 8%;">
     <a href="#a" class="active" onclick="userInfo()">个人信息</a>
     <a href="#b" onclick="updateInfo()">修改信息</a>
     <a href="#c">积分充值</a>
     <a href="#d">站内信</a>
+    <a href="#f">申请专家</a>
+    <a href="#g">上传论文</a>
     <!-- <li role="presentation" class="active"><a href="#a" >个人信息</a></li> -->
 </ul>
 <div class="container" id="a">
@@ -213,13 +224,78 @@
 
 </div> <!-- /container -->
 
+<div class="container" id="f">
+    <div class="page-header" style="margin-top: 0px;">
+        <h1 style="margin-top: 0px;">申请专家</h1>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">选择机构</label>
+            <select  class="selectpicker"  id="instituteId">
+                <option value ="1">清华</option>
+                <option value ="2">北大</option>
+                <option value="3">中科院</option>
+                <option value="4">北航</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">填写头衔</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="title">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">填写内容</label>
+        </div>
+        <textarea rows="3" cols="20" id="identity"></textarea>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-default" data-dismiss="alert" onclick="apply()">提交申请</button>
+            </div>
+        </div>
+
+    </form>
+
+
+</div> <!-- /container -->
+<div class="container" id="g">
+    <div class="page-header" style="margin-top: 0px;">
+        <h1 style="margin-top: 0px;">发表论文</h1>
+    </div>
+    <form class="form-horizontal"  enctype="multipart/form-data" method="post" action="/setting/uploadfile">
+        file: <input type="file" name="file" name="file" >
+        discipline
+        <select name="discipline">
+            <option value="3">数学</option>
+            <option value="4">物理学</option>
+            <option value="5">天文学</option>
+            <option value="7">化学</option>
+            <option value="8">材料科学</option>
+            <option value="9">冶金工业</option>
+            <option value="8">农业工程</option>
+            <option value="8">水产和渔业</option>
+            <option value="8">农作物</option>
+            <option value="8">中医药</option>
+            <option value="8">妇产科学</option>
+            <option value="8">神经病学</option>
+            <option value="19">地理</option>
+            <option value="20">哲学</option>
+            <option value="21">美学</option>
+            <option value="1">其他</option>
+        </select>
+        <input type="text" id="price" name="price">
+        <input type="submit" value="上传" >
+    </form>
+
+
+</div> <!-- /container -->
 
 </body>
 <script>
     var nav = document.getElementById('Navibar')
     nav.onclick = function (e) {
         var children = nav.children
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 6; i++) {
             children[i].className = ''
         }
         e.target.className = 'active'
@@ -475,6 +551,31 @@
         });
     }
 
+    function apply(){
+        var data = {
+            "identity" : document.getElementById("identity").value,
+            "title" : document.getElementById("title").value,
+            "instituteId" : document.getElementById("instituteId").value
+        }
+        $.ajax({
+            url : '/apply',
+            type : 'POST',
+            data : JSON.stringify(data), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                if (response['errorInfo'] == null) {
+                    alert(response['info']);
+                    document.getElementById("identity").value = null
+                    document.getElementById("title").value = null
+                } else {
+                    alert(response['errorInfo']);
+                }
+            }
+        });
+    }
+
 
     function sendMessage() {
         var data = {
@@ -500,6 +601,36 @@
         });
         return false;
     }
+
+    // function upload(){
+    //     var file = document.getElementById("file")
+    //     var discipline = document.getElementById("discipline")
+    //     var subject = null
+    //     var price = document.getElementById("price")
+    //     var data = {
+    //         "file" : file,
+    //         "discipline" : discipline,
+    //         "subject" : subject,
+    //         "price" : price
+    //     }
+    //     $.ajax({
+    //         url : '/setting/uploadfile',
+    //         type : 'POST',
+    //         data : JSON.stringify(data), // Request body
+    //         contentType : 'application/json; charset=utf-8',
+    //         dataType : 'json',
+    //         success : function(response) {
+    //             //请求成功
+    //             if (response['errorInfo'] == null) {
+    //                 alert(response['info']);
+    //                 document.getElementById("discipline").value = null
+    //                 document.getElementById("price").value = null
+    //             } else {
+    //                 alert(response['errorInfo']);
+    //             }
+    //         }
+    //     });
+    // }
 
 
 </script>

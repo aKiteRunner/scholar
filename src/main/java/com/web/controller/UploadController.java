@@ -57,7 +57,6 @@ public class UploadController {
 
     @RequestMapping(value = "/setting/uploadfile", method = RequestMethod.POST)
     public String uploadFile(@RequestParam(value = "file") MultipartFile file,
-                             @RequestParam(value = "subject") String subject,
                              @RequestParam(value = "discipline") String discipline,
                              @RequestParam(value = "price") Integer price,
                              HttpSession session,
@@ -66,19 +65,17 @@ public class UploadController {
         Integer scholarId = (Integer) session.getAttribute("id");
         if (file.getSize() > 0 && scholarService.scholarExist(scholarId)) {
             try {
-                if (!disciplineService.disciplineExist(discipline)) {
-                    throw new ParameterInvalidException("所选学科不存在");
-                }
-                if (!subjectService.subjectExist(subject)) {
+
+                /*if (!subjectService.subjectExist(subject)) {
                     throw new ParameterInvalidException("所选文献等级不存在");
-                }
+                }*/
                 // 存储paper
                 File storedFile = new File(Setting.UPLOAD_ROOT + "/" + file.getOriginalFilename());
                 FileUtils.copyInputStreamToFile(file.getInputStream(), storedFile);
                 // 生成paper
                 Paper paper = new Paper();
-                paper.setDisciplineId(disciplineService.selectByName(discipline).getId());
-                paper.setSubjectId(subjectService.selectByName(subject).getId());
+                paper.setDisciplineId(Integer.parseInt(discipline));
+//                paper.setSubjectId(subjectService.selectByName(subject).getId());
                 paper.setName(file.getOriginalFilename());
                 paper.setPath(storedFile.getAbsolutePath());
                 paper.setTime(new Date());
@@ -96,14 +93,17 @@ public class UploadController {
                 userPaper.setPaperId(paperId);
                 userPaper.setUserId(scholarId);
                 userPaperService.insertUserPaper(userPaper);
+                model.addAttribute("info", "上传成功");
             } catch (IOException e) {
                 System.out.println(e.getMessage());
                 model.addAttribute("errorInfo", "文件上传失败");
-            } catch (ParameterInvalidException e) {
-                model.addAttribute("errorInfo", e.getMessage());
             }
         }
-        return "uploadFile";
+        for (Object s : model.asMap().values()) {
+            System.out.println("values:" + s);
+        }
+        System.out.println();model.asMap();
+        return "userInfo";
     }
 
     @RequestMapping(value = "/download/{paperId}", method = RequestMethod.GET)
