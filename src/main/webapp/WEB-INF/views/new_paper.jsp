@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 卡牌小希
@@ -10,6 +11,7 @@
 <head>
     <title>模板</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -20,7 +22,7 @@
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background: #f6f6f6">
 <div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -39,7 +41,6 @@
         </div>
     </div>
 </div>
-
 <!--header-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <nav class="navbar navbar-light bg-light">
@@ -99,8 +100,154 @@
 
     </div>
 </nav>
+<p></p>
+<p></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="jumbotron" style="background: #FFFFFF">
+                    <h5><i class="fas fa-book"></i><a href="#" class="btn">某个人拿了一个东西</a></h5>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <i class="fas fa-address-card"></i>
+                            作者
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-calendar-alt"></i>
+                            2018-4-6
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-fire"></i>
+                            热度1888
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-bookmark"></i>
+                            id #1
+                        </div>
+                    </div>
+                </div>
+                <div class="jumbotron" style="background: #FFFFFF">
+                    <h5><i class="fas fa-book"></i><a href="#" class="btn">某个人拿了一个东西</a></h5>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <i class="fas fa-address-card"></i>
+                            作者
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-calendar-alt"></i>
+                            2018-4-6
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-fire"></i>
+                            热度1888
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-bookmark"></i>
+                            id #1
+                        </div>
+                    </div>
+                </div>
+                <c:forEach var="paper" items="${list}">
+                    <div class="jumbotron" style="background: #FFFFFF">
+                        <h5><i class="fas fa-book"></i><a href="#" class="btn">${paper[0].name}</a></h5>
+                        <p class="lead">${paper[0].abstract1}</p>
+                        <hr class="my-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <i class="fas fa-address-card"></i>${paper[1].username}
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-calendar-alt"></i>${paper[0].time}
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-fire"></i>
+                                热度${paper[0].popularity}
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-bookmark"></i>
+                                id #${paper[0].id}
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+                <div class="jumbotron" style="background: #FFFFFF">
+                    <h5><i class="fas fa-book"></i><a href="#" class="btn">某个人拿了一个东西</a></h5>
+                    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                    <hr class="my-4">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <i class="fas fa-address-card"></i>
+                            作者
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-calendar-alt"></i>
+                            2018-4-6
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-fire"></i>
+                            热度1888
+                        </div>
+                        <div class="col-md-3">
+                            <i class="fas fa-bookmark"></i>
+                            id #1
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">最近新闻</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">你是真的牛逼</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">你是真的牛逼</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">你是真的牛逼</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">Never mind scandals and libel</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">rsndm</h6>
+                        <small class="text-muted">燃烧你的梦</small>
+                    </div>
+                </li>
+            </ul>
 
-<img src="/static/images/170.jpg" width="100%" height="100%">
+            <form class="card p-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Promo code">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!--//header-->
 <!--w3l-->
 <!--//footer-->

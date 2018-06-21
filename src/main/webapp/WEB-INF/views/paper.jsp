@@ -103,7 +103,7 @@
        <c:forEach var="paper" items="${list}">
            <div class="paper" onmouseover="this.style.background='#ffecfc'" onmouseout="this.style.background = '#eeeeee'">
                <div class="paper_title ">
-                       ${paper[0].name}
+
                </div>
                <div class="dropdown col-md-2" style="float:right; margin-right: 5px;">
                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -112,18 +112,18 @@
                    </ul>
                </div>
                <div class="paper_abstract">
-                   <span>${paper[0].abstract1}</span>
+                   <span></span>
                </div>
                <div class="paper_mes">
                    <div class="paper_author col-md-2">
-                       <span class="glyphicon glyphicon-user"></span> ${paper[1].username}
+                       <span class="glyphicon glyphicon-user"></span>
                    </div>
                    <div class="paper_time col-md-2">
-                       <fmt:formatDate type="date" value="${paper[0].time}" />
+                       <fmt:formatDate type="date" value="" />
                    </div>
                    <div class="paper_right col-md-4 col-md-offset-3">
                        <div class="paper_readnum col-md-6">
-                           阅读量 ${paper[0].popularity}
+                           阅读量
                        </div>
                        <div class="paper_commentnum col-md-6">
                            <span class="glyphicon glyphicon-comment"></span>评论
