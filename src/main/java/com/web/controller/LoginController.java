@@ -49,7 +49,7 @@ public class LoginController {
                 session.setAttribute("username", userName);
                 session.setAttribute("id", userService.getUser(userName).getId());
                 model.addAttribute("Info", "操作成功");
-                return "index";
+                return "redirect:/";
             }
         }
         return "login";

@@ -1,3 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: 52460
+  Date: 2018/6/19
+  Time: 19:07
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -6,15 +14,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Main</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css?v=1324">
+    <link rel="stylesheet" type="text/css" href="/static/css/style-v4.css">
     <!-- Bootstrap -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -24,17 +28,121 @@
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
+<div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="information"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--header-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand mb-0 h1" href="#">Gryffindor</a>
+    </nav>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/repository">仓库<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/setting">个人信息<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    学科
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/discipline/3">数学</a>
+                    <a class="dropdown-item" href="/discipline/4">物理学</a>
+                    <a class="dropdown-item" href="/discipline/5">天文学</a>
+                    <a class="dropdown-item" href="/discipline/6">工程科技</a>
+                    <a class="dropdown-item" href="/discipline/7">化学</a>
+                    <a class="dropdown-item" href="/discipline/8">材料科学</a>
+                    <a class="dropdown-item" href="/discipline/9">冶金工业</a>
+                    <a class="dropdown-item" href="/discipline/10">农业科技</a>
+                    <a class="dropdown-item" href="/discipline/11">农业工程</a>
+                    <a class="dropdown-item" href="/discipline/12">水产和渔业</a>
+                    <a class="dropdown-item" href="/discipline/13">农作物</a>
+                    <a class="dropdown-item" href="/discipline/14">医药卫生</a>
+                    <a class="dropdown-item" href="/discipline/15">中医药</a>
+                    <a class="dropdown-item" href="/discipline/16">妇产科学</a>
+                    <a class="dropdown-item" href="/discipline/17">神经病学</a>
+                    <a class="dropdown-item" href="/discipline/18">哲学与人文</a>
+                    <a class="dropdown-item" href="/discipline/19">地理</a>
+                    <a class="dropdown-item" href="/discipline/20">哲学</a>
+                    <a class="dropdown-item" href="/discipline/21">美学</a>
+                    <a class="dropdown-item" href="/discipline/22">软件工程</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    机构
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item" href="/institute/1">清华</a>
+                    <a class="dropdown-item" href="/institute/2">北大</a>
+                    <a class="dropdown-item" href="/institute/3">中科院</a>
+                    <a class="dropdown-item" href="/institute/4">北航</a>
+                    <a class="dropdown-item" href="/institute/5">浙大</a>
+                    <a class="dropdown-item" href="/institute/6">哈工大</a>
+                    <a class="dropdown-item" href="/institute/7">天津大学</a>
+                    <a class="dropdown-item" href="/institute/8">南京大学</a>
+                    <a class="dropdown-item" href="/institute/9">湖南大学</a>
+                    <a class="dropdown-item" href="/institute/10">山东大学</a>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <form class="form-inline my-2 my-lg-0" action="/search" method="post">
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="输入关键字" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                </form>
+            </li>
+        </ul>
+        <div href="/login" class="nav-item">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">登录/注册<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
 <h1></h1>
 
-<ul class="nav nav-pills nav-stacked" id="Navibar" style="float: left; width: 8%;">
-    <a href="#a" class="active" onclick="userInfo()">个人信息</a>
-    <a href="#b" onclick="updateInfo()">修改信息</a>
-    <a href="#c">积分充值</a>
-    <a href="#d">站内信</a>
-    <a href="#f">申请专家</a>
-    <a href="#g">上传论文</a>
+<ul class="nav flex-column" id="Navibar" style="float: left; width: 8%;">
+    <a href="#a" class="nav-link active" onclick="userInfo()">个人信息</a>
+    <a href="#b" class="nav-link" onclick="updateInfo()">修改信息</a>
+    <a href="#c" class="nav-link">积分充值</a>
+    <a href="#d" class="nav-link">站内信</a>
+    <a href="#f" class="nav-link">申请专家</a>
+    <a href="#g" class="nav-link">上传论文</a>
     <!-- <li role="presentation" class="active"><a href="#a" >个人信息</a></li> -->
 </ul>
 <div class="container" id="a">
@@ -56,7 +164,7 @@
 
     <h3 class="infoTitle">等级</h3>
     <p class="infoDetail" id="degree">${degree}</p>
-    <div class="progress" style="width:200px;">
+    <div class="progress infoDetail" style="width:200px;">
         <div id="bar" class="progress-bar" role="progressbar" aria-valuenow="${exp}" aria-valuemin="0" aria-valuemax="${maxExp}"
              style="width:60%;">
             60%
@@ -69,45 +177,43 @@
         <h1 style="margin-top: 0px;">修改信息</h1>
     </div>
     <form class="form-horizontal">
-        <div class="form-group">
+        <div class="form-group row">
             <label for="updateUserName" class="col-sm-2 control-label">用户名</label>
             <div class="col-sm-3">
                 <input class="form-control" id="updateUserName">
             </div>
             <div class="col-sm-3">
-                <button class="btn btn-default" onclick="updateUserNameF()">更改昵称</button>
+                <button class="btn btn-primary" onclick="updateUserNameF()">更改昵称</button>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row">
             <label for="updateEmail" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-3">
                 <input type="email" class="form-control" id="updateEmail">
             </div>
             <div class="col-sm-2">
-                <button type="submit" class="btn btn-default" data-dismiss="alert" onclick="updateEmailF()">更改邮箱</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="alert" onclick="updateEmailF()">更改邮箱</button>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row">
             <label for="oldPw" class="col-sm-2 control-label">原密码</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" id="oldPw">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row">
             <label for="newPw" class="col-sm-2 control-label">新密码</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" id="newPw">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row">
             <label for="newPwConf" class="col-sm-2 control-label">确认新密码</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" id="newPwConf">
             </div>
-        </div>
-        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-default" data-dismiss="alert" onclick="updatePasswordF()">更改密码</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="alert" onclick="updatePasswordF()">更改密码</button>
             </div>
         </div>
     </form>
@@ -115,58 +221,71 @@
 
 </div> <!-- /container -->
 <div class="container" id="c">
-
     <div class="page-header" style="margin-top: 0px;">
-        <h1 style="margin-top: 0px;">积分充值</h1>
+      <h1 style="margin-top: 0px;">积分充值</h1>
     </div>
-    <div class="co-top">
-        <div class="co-le1">
-            <img src="/static/images/1.jpg" class="img-responsive" alt="">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">套餐一</h4>
         </div>
-        <div class="co-rg1">
-            <h5><a onclick="topUp(10)">充值10积分</a></h5>
-            <p>您仅需￥10，即可获得10积分</p>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$10 <small class="text-muted">/ 10 credits</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>温馨提示</li>
+            <li>知识就是力量</li>
+            <li>版权需要购买</li>
+            <li>尊重正版</li>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="topUp(10)">10</button>
         </div>
-        <div class="clearfix"></div>
+      </div>
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">套餐二</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ 50 credits</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+              <li>温馨提示</li>
+              <li>知识就是力量</li>
+              <li>版权需要购买</li>
+              <li>尊重正版</li>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="topUp(20)">20</button>
+        </div>
+      </div>
     </div>
-    <div class="co-top">
-        <div class="co-le1">
-            <img src="/static/images/1.jpg" class="img-responsive" alt="">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">套餐三</h4>
         </div>
-        <div class="co-rg1">
-            <h5><a onclick="topUp(20)">充值20积分</a></h5>
-            <p>您仅需￥20，即可获得20积分</p>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$100 <small class="text-muted">/ 100 credits</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+              <li>温馨提示</li>
+              <li>知识就是力量</li>
+              <li>版权需要购买</li>
+              <li>尊重正版</li>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="topUp(50)">50</button>
         </div>
-        <div class="clearfix"></div>
+      </div>
+      <div class="card mb-4 box-shadow">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">自定义</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$1 <small class="text-muted">/ 1 credits</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>充值<input type="number"  placeholder="100" style="width: 80px;" id="number">元</li>
+          </ul>
+          <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="topUPDiy()">充值</button>
+        </div>
+      </div>
     </div>
-    <div class="co-top">
-        <div class="co-le1">
-            <img src="/static/images/1.jpg" class="img-responsive" alt="">
-        </div>
-        <div class="co-rg1">
-            <h5><a onclick="topUp(50)">充值50积分</a></h5>
-            <p>您仅需￥50，即可获得50积分</p>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="co-top">
-        <div class="co-le1">
-            <img src="/static/images/1.jpg" class="img-responsive" alt="">
-        </div>
-        <div class="co-rg1">
-            <h5>自选充值金额</h5>
-            <form class="form-inline">
-                <div class="form-group">
-                    <p class="recharge">充值
-                        <input type="number" class="form-control" placeholder="100" style="width: 80px;" id="number">
-                        元</p>
-                </div>
-                <button type="submit" class="btn btn-default" style="margin-left: 20px;" onclick="topUPDiy()">确定</button>
-            </form>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div> <!-- /container -->
+  </div> <!-- /container -->
 
 <div class="container" id="d">
     <div class="page-header" style="margin-top: 0px;">
@@ -207,20 +326,20 @@
         </table>
     </div>
 
-    <div class="panel panel-default" id="writeLetter">
-        <form class="form-inline" style="margin-top: 10px; margin-bottom: 10px;">
-            <div class="form-group">
-                <label for="exampleInputName2">收件人</label>
-                <input type="text" class="form-control" id="exampleInputName2">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail2">标题</label>
-                <input type="text" class="form-control" id="exampleInputEmail2">
-            </div>
-            <button type="submit" class="btn btn-default">发送</button>
+    <div class="panel panel-default" id="writeLetter" >
+      <form class="form-inline" style="margin-top: 10px; margin-bottom: 10px;">
+          <div class="form-group wLetter">
+            <label for="receiver">收件人</label>
+            <input type="text" class="form-control" id="receiver">
+          </div>
+          <div class="form-group wLetter">
+            <label for="messageTitle">标题</label>
+            <input type="text" class="form-control" id="messageTitle">
+          </div>
+          <button type="submit" class="btn btn-primary">发送</button>
         </form>
-        <textarea class="form-control" rows="10"></textarea>
-    </div>
+      <textarea class="form-control" rows="10"></textarea>
+  </div>
 
 </div> <!-- /container -->
 
@@ -230,8 +349,8 @@
     </div>
     <form class="form-horizontal">
         <div class="form-group">
-            <label  class="col-sm-2 control-label">选择机构</label>
-            <select  class="selectpicker"  id="instituteId">
+            <label  class="col-sm-2 control-label" >选择机构</label>
+            <select  class="form-control col-sm-5" style="margin-left:8%;"  id="instituteId">
                 <option value ="1">清华</option>
                 <option value ="2">北大</option>
                 <option value="3">中科院</option>
@@ -240,17 +359,16 @@
         </div>
         <div class="form-group">
             <label for="title" class="col-sm-2 control-label">填写头衔</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="title">
-            </div>
+            <input type="text" class="form-control col-sm-5" style="margin-left:8%;" id="title">
+
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">填写内容</label>
         </div>
-        <textarea rows="3" cols="20" id="identity"></textarea>
+        <textarea class="form-control col-sm-5" style="margin-left:8%;" rows="8" cols="20" id="identity"></textarea>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-default" data-dismiss="alert" onclick="apply()">提交申请</button>
+            <div class="col-sm-offset-2 col-sm-4" style="margin-top: 20px; margin-left:8%;">
+                <button type="submit" class="btn btn-primary" data-dismiss="alert" onclick="apply()">提交申请</button>
             </div>
         </div>
 
@@ -263,28 +381,31 @@
         <h1 style="margin-top: 0px;">发表论文</h1>
     </div>
     <form class="form-horizontal"  enctype="multipart/form-data" method="post" action="/setting/uploadfile">
-        file: <input type="file" name="file" name="file" >
-        discipline
-        <select name="discipline">
-            <option value="3">数学</option>
-            <option value="4">物理学</option>
-            <option value="5">天文学</option>
-            <option value="7">化学</option>
-            <option value="8">材料科学</option>
-            <option value="9">冶金工业</option>
-            <option value="8">农业工程</option>
-            <option value="8">水产和渔业</option>
-            <option value="8">农作物</option>
-            <option value="8">中医药</option>
-            <option value="8">妇产科学</option>
-            <option value="8">神经病学</option>
-            <option value="19">地理</option>
-            <option value="20">哲学</option>
-            <option value="21">美学</option>
-            <option value="1">其他</option>
-        </select>
-        <input type="text" id="price" name="price">
-        <input type="submit" value="上传" >
+        选取文件: <input type="file" name="file" name="file" >
+        <div class="form-group row" style="margin-top: 30px; margin-left:2px;">
+            学科
+          <select class="form-control col-sm-3" name="discipline" style="margin-left:15px;">
+              <option value="3">数学</option>
+              <option value="4">物理学</option>
+              <option value="5">天文学</option>
+              <option value="7">化学</option>
+              <option value="8">材料科学</option>
+              <option value="9">冶金工业</option>
+              <option value="8">农业工程</option>
+              <option value="8">水产和渔业</option>
+              <option value="8">农作物</option>
+              <option value="8">中医药</option>
+              <option value="8">妇产科学</option>
+              <option value="8">神经病学</option>
+              <option value="19">地理</option>
+              <option value="20">哲学</option>
+              <option value="21">美学</option>
+              <option value="1">其他</option>
+          </select>
+          <input class="form-control col-sm-3"  type="text" id="price" name="price" style="margin-left:15px;">
+          <input class="btn btn-primary"  type="submit" value="上传" style="margin-left:15px;">
+        </div>
+        
     </form>
 
 
@@ -296,9 +417,9 @@
     nav.onclick = function (e) {
         var children = nav.children
         for (var i = 0; i < 6; i++) {
-            children[i].className = ''
+            children[i].className = 'nav-link'
         }
-        e.target.className = 'active'
+        e.target.className = 'nav-link active'
     }
     var rl = document.getElementById('rlButton')
     var pl = document.getElementById('plButton')
@@ -601,37 +722,5 @@
         });
         return false;
     }
-
-    // function upload(){
-    //     var file = document.getElementById("file")
-    //     var discipline = document.getElementById("discipline")
-    //     var subject = null
-    //     var price = document.getElementById("price")
-    //     var data = {
-    //         "file" : file,
-    //         "discipline" : discipline,
-    //         "subject" : subject,
-    //         "price" : price
-    //     }
-    //     $.ajax({
-    //         url : '/setting/uploadfile',
-    //         type : 'POST',
-    //         data : JSON.stringify(data), // Request body
-    //         contentType : 'application/json; charset=utf-8',
-    //         dataType : 'json',
-    //         success : function(response) {
-    //             //请求成功
-    //             if (response['errorInfo'] == null) {
-    //                 alert(response['info']);
-    //                 document.getElementById("discipline").value = null
-    //                 document.getElementById("price").value = null
-    //             } else {
-    //                 alert(response['errorInfo']);
-    //             }
-    //         }
-    //     });
-    // }
-
-
 </script>
 </html>
