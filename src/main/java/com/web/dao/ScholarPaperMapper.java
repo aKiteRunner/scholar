@@ -30,5 +30,5 @@ public interface ScholarPaperMapper {
 
     ScholarPaper selectByScholarAndPaper(@Param("scholarId") Integer scholarId,@Param("paperId") Integer paperId);
 
-    int selectByPaper(Integer paperId);
+    Integer selectByPaper(Integer paperId);
 }

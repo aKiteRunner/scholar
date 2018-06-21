@@ -55,9 +55,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/discover">发现<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/repository">仓库<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
@@ -87,7 +84,7 @@
             </li>
             <li class="nav-item ">
                 <form class="form-inline my-2 my-lg-0" action="/search" method="post">
-                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search">
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="输入关键字" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </li>

@@ -34,12 +34,6 @@ public class AdminController {
         this.scholarService = scholarService;
         this.messageService = messageService;
     }
-
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index() {
-        return "index";
-    }
-
     @RequestMapping(value = "template", method = RequestMethod.GET)
     public String template() {
         return "template";

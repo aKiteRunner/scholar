@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 卡牌小希
@@ -10,7 +11,7 @@
 <head>
     <title>模板</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
@@ -20,8 +21,6 @@
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
-
 </head>
 <body style="background: #f6f6f6">
 <div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
@@ -42,7 +41,6 @@
         </div>
     </div>
 </div>
-
 <!--header-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <nav class="navbar navbar-light bg-light">
@@ -54,9 +52,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/discover">发现<span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/repository">仓库<span class="sr-only">(current)</span></a>
             </li>
@@ -87,7 +82,7 @@
             </li>
             <li class="nav-item ">
                 <form class="form-inline my-2 my-lg-0" action="/search" method="post">
-                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search">
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="输入关键字" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </li>
@@ -102,8 +97,78 @@
 
     </div>
 </nav>
-
-
+<p></p>
+<p></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <c:forEach var="paper" items="${list}">
+                    <div class="jumbotron" style="background: #FFFFFF">
+                        <h5><i class="fas fa-book"></i><a href="/paper/${paper[0].id}" class="btn">${paper[0].name}</a></h5>
+                        <p class="lead">${paper[0].abstract1}</p>
+                        <hr class="my-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <i class="fas fa-address-card"></i>
+                                    ${paper[1].username}
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-calendar-alt"></i>
+                                    ${paper[0].time}
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-fire"></i>
+                                热度${paper[0].popularity}
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-bookmark"></i>
+                                id #${paper[0].id}
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">最近新闻</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">你是真的牛逼</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">你是真的牛逼</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">你是真的牛逼</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">nmsl</h6>
+                        <small class="text-muted">Never mind scandals and libel</small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">rsndm</h6>
+                        <small class="text-muted">燃烧你的梦</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 <!--//header-->
 <!--w3l-->
 <!--//footer-->
@@ -260,3 +325,4 @@
 </script>
 </body>
 </html>
+

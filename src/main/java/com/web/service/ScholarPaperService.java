@@ -23,7 +23,14 @@ public class ScholarPaperService {
     }
 
     public int getScholarId(Integer paperId){
-        int scholarId = scholarPaperMapper.selectByPaper(paperId);
+        // !!!
+        int scholarId = 11;
+        try {
+            scholarId = scholarPaperMapper.selectByPaper(paperId);
+        } catch (NullPointerException e) {
+            System.out.println("!!!!!!" + paperId);
+            throw e;
+        }
         return scholarId;
     }
 }
