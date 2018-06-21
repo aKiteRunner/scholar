@@ -150,7 +150,7 @@ public class SearchController {
                     abstract1 += text;
                 }
             } else{
-                abstract1= (String)source.get("abstract");
+                abstract1= (String)source.get("abstract1");
             }
 
             if(highlighterMap.get("scholarName") != null) {

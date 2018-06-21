@@ -5,6 +5,7 @@ import com.web.bean.Paper;
 import com.web.exception.ParameterInvalidException;
 import com.web.service.CommentService;
 import com.web.service.PaperService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +27,16 @@ public class CommentController {
         this.paperService = paperService;
     }
 
-    @RequestMapping(value = "comment", method = RequestMethod.POST)
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
     @ResponseBody
     public HashMap<String, String> comment(HttpSession session,
-                                           @RequestParam("paperId") Integer paperId,
-                                           @RequestParam("content") String content) {
+                                           @RequestBody String json) {
         // 检查登录
         HashMap<String, String> map = new HashMap<>();
-        if (session.getAttribute("loinged")== null) {
+        JSONObject jsonObject = new JSONObject(json);
+        int paperId = jsonObject.getInt("paperId");
+        String content = jsonObject.getString("content");
+        if (session.getAttribute("logined")== null) {
             map.put("errorInfo", "请登录");
             return map;
         }
@@ -44,6 +47,7 @@ public class CommentController {
         } catch (ParameterInvalidException e) {
             map.put("errorInfo", e.getMessage());
         }
+        System.out.println("!");
         return map;
     }
 }

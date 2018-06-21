@@ -28,6 +28,8 @@ public interface PaperMapper {
 
     List<Paper> selectByUser(Integer userId);
 
+    List<Paper> selectByInstitute(Integer InstituteId);
+
     int updateByExampleSelective(@Param("record") Paper record, @Param("example") PaperExample example);
 
     int updateByExample(@Param("record") Paper record, @Param("example") PaperExample example);

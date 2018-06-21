@@ -44,6 +44,11 @@ public class AdminController {
         return "index";
     }
 
+    @RequestMapping(value = "template", method = RequestMethod.GET)
+    public String template() {
+        return "template";
+    }
+
     @RequestMapping(value = "admin/application", method = RequestMethod.GET)
     public String displayApplication(HttpSession session, Model model) {
         if (Setting.ADMIN_ID != (Integer) session.getAttribute("id")) {

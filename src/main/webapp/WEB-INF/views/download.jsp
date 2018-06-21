@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 52460
@@ -34,6 +35,25 @@
     </script>
     <!--//end-animate-->
 </head>
+<div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="information"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <body onload="page(1,10)">
 <!--header-->
 <div class="header-1">
@@ -92,11 +112,11 @@
 <div class="comment_main container" >
     <div class="detail_main col-md-7 ">
         <div class="detail_title">
-            如何看待杨幂主演的电视剧《扶摇》涉嫌抄袭《哈利 · 波特与火焰杯》？
+            ${paper.name}
         </div>
         <div class="detail_docum">
             <div class="abstract_author">
-                May ,2018<br>
+                ${paper.time}<br>
                 <span class="glyphicon glyphicon-user"></span>作者
             </div>
             <div class="detail_abstract">
@@ -104,33 +124,17 @@
                     摘要
                 </div>
                 <hr style="height:2px;width: 100%;color: #040402;font-weight: bold;background-color: black;margin-top: 0.5em; " >
-                <p>中华人民共和国位于亚洲东部，太平洋西岸 [1] ，是工人阶级领导的、以工农联盟为基础的人民民主专政的社会主义国家 [2
-                    ] 。 1949年（己丑年）10月1日成立 [3-4] ，以五星红旗为国旗 [5] ，《义勇军进行曲》为国歌 [6] ，国徽内容包括国旗、天安
-                    门、齿轮和麦稻穗 [7] ，首都北京 [8] ，省级行政区划为23个省、5个自治区、4个直辖市、2个特别行政区 [9] ，是一个以汉族为
-                    主体民族，由56个民族构成的统一多民族国家，汉族占总人口的91.51% [10] 。 新中国成立后，随即开展经济恢复与建设 [11] ，1953
-                    年开始三大改造 [12] ，到1956年确立了社会主义制度，进入社会主义探索阶段 [13] 。文化大革命之后开始改革开放，逐步确立了中国特
-                    色社会主义制度。 [14] 中华人民共和国陆地面积约960万平方公里，大陆海岸线1.8万多千米，岛屿岸线1.4万多千米，内海和边海的水域面积
-                    约470多万平方千米。海域分布有大小岛屿7600多个，其中台湾岛最大，面积35798平方千米。 [1] 陆地同14国接壤，与6国海上相邻。 [15
-                    -17] 中国是四大文明古国之一 [18-19] ，有着悠久的历史文化，是世界国土面积第三大的国家 [20-21] ，世界第一大人口国，与英、
-                    法、美、俄并为联合国安理会五大常任理事国。中国是世界第二大经济体 [22-23] ，世界第一贸易大国 [24] ，世界第一大外汇储备国
-                    [25] ，世界第一大钢铁生产国和世界第一大农业国 [26-27] ，世界第一大粮食总产量国以及世界上经济成长最快的国家之一 [28-29] 。
-                    第二大吸引外资国 [30] ，还是世界许多国际组织的重要成员 [31] ，被认为是潜在超级大国之一。 [32-33] 中华人民共和国拥有最丰
-                    富的世界文化遗产和自然人文景点，是世界旅游大国之一。中华人民共和国位于亚洲东部，太平洋西岸 [1]  ，是工人阶级领导的、
-                    以工农联盟为基础的人民民主专政的社会主义国家 [2]  。 1949年（己丑年）10月1日成立 [3-4]  ，以五星红旗为国旗 [5]  ，《
-                    义勇军进行曲》为国歌 [6]  ，国徽内容包括国旗、天安门、齿轮和麦稻穗 [7]  ，首都北京 [8]  ，省级行政区划为23个省、5个自治区
-                    、4个直辖市、2个特别行政区 [9]  ，是一个以汉族为主体民族，由56个民族构成的统一多民族国家，汉族占总人口的91.51% [10]  。 新
-                    中国成立后，随即开展经济恢复与建设 [11]  ，1953年开始三大改造 [12]  ，到1956年确立了社会主义制度，进入社会主义探索阶段 [13]  。文化大革命之后开始改革开放，逐步确立了中国特色社会主义制度。 [14] 中华人民共和国陆地面积约960万平方公里，大陆海岸线1.8万多千米，岛屿岸线1.4万多千米，内海和边海的水域面积约470多万平方千米。海域分布有大小岛屿7600多个，其中台湾岛最大，面积35798平方千米。 [1]  陆地同14国接壤，与6国海上相邻。 [15-17] 中国是四大文明古国之一 [18-19]  ，有着悠久的历史文化，是世界国土面积第三大的国家 [20-21]  ，世界第一大人口国，与英、法、美、俄并为联合国安理会五大常任理事国。中国是世界第二大经济体 [22-23]  ，世界第一贸易大国 [24]  ，世界第一大外汇储备国 [25]  ，世界第一大钢铁生产国和世界第一大农业国 [26-27]  ，世界第一大粮食总产量国以及世界上经济成长最快的国家之一 [28-29]  。第二大吸引外资国 [30]  ，还是世界许多国际组织的重要成员 [31]  ，被认为是潜在超级大国之一。 [32-33] 中华人民共和国拥有最丰富的世界文化遗产和自然人文景点，是世界旅游大国之一。
-                </p>
+                <p>${paper.abstract1}</p>
             </div>
         </div>
         <div class="display_down">
             <div class="comment col-md-9">
                 <div class="top_of_comment">
                     <div class="dis_comment">评论</div>
-                    <div class="submit_comment">评论</div>
+                    <button class="submit_comment" onclick="comment()">评论</button>
                 </div>
                 <div class="write_conment">
-                    <textarea placeholder="写下你的评论..."></textarea>
+                    <textarea placeholder="写下你的评论..." id="content"></textarea>
                 </div>
             </div>
             <div class="download_box col-md-3">
@@ -146,31 +150,18 @@
             <span class="glyphicon glyphicon-comment"></span>
             <h2>有关评论</h2>
         </div>
-        <%! private  int newsnum=0;
-        %>
-        <% for (newsnum=1;newsnum<=5;newsnum++)%><%{%>
-        <div class="comment_content">
-            <div class="comment_user ">
-                <span class="glyphicon glyphicon-user"></span>
-                <h2>有关评论</h2>
+        <c:forEach var="comment" items="${comments}">
+            <div class="comment_content">
+                <div class="comment_user ">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <h2>${comment.user}</h2>
+                </div>
+                <div class="comment_word ">
+                    ${comment.content}
+                </div>
             </div>
-            <div class="comment_word ">
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-                ojbk   新闻标题
-            </div>
-        </div>
-        <%}%>
+        </c:forEach>
+
         <ul id="page_test" class="pagination page_test2" >
         </ul>
         <script>
@@ -254,6 +245,41 @@
     </div>
 </div>
 
+<script>
+    function comment() {
+        var paperId = ${paper.id}
+        var content = document.getElementById("content").value;
+        alert("!!")
+        $.ajax({
+            url : '/comment/',
+            type : 'POST',
+            data : JSON.stringify({"content" : content, "paperId": paperId}), // Request body
+            contentType : 'application/json; charset=utf-8',
+            dataType : 'json',
+            success : function(response) {
+                //请求成功
+                alert("!!!")
+                if(response["errorInfo"] == null){
+                    infomation(false, response["info"])
+                }else{
+                    infomation(true, response["errorInfo"])
+                }
+            },
+            error : function(msg) {
+            }
+        });
+    }
+
+    function infomation(error, info) {
+        $('#infoModal').modal('show');
+        if (error) {
+            document.getElementById('infoModalTitle').innerText = '警告';
+        } else {
+            document.getElementById('infoModalTitle').innerText = '提示';
+        }
+        document.getElementById('information').innerText = info;
+    }
+</script>
 <!--w3l-->
 <div class="footer">
     <div class="container">

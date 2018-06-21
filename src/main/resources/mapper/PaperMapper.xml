@@ -125,6 +125,13 @@
     from b_paper, r_user_paper
     where b_paper.id = r_user_paper.paper_id and r_user_paper.user_id = #{userId};
   </select>
+  <select id="selectByInstitute" parameterType="java.lang.Integer" resultMap="ResultMap">
+    select
+      b_paper.id pid, name, path, popularity, degree, b_paper.price, subject_id, discipline_id, abstract1
+    from
+      (select s_scholar.id from s_scholar where #{instituteId} = s_scholar.institute_id) scholar, r_scholar_paper, b_paper
+    where b_paper.id = r_scholar_paper.paper_id and r_scholar_paper.scholar_id = scholar.id;
+  </select>
   <select id="orderByAscendingPopularity" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

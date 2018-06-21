@@ -21,9 +21,10 @@ public class DisplayPaperController {
     private final CommentService commentService;
     private final ScholarPaperService scholarPaperService;
     private final ScholarService scholarService;
+    private final InstituteService instituteService;
 
     @Autowired
-    public DisplayPaperController(DisciplineService disciplineService, PaperService paperService, UserService userService, UserPaperService userPaperService, CommentService commentService, ScholarPaperService scholarPaperService, ScholarService scholarService) {
+    public DisplayPaperController(DisciplineService disciplineService, PaperService paperService, UserService userService, UserPaperService userPaperService, CommentService commentService, ScholarPaperService scholarPaperService, ScholarService scholarService, InstituteService instituteService) {
         this.disciplineService = disciplineService;
         this.paperService = paperService;
         this.userService = userService;
@@ -31,6 +32,7 @@ public class DisplayPaperController {
         this.commentService = commentService;
         this.scholarPaperService = scholarPaperService;
         this.scholarService = scholarService;
+        this.instituteService = instituteService;
     }
 
     // 返回按照热度排行
@@ -40,6 +42,19 @@ public class DisplayPaperController {
             return "404";
         }
         List<Paper> papers = paperService.selectByDiscipline(disciplineId);
+        papers = papers.stream()
+                .sorted(Comparator.comparing(Paper::getPopularity).reversed())
+                .collect(Collectors.toList());
+        model.addAttribute("papers", papers);
+        return "papers";
+    }
+
+    @RequestMapping(value = "/institute/{instituteId}", method = RequestMethod.GET)
+    public String displayPaperByInstitute(@PathVariable Integer instituteId, Model model) {
+        if (!instituteService.instituteExist(instituteId)) {
+            return "404";
+        }
+        List<Paper> papers = paperService.selectByInstitute(instituteId);
         papers = papers.stream()
                 .sorted(Comparator.comparing(Paper::getPopularity).reversed())
                 .collect(Collectors.toList());
@@ -137,7 +152,16 @@ public class DisplayPaperController {
         paperService.addPopularity(paperId, Setting.POPULARITY_PER_CLICK);
         model.addAttribute("paper", paper);
         List<Comment> comments = commentService.paperComment(paperId);
-        model.addAttribute("comments", comments);
+        List<Map> list = new ArrayList<>();
+        for (Comment comment : comments) {
+            Map temp = new HashMap();
+            temp.put("content", comment.getComment());
+            temp.put("user", userService.getUser(comment.getUserId()).getUsername());
+            temp.put("time", comment.getTime());
+            list.add(temp);
+        }
+        System.out.println(list);
+        model.addAttribute("comments", list);
         return "download";
     }
 }
