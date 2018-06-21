@@ -72,35 +72,7 @@ public class SearchController {
         }
     }
 
-    public void createDocumentByJson() throws Exception{
-        List<PaperForSearch> plist = paperService.selectPaperForSearch();
-        for(PaperForSearch pfs : plist) {
-            System.out.println(pfs.getId() + pfs.getName());
 
-            Map<String, Object> source = new HashMap<String, Object>();
-            source.put("id", pfs.getId());
-            source.put("name", pfs.getName());
-            source.put("popularity", pfs.getPopularity());
-            source.put("abstract1", pfs.getAbstract1());
-            source.put("scholarName", pfs.getScholarname());
-
-            // 也可以转化java的bean
-            String json = MAPPER.writeValueAsString(source);
-            IndexResponse response = this.client.prepareIndex("pfs", "PaperForSearch")
-                    .setSource(json)
-                    .execute()
-                    .actionGet();
-        }
-    }
-
-    public void deleteDocument(){
-        StringBuilder b = new StringBuilder();
-        b.append("{\"query\":{\"match_all\":{}}}");
-        DeleteByQueryRequestBuilder response = new DeleteByQueryRequestBuilder(client, DeleteByQueryAction.INSTANCE);
-        response.setIndices("pfs").setTypes("PaperForSearch").setSource(b.toString())
-                .execute()
-                .actionGet();
-    }
 
     List<HashMap<String, Object>> queryDocument(String query) {
         List<HashMap<String, Object>> list = new ArrayList<>();

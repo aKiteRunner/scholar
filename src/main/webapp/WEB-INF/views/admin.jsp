@@ -86,11 +86,13 @@
 
       function pass(id) {
           $.post("/admin/checkapplication", { approve: true, applicationId: id } );
+          window.location.href='/admin/application';
       }
 
       function unpass(id){
           $.post("/admin/checkapplication", { approve: false, applicationId: id } );
-      }
+          window.location.href='/admin/application';
+  }
      
   </script>
 </html>

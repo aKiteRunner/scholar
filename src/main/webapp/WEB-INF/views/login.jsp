@@ -1,4 +1,10 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    //    以斜线开始，不以斜线结束(例如/crud)
+    pageContext.setAttribute("APP_PATH", request.getContextPath());
+%>
 <html>
 <style>
     *, ::after, ::before {
@@ -55,6 +61,11 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<c:if test="${errorInfo != null }">
+
+<script>alert("登陆失败")</script>
+
+</c:if>
 <form class="flatbox"  method="post" action="/login">
     <div class="gslogen mb-4"><em>Gryffindor</em></div>
     <h1 class="h3 mb-3 font-weight-normal">登录</h1>

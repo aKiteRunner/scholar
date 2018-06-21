@@ -12,157 +12,135 @@
     pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <html>
+<style>
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+    html {
+        height: 100%;
+    }
+    body {
+        text-align: center !important;
+        height: 100%;
+        display:flex;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background: url("/static/images/img4.jpg") no-repeat center;
+        background-size: cover;
+    }
+    .flatbox {
+        width: 100%;
+        max-width: 350px;
+        background-color: white;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        margin: auto;
+        box-shadow: 4px 4px 6px #aaaaaa;
+    }
+    .gslogen {
+        font-family: Consolas;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .lbot {
+        background-color: #eeeeee;
+        height: 50px;
+        line-height: 50px;
+    }
+</style>
 <head>
-    <title>注册</title>
-    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/static/js/jquery.min.js"></script>
-    <!-- Custom Theme files -->
-    <!--theme-style-->
-    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!--//theme-style-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,500' rel='stylesheet' type='text/css'>
-    <!--flexslider-->
-    <link rel="stylesheet" href="/static/css/flexslider.css" type="text/css" media="screen" />
-    <!--//flexslider-->
-    <link rel="stylesheet" href="/static/css/lightbox.css">
-    <!--JS for animate-->
-    <link href="/css/animate.css" rel="stylesheet" type="text/css" media="all">
-    <script src="/static/js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <!--//end-animate-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <!--header-->
-<div class="header-1">
-    <div class="container">
-        <!---->
-        <div class="header-logo">
-            <div class="logo">
-                <a href="old_index.jsp"><img src="/static/images/logo.png" alt="" ></a>
+<div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="top-nav">
-                <span class="icon"><img src="/static/images/menu.png" alt=""> </span>
-                <ul>
-                    <li><a href="old_index.jsp">首页</a></li>
-                    <li><a href="services.html">发现</a></li>
-                    <li><a href="projects.html">仓库</a></li>
-                    <li><a href="typo.html">帮助</a> </li>
-                    <li><a href="quality.html">个人</a> </li>
-                    <li><a href="login.jsp">登录</a></li>
-                </ul>
-                <!--script-->
-                <script>
-                    $("span.icon").click(function(){
-                        $(".top-nav ul").slideToggle(500, function(){
-                        });
-                    });
-                </script>
+            <div class="modal-body">
+                <p id="information"></p>
             </div>
-            <div class="clearfix"> </div>
-        </div>
-        <!---->
-        <div class="top-menu wow fadeInLeft animated" data-wow-delay=".5s">
-
-            <ul>
-                <li><a href="old_index.jsp">首页</a></li>
-                <li><a href="services.html">发现</a></li>
-                <li><a href="projects.html">仓库</a></li>
-                <li><a href="old_index.jsp"><img src="/static/images/logo.png"></a></li>
-                <li><a href="typo.html">帮助</a> </li>
-                <li><a href="quality.html">个人</a> </li>
-                <li><a href="login.jsp">登录</a></li>
-                <div class="clearfix"></div>
-            </ul>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            </div>
         </div>
     </div>
 </div>
+
+
+<c:if test="${errorInfo != null }">
+
+    <script>alert("注册失败")</script>
+
+</c:if>
+
+
 <!--//header-->
-<!--w3l-->
-<div class="register">
-    <c:if test="${errorInfo != null}">
-        <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <strong>Warning!</strong> ${errorInfo}
-        </div>
-    </c:if>
-    <div class="register-top">
-        <h2>注册</h2>
-        <form action="register" method="post">
-            <input type="text" value="用户名" name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
-            <input type="password" id="pw1" name="password1" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
-            <input type="password" id="pw2" name="password2" value="password" onfocus="this.value = '';" onkeyup="confirmpw()" ><span id="message"></span>
-            <input type="text" value="email.com" name="email" onfocus="this.value='';" >
-            <input type="text" value="0123-456789" name="phone" onfocus="this.value='';">
-            <input type="submit" value="注册">
-        </form>
-        <script>
-            function confirmpw() {
-                var pw1 = document.getElementById("pw1").value;
-                var pw2 = document.getElementById("pw2").value;
-                if(pw1 == pw2) {
-                    document.getElementById("message").innerHTML="<span class=' glyphicon glyphicon-ok' ></span>";
-                    document.getElementById("submit").disabled = false;
-                }
-                else {
-                    document.getElementById("message").innerHTML="<span class='glyphicon glyphicon-remove'></span>";
-                    document.getElementById("submit").disabled = true;
-                }
-            }
-        </script>
-    </div>
-</div>
-<div class="footer">
-    <div class="container">
-        <div class="col-md-3 latest-proj wow fadeInLeft animated" data-wow-delay=".5s">
-            <h3>Gryffindor</h3>
-            <img src="/static/images/logo.png" class="img-responsive" alt="">
-            <div class="clearfix"></div>
-        </div>
-        <div class="col-md-3 location wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>科技专家资源共享</h3>
-            <address>
-                我们提供最全面的，最权威的论文下载,在这里你可以享受知识分享的乐趣           </address>
-            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-            <p class="mai">欢迎加入我们</p>
-        </div>
-        <div class="col-md-3 location wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>所在</h3>
-            <address>
-                北京航空航天大学<br>
-                软件学院<br>
-                <abbr title="Phone">电话：</abbr> 0123456789
-            </address>
-            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-            <p class="mai">Email : <a class="email-link" href="mailto:info@example.com">xxxxxxxx.com</a></p>
-        </div>
-        <div class="col-md-3 cont wow fadeInRight animated" data-wow-delay=".5s">
-            <h3>联系我们</h3>
+<form class="flatbox" method="post" action="register">
+    <div class="gslogen mb-4"><em>Gryffindor</em></div>
+    <h1 class="h3 mb-3 font-weight-normal">注册</h1>
+    <label class="sr-only" for="inputun" >用户名</label>
+    <input class="form-control"  id="inputun" autofocus="autofocus" required="required" type="text" placeholder="用户名"  name="userName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '用户名';}"/>
+    <p></p>
+    <label class="sr-only" for="inputPassword" name="password1">密码</label>
+    <input class="form-control" name="password1" id="inputPassword" required="required" type="password" placeholder="密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '密码';}"/>
+    <p></p>
+    <input class="form-control" name="password2" id="reinputPassword" required="required" type="password" placeholder="重复密码" onfocus="this.value = '';" onkeyup="confirmpw()" />
+    <p></p>
+    <label class="sr-only" for="inputem">电子邮箱</label>
+    <input class="form-control" name="email" id="inputem" required="required" type="email" placeholder="电子邮箱" onfocus="this.value='';" />
+    <p></p>
+    <label class="sr-only" for="inputpn">手机号</label>
+    <input class="form-control" name="phone" id="inputpn" required="required" type="text" placeholder="手机号" onfocus="this.value='';"/>
+    <button class="btn btn-lg btn-primary btn-block mt-4 mb-2" type="submit">注册</button>
+</form>
+<script>
+    function confirmpw() {
+        var pw1 = document.getElementById("pw1").value;
+        var pw2 = document.getElementById("pw2").value;
+        if(pw1 == pw2) {
+            document.getElementById("message").innerHTML="<span class=' glyphicon glyphicon-ok' ></span>";
+            document.getElementById("submit").disabled = false;
+        }
+        else {
+            document.getElementById("message").innerHTML="<span class='glyphicon glyphicon-remove'></span>";
+            document.getElementById("submit").disabled = true;
+        }
+    }
 
-            <h4><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>电话</h4>
-            <p>+1-234-567-8900</p>
-            <div class="copy-rights">
-                <ul>
-                    <li><a href="#"><span class="fa"> </span></a></li>
-                    <li><a href="#"><span class="tw"> </span></a></li>
-                    <li><a href="#"><span class="g"> </span></a></li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="foot-bt animated wow fadeInUp animated animated" data-wow-duration="1200ms" data-wow-delay="500ms">
-        <p>Copyright &copy; 2018.Gryffindor Group.</p>
-    </div>
-</div>
+    function infomation(error, info) {
+        $('#infoModal').modal('show');
+        if (error) {
+            document.getElementById('infoModalTitle').innerText = '警告';
+        } else {
+            document.getElementById('infoModalTitle').innerText = '提示';
+        }
+        document.getElementById('information').innerText = info;
+    }
+
+
+</script>
+
 
 </body>
 
