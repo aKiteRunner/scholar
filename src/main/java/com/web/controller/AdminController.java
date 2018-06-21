@@ -38,12 +38,6 @@ public class AdminController {
         this.messageService = messageService;
         this.instituteService = instituteService;
     }
-
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index() {
-        return "index";
-    }
-
     @RequestMapping(value = "template", method = RequestMethod.GET)
     public String template() {
         return "template";

@@ -105,9 +105,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/discover">发现<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/repository">仓库<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
@@ -118,10 +115,10 @@
                     学科
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">数学</a>
-                    <a class="dropdown-item" href="#">生物</a>
-                    <a class="dropdown-item" href="#">物理</a>
-                    <a class="dropdown-item" href="#">哲学</a>
+                    <a class="dropdown-item" href="/discipline/3">数学</a>
+                    <a class="dropdown-item" href="/discipline/4">物理学</a>
+                    <a class="dropdown-item" href="/discipline/5">天文学</a>
+                    <a class="dropdown-item" href="/discipline/6">工程科技</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -129,15 +126,15 @@
                     机构
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                    <a class="dropdown-item" href="#">清华</a>
-                    <a class="dropdown-item" href="#">北大</a>
-                    <a class="dropdown-item" href="#">中科院</a>
-                    <a class="dropdown-item" href="#">北航</a>
+                    <a class="dropdown-item" href="/institute/1">清华</a>
+                    <a class="dropdown-item" href="/institute/2">北大</a>
+                    <a class="dropdown-item" href="/institute/3">中科院</a>
+                    <a class="dropdown-item" href="/institute/4">北航</a>
                 </div>
             </li>
             <li class="nav-item ">
                 <form class="form-inline my-2 my-lg-0" action="/search" method="post">
-                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search">
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="输入关键字" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </li>

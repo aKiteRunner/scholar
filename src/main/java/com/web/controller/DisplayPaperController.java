@@ -77,7 +77,7 @@ public class DisplayPaperController {
         return "paper";
     }
 
-    @RequestMapping(value = "/discover", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String displayAllPaper(Model model) {
         List<Paper> papers = paperService.mostPopularPaper(Setting.INDEX_PAPER_NUMBER);
         papers = papers.stream()
