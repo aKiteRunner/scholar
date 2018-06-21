@@ -26,43 +26,44 @@ public class UserInfoController {
     }
 
     @RequestMapping(value = "/setting", method = RequestMethod.GET)
-    public String setting(HttpServletRequest request, Model model){
-        HttpSession session = request.getSession();
-//        if(session.getAttribute("logined") != null){
-//            model.addAttribute("errorInfo", "您还未登录");
-//            return "index";
-//        }else {
-//            String username = (String) session.getAttribute("username");
-        String username = "abc123";
-            User user = userService.getUser(username);
-            String email = user.getEmail();
-            String phone = user.getPhone();
-            int credit = user.getCredit();
-            int degree = user.getDegree();
-            int exp = user.getExp();
-            model.addAttribute("username", username);
-            model.addAttribute("email", email);
-            model.addAttribute("phone", phone);
-            model.addAttribute("credit", credit);
-            model.addAttribute("degree", degree);
-            model.addAttribute("exp", exp);
-            model.addAttribute("maxExp", Setting.DEGREE_EXP);
-            return "userInfo";
-//        }
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/setting/userInfo", method = RequestMethod.GET)
-    public Map<String, Object> userInfo() {
-        String username = "abc123";
-        User user = userService.getUser(username);
+    public String setting(HttpSession session, Model model){
+        if(session.getAttribute("logined") == null){
+            model.addAttribute("errorInfo", "您还未登录");
+            return "redirect:/login";
+        }
+        Integer userId = (Integer) session.getAttribute("id");
+        User user = userService.getUser(userId);
         String email = user.getEmail();
         String phone = user.getPhone();
         int credit = user.getCredit();
         int degree = user.getDegree();
         int exp = user.getExp();
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("email", email);
+        model.addAttribute("phone", phone);
+        model.addAttribute("credit", credit);
+        model.addAttribute("degree", degree);
+        model.addAttribute("exp", exp);
+        model.addAttribute("maxExp", Setting.DEGREE_EXP);
+        return "userInfo";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/setting/userInfo", method = RequestMethod.GET)
+    public Map<String, Object> userInfo(HttpSession session) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("username", username);
+        if(session.getAttribute("logined") == null){
+            map.put("errorInfo", "您还未登录");
+            return map;
+        }
+        Integer userId = (Integer) session.getAttribute("id");
+        User user = userService.getUser(userId);
+        String email = user.getEmail();
+        String phone = user.getPhone();
+        int credit = user.getCredit();
+        int degree = user.getDegree();
+        int exp = user.getExp();
+        map.put("username", user.getUsername());
         map.put("email", email);
         map.put("phone", phone);
         map.put("credit", credit);

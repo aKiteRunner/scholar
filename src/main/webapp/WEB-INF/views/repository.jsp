@@ -119,6 +119,22 @@
                     <a class="dropdown-item" href="/discipline/4">物理学</a>
                     <a class="dropdown-item" href="/discipline/5">天文学</a>
                     <a class="dropdown-item" href="/discipline/6">工程科技</a>
+                    <a class="dropdown-item" href="/discipline/7">化学</a>
+                    <a class="dropdown-item" href="/discipline/8">材料科学</a>
+                    <a class="dropdown-item" href="/discipline/9">冶金工业</a>
+                    <a class="dropdown-item" href="/discipline/10">农业科技</a>
+                    <a class="dropdown-item" href="/discipline/11">农业工程</a>
+                    <a class="dropdown-item" href="/discipline/12">水产和渔业</a>
+                    <a class="dropdown-item" href="/discipline/13">农作物</a>
+                    <a class="dropdown-item" href="/discipline/14">医药卫生</a>
+                    <a class="dropdown-item" href="/discipline/15">中医药</a>
+                    <a class="dropdown-item" href="/discipline/16">妇产科学</a>
+                    <a class="dropdown-item" href="/discipline/17">神经病学</a>
+                    <a class="dropdown-item" href="/discipline/18">哲学与人文</a>
+                    <a class="dropdown-item" href="/discipline/19">地理</a>
+                    <a class="dropdown-item" href="/discipline/20">哲学</a>
+                    <a class="dropdown-item" href="/discipline/21">美学</a>
+                    <a class="dropdown-item" href="/discipline/22">软件工程</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -130,6 +146,12 @@
                     <a class="dropdown-item" href="/institute/2">北大</a>
                     <a class="dropdown-item" href="/institute/3">中科院</a>
                     <a class="dropdown-item" href="/institute/4">北航</a>
+                    <a class="dropdown-item" href="/institute/5">浙大</a>
+                    <a class="dropdown-item" href="/institute/6">哈工大</a>
+                    <a class="dropdown-item" href="/institute/7">天津大学</a>
+                    <a class="dropdown-item" href="/institute/8">南京大学</a>
+                    <a class="dropdown-item" href="/institute/9">湖南大学</a>
+                    <a class="dropdown-item" href="/institute/10">山东大学</a>
                 </div>
             </li>
             <li class="nav-item ">
@@ -149,6 +171,7 @@
 
     </div>
 </nav>
+
 <p></p>
 <p></p>
 <div class="container">
@@ -325,7 +348,7 @@
 
                 <!-- Grid column -->
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                    <h6 class="mb-0">欢迎加入我们！</h6>
                 </div>
                 <!-- Grid column -->
 
@@ -372,9 +395,9 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
                 <!-- Content -->
-                <h6 class="text-uppercase font-weight-bold">Company name</h6>
+                <h6 class="text-uppercase font-weight-bold">科技专家资源共享</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>我们提供最全面的，最权威的论文下载,在这里你可以享受知识分享的乐趣  </p>
 
             </div>
             <!-- Grid column -->
@@ -383,20 +406,11 @@
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Products</h6>
+                <h6 class="text-uppercase font-weight-bold">我们所在</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="#!">MDBootstrap</a>
-                </p>
-                <p>
-                    <a href="#!">MDWordPress</a>
-                </p>
-                <p>
-                    <a href="#!">BrandFlow</a>
-                </p>
-                <p>
-                    <a href="#!">Bootstrap Angular</a>
-                </p>
+                <p> 学院路 37号，海淀区</p>
+                <p> 北京航空航天大学</p>
+                <p>  软件学院</p>
 
             </div>
             <!-- Grid column -->
@@ -405,19 +419,19 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <h6 class="text-uppercase font-weight-bold">友情链接</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a href="#!">Your Account</a>
+                    <a href="http://epub.cnki.net/kns/default.htm">中国知网</a>
                 </p>
                 <p>
-                    <a href="#!">Become an Affiliate</a>
+                    <a href="https://www.csdn.net/">CSDN</a>
                 </p>
                 <p>
-                    <a href="#!">Shipping Rates</a>
+                    <a href="https://www.openacademic.ai/oag/">Open Academic</a>
                 </p>
                 <p>
-                    <a href="#!">Help</a>
+                    <a href="http://219.224.166.3:8011/">在线协作平台</a>
                 </p>
 
             </div>
@@ -427,16 +441,16 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <h6 class="text-uppercase font-weight-bold">联系我们</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
+                    <i class="fa fa-home mr-3"></i>  北京航空航天大学</p>
                 <p>
                     <i class="fa fa-envelope mr-3"></i> info@example.com</p>
                 <p>
-                    <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <i class="fa fa-phone mr-3"></i> 12345678</p>
                 <p>
-                    <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+                    <i class="fa fa-print mr-3"></i>123577818</p>
 
             </div>
             <!-- Grid column -->
