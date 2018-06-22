@@ -209,7 +209,8 @@
             </h4>
             <div class="mb-3 " style="background: #FFFFFF">
                 <div class="pt-4 ml-4">
-                        <h3><i class="fas fa-user"></i>${user.username}</h3>
+                        <h3><i class="fas fa-user"></i>
+                            ${user.username}</h3>
                 </div>
                 <hr class="my-4">
                 <div class="row m-2">

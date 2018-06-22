@@ -29,7 +29,7 @@ public class ScholarPaperService {
             scholarId = scholarPaperMapper.selectByPaper(paperId);
         } catch (NullPointerException e) {
             System.out.println("!!!!!!" + paperId);
-            throw e;
+//            throw e;
         }
         return scholarId;
     }
