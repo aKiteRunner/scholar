@@ -106,9 +106,9 @@ public class SearchController {
             String name = "";
             String abstract1 = "";
             String scholarName = "";
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-            String time= sdf.format(paperService.selectById(id).getTime());
-
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+//            String time= sdf.format(paperService.selectById(id).getTime());
+            int price = paperService.selectById(id).getPrice();
             if(highlighterMap.get("name") != null) {
                 highlightField = highlighterMap.get("name");
                 texts = highlightField.getFragments();
@@ -144,7 +144,7 @@ public class SearchController {
             System.out.println("popularity: " + popularity);
             System.out.println("abstract1: " + abstract1);
             System.out.println("scholarName: " + scholarName);
-            System.out.println("time: " + time);
+            System.out.println("price: " + price);
 
             HashMap<String, Object> map = new HashMap<>();
             map.put("id", id);
@@ -152,7 +152,7 @@ public class SearchController {
             map.put("popularity", popularity);
             map.put("abstract1", abstract1);
             map.put("scholarName", scholarName);
-            map.put("time", time);
+            map.put("price", price);
             list.add(map);
         }
         return list;
