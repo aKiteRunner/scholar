@@ -11,7 +11,7 @@ public class ScholarExample {
     protected List<Criteria> oredCriteria;
 
     public ScholarExample() {
-        oredCriteria = new ArrayList<>();
+        oredCriteria = new ArrayList<Criteria>();
     }
 
     public void setOrderByClause(String orderByClause) {
@@ -53,7 +53,8 @@ public class ScholarExample {
     }
 
     protected Criteria createCriteriaInternal() {
-        return new Criteria();
+        Criteria criteria = new Criteria();
+        return criteria;
     }
 
     public void clear() {
@@ -67,7 +68,7 @@ public class ScholarExample {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<>();
+            criteria = new ArrayList<Criterion>();
         }
 
         public boolean isValid() {

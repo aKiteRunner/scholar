@@ -180,7 +180,7 @@
         <div class="form-group row">
             <label for="updateUserName" class="col-sm-2 control-label">用户名</label>
             <div class="col-sm-3">
-                <input class="form-control" id="updateUserName">
+                <input class="form-control" id="updateUserName" >
             </div>
             <div class="col-sm-3">
                 <button class="btn btn-primary" onclick="updateUserNameF()">更改昵称</button>
@@ -245,7 +245,7 @@
           <h4 class="my-0 font-weight-normal">套餐二</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ 50 credits</small></h1>
+          <h1 class="card-title pricing-card-title">$20 <small class="text-muted">/ 20 credits</small></h1>
           <ul class="list-unstyled mt-3 mb-4">
               <li>温馨提示</li>
               <li>知识就是力量</li>
@@ -262,7 +262,7 @@
           <h4 class="my-0 font-weight-normal">套餐三</h4>
         </div>
         <div class="card-body">
-          <h1 class="card-title pricing-card-title">$100 <small class="text-muted">/ 100 credits</small></h1>
+          <h1 class="card-title pricing-card-title">$50 <small class="text-muted">/ 50 credits</small></h1>
           <ul class="list-unstyled mt-3 mb-4">
               <li>温馨提示</li>
               <li>知识就是力量</li>
@@ -279,6 +279,9 @@
         <div class="card-body">
           <h1 class="card-title pricing-card-title">$1 <small class="text-muted">/ 1 credits</small></h1>
           <ul class="list-unstyled mt-3 mb-4">
+                  <li>温馨提示</li>
+                  <li>知识就是力量</li>
+                  <li>版权需要购买</li>
             <li>充值<input type="number"  placeholder="100" style="width: 80px;" id="number">元</li>
           </ul>
           <button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="topUPDiy()">充值</button>
@@ -329,16 +332,12 @@
     <div class="panel panel-default" id="writeLetter" >
       <form class="form-inline" style="margin-top: 10px; margin-bottom: 10px;">
           <div class="form-group wLetter">
-            <label for="receiver">收件人</label>
-            <input type="text" class="form-control" id="receiver">
+            <label for="receiverName">收件人</label>
+            <input type="text" class="form-control" id="receiverName">
           </div>
-          <div class="form-group wLetter">
-            <label for="messageTitle">标题</label>
-            <input type="text" class="form-control" id="messageTitle">
-          </div>
-          <button type="submit" class="btn btn-primary">发送</button>
+          <button onclick="sendMessage()" type="submit" class="btn btn-primary">发送</button>
         </form>
-      <textarea class="form-control" rows="10"></textarea>
+      <textarea id="content" class="form-control" rows="10"></textarea>
   </div>
 
 </div> <!-- /container -->
@@ -477,7 +476,7 @@
         });
     }
 
-    function sendMessage() {
+    function sentMessage() {
         rl.className = ''
         pl.className = 'active'
         wl.className = ''
@@ -518,7 +517,7 @@
     receiveMessage();
 
     rl.onclick = receiveMessage
-    pl.onclick = sendMessage
+    pl.onclick = sentMessage
     wl.onclick = function (e) {
         rl.className = ''
         pl.className = ''

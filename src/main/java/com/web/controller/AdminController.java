@@ -7,13 +7,11 @@ import com.web.service.InstituteService;
 import com.web.service.ScholarService;
 import com.web.service.UserService;
 import com.web.utils.Setting;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Comparator;
@@ -62,20 +60,24 @@ public class AdminController {
     @RequestMapping(value = "admin/checkapplication", method = RequestMethod.POST)
     @ResponseBody
     public String checkApplication(HttpSession session,
-                                                    @RequestParam("approve") Boolean approve,
-                                                    @RequestParam("applicationId") Integer applicationId,
-                                                    Model model) {
+                                                    @RequestBody String json,
+
+                                   Model model) {
         if (Setting.ADMIN_ID != (Integer) session.getAttribute("id")) {
             return null;
         }
+        JSONObject jsonObject = new JSONObject(json);
+        int approve = jsonObject.getInt("approve");
+        int applicationId = jsonObject.getInt("applicationId");
         Application application = applicationService.getApplication(applicationId);
+        System.out.println(application);
         User user = userService.getUser(application.getUserId());
         Message message = new Message();
         message.setSenderId(Setting.ADMIN_ID);
         message.setReceiverId(user.getId());
         message.setStatus(Setting.UNREAD_APPLICATION);
         message.setSendTime(new Date());
-        if (approve) {
+        if (approve == 1) {
             // 如果同意，将其加入到专家数据库，并发送站内信通知
             Scholar scholar = new Scholar();
             scholar.setId(user.getId());

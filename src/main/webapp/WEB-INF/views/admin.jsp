@@ -85,13 +85,52 @@
       }
 
       function pass(id) {
-          $.post("/admin/checkapplication", { approve: true, applicationId: id } );
-          window.location.href='/admin/application';
+          $.ajax({
+              url : "/admin/checkapplication",
+              type : 'POST',
+              data : JSON.stringify({"approve":1, "applicationId" : id}), // Request body
+              contentType : 'application/json; charset=utf-8',
+              dataType : 'json',
+              success : function(response) {
+                  //请求成功
+                  if(response["errorInfo"] == null){
+                      window.alert("info");
+                  }else{
+                      window.alert(response["errorInfo"]);
+                  }
+              },
+              error : function(msg) {
+              }
+          });
+
+
+      }
+
+
+      function updateUserNameF() {
+          var v = document.getElementById("updateUserName").value;
+
       }
 
       function unpass(id){
-          $.post("/admin/checkapplication", { approve: false, applicationId: id } );
-          window.location.href='/admin/application';
+          $.ajax({
+              url : "/admin/checkapplication",
+              type : 'POST',
+              data : JSON.stringify({"approve":0, "applicationId" : id}), // Request body
+              contentType : 'application/json; charset=utf-8',
+              dataType : 'json',
+              success : function(response) {
+                  //请求成功
+                  if(response["errorInfo"] == null){
+                      window.alert("info");
+                  }else{
+                      window.alert(response["errorInfo"]);
+                  }
+              },
+              error : function(msg) {
+              }
+          });
+
   }
      
   </script>
