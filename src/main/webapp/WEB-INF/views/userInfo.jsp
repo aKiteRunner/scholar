@@ -402,10 +402,16 @@
               <option value="21">美学</option>
               <option value="1">其他</option>
           </select>
-          <input class="form-control col-sm-3"  type="text" id="price" name="price" style="margin-left:15px;">
-          <input class="btn btn-primary"  type="submit" value="上传" style="margin-left:15px;">
         </div>
-        
+        <div class="form-group row" style="margin-top: 30px; margin-left:2px;">
+           价格
+          <input class="form-control col-sm-3"  type="text" id="price" name="price" style="margin-left:15px;">
+        </div>
+        <div class="form-group row" style="margin-top: 30px; margin-left:2px;">
+            摘要
+        </div>
+        <textarea class="form-control col-sm-5" style="margin-left:8%;" rows="8" cols="20" id="abstract1" name="abstract1"></textarea>
+        <input class="btn btn-primary"  type="submit" value="上传" style="margin-left:15px;">
     </form>
 
 

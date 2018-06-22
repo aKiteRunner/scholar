@@ -68,6 +68,7 @@ public class UploadController {
     public String uploadFile(@RequestParam(value = "file") MultipartFile file,
                              @RequestParam(value = "discipline") String discipline,
                              @RequestParam(value = "price") Integer price,
+                             @RequestParam(value = "abstract1") String abstract1,
                              HttpSession session,
                              Model model) {
         // 文件大小必须大于0，必须为专家用户
@@ -89,6 +90,7 @@ public class UploadController {
                 paper.setPath(storedFile.getAbsolutePath());
                 paper.setTime(new Date());
                 paper.setPrice(price);
+                paper.setAbstract1(abstract1);
                 paperService.insertPaper(paper);
                 Integer paperId = paperService.selectByName(getFileNameNoEx(file.getOriginalFilename())).getId();
                 System.out.println(paperId);
