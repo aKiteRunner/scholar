@@ -44,7 +44,7 @@
 <!--header-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand mb-0 h1" href="#">Gryffindor</a>
+        <a class="navbar-brand mb-0 h1" href="/">Gryffindor</a>
     </nav>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -52,9 +52,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/discover">发现<span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/repository">仓库<span class="sr-only">(current)</span></a>
             </li>
@@ -66,11 +63,26 @@
                     学科
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">基础科学</a>
-                    <a class="dropdown-item" href="#">工程科技</a>
-                    <a class="dropdown-item" href="#">农业科技</a>
-                    <a class="dropdown-item" href="#">医药卫生</a>
-                    <a class="dropdown-item" href="#">哲学与人文</a>
+                    <a class="dropdown-item" href="/discipline/3">数学</a>
+                    <a class="dropdown-item" href="/discipline/4">物理学</a>
+                    <a class="dropdown-item" href="/discipline/5">天文学</a>
+                    <a class="dropdown-item" href="/discipline/6">工程科技</a>
+                    <a class="dropdown-item" href="/discipline/7">化学</a>
+                    <a class="dropdown-item" href="/discipline/8">材料科学</a>
+                    <a class="dropdown-item" href="/discipline/9">冶金工业</a>
+                    <a class="dropdown-item" href="/discipline/10">农业科技</a>
+                    <a class="dropdown-item" href="/discipline/11">农业工程</a>
+                    <a class="dropdown-item" href="/discipline/12">水产和渔业</a>
+                    <a class="dropdown-item" href="/discipline/13">农作物</a>
+                    <a class="dropdown-item" href="/discipline/14">医药卫生</a>
+                    <a class="dropdown-item" href="/discipline/15">中医药</a>
+                    <a class="dropdown-item" href="/discipline/16">妇产科学</a>
+                    <a class="dropdown-item" href="/discipline/17">神经病学</a>
+                    <a class="dropdown-item" href="/discipline/18">哲学与人文</a>
+                    <a class="dropdown-item" href="/discipline/19">地理</a>
+                    <a class="dropdown-item" href="/discipline/20">哲学</a>
+                    <a class="dropdown-item" href="/discipline/21">美学</a>
+                    <a class="dropdown-item" href="/discipline/22">软件工程</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -78,15 +90,21 @@
                     机构
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                    <a class="dropdown-item" href="#">清华</a>
-                    <a class="dropdown-item" href="#">北大</a>
-                    <a class="dropdown-item" href="#">中科院</a>
-                    <a class="dropdown-item" href="#">北航</a>
+                    <a class="dropdown-item" href="/institute/1">清华</a>
+                    <a class="dropdown-item" href="/institute/2">北大</a>
+                    <a class="dropdown-item" href="/institute/3">中科院</a>
+                    <a class="dropdown-item" href="/institute/4">北航</a>
+                    <a class="dropdown-item" href="/institute/5">浙大</a>
+                    <a class="dropdown-item" href="/institute/6">哈工大</a>
+                    <a class="dropdown-item" href="/institute/7">天津大学</a>
+                    <a class="dropdown-item" href="/institute/8">南京大学</a>
+                    <a class="dropdown-item" href="/institute/9">湖南大学</a>
+                    <a class="dropdown-item" href="/institute/10">山东大学</a>
                 </div>
             </li>
             <li class="nav-item ">
                 <form class="form-inline my-2 my-lg-0" action="/search" method="post">
-                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search">
+                    <input name="query" class="form-control mr-sm-2" type="search" placeholder="输入关键字" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
                 </form>
             </li>
@@ -109,15 +127,17 @@
             <div class="row">
                 <c:forEach var="paper" items="${list}">
                     <div class="jumbotron" style="background: #FFFFFF">
-                        <h5><i class="fas fa-book"></i><a href="#" class="btn">${paper.name}</a></h5>
+                        <h5><i class="fas fa-book"></i><a href="/paper/${paper.id}" class="btn">${paper.name}</a></h5>
                         <p class="lead">${paper.abstract1}</p>
                         <hr class="my-4">
                         <div class="row">
                             <div class="col-md-3">
-                                <i class="fas fa-address-card"></i>${paper.scholarName}
+                                <i class="fas fa-address-card"></i>
+                                    ${paper.scholarName}
                             </div>
                             <div class="col-md-3">
-                                <i class="fas fa-calendar-alt"></i>${paper.price}
+                                <i class="fas fa-dollar-sign"></i>
+                                    ${paper.price}
                             </div>
                             <div class="col-md-3">
                                 <i class="fas fa-fire"></i>
@@ -142,44 +162,114 @@
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h6 class="my-0">nmsl</h6>
-                        <small class="text-muted">你是真的牛逼</small>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/blockchain_lemon/article/details/80749552" style=" color:black"
+                               target="_blank">刚刚！孟岩区块链通证经济课二期报满，三期报名开启</a>
+                        </h6>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h6 class="my-0">nmsl</h6>
-                        <small class="text-muted">你是真的牛逼</small>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/blockchain_lemon/article/details/80749541" style=" color:black" target="_blank">1分钟链圈 | 以太坊再现漏洞！或使Token供应</a>
+                        </h6>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h6 class="my-0">nmsl</h6>
-                        <small class="text-muted">你是真的牛逼</small>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/dQCFKyQDXYm3F8rB0/article/details/80730659"  style=" color:black"target="_blank">OpenAI NLP最新进展：通过无监督学习提升语</a>
+                        </h6>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h6 class="my-0">nmsl</h6>
-                        <small class="text-muted">Never mind scandals and libel</small>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/guleileo/article/details/80729775"  style=" color:black"target="_blank">AI从入门到放弃：BP神经网络算法推导及代码实现笔</a>
+                        </h6>
+
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
-                        <h6 class="my-0">rsndm</h6>
-                        <small class="text-muted">燃烧你的梦</small>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/csdnnews/article/details/80732787"  style=" color:black"target="_blank">电竞大数据平台 FunData 的系统架构演进</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/csdnnews/article/details/80731188" style=" color:black" target="_blank">程序员如果也能像C罗一样自律和勤奋，必将成为大神！</a>
+                        </h6>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/csdnsevenn/article/details/80750502"  style=" color:black"target="_blank">也许你的账号密码就是这样泄露了！</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="https://edu.csdn.net/huiyiCourse/series_detail/108?utm_source=home4"  style=" color:black"target="_blank">机器学习十二讲（核心算法各个击破）</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="http://ibmuniversity.csdn.net/"  style=" color:black"target="_blank">人工智能、机器学习和认知计算入门指南</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="https://blog.csdn.net/csdnsevenn/article/details/80750499"  style=" color:black"  target="_blank">30岁那年转行，离开通信拥抱互联网</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="http://gitbook.cn/gitchat/geekbook/5b14bc2f18d5d2470992eee1?utm_source=jr18062002"   style=" color:black" target="_blank">你不知道的 JavaScript</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="http://gitbook.cn/gitchat/column/5a56effae286423809d47f2d?utm_source=jr18062001"  style=" color:black"  target="_blank">程序员向架构师转型之路</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="https://edu.csdn.net/huiyiCourse/series_detail/102?utm_source=home4"  style=" color:black"  target="_blank">无人驾驶技术如何入门？</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">
+                            <a href="http://qualcomm.csdn.net/"   style=" color:black"   target="_blank">5G标准已经完成，下一步是什么</a>
+                        </h6>
+                        <p class="list-group-item-text"></p>
                     </div>
                 </li>
             </ul>
-
-            <form class="card p-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Promo code">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
 </div>
@@ -197,7 +287,7 @@
 
                 <!-- Grid column -->
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                    <h6 class="mb-0">欢迎加入我们！</h6>
                 </div>
                 <!-- Grid column -->
 
@@ -244,9 +334,9 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
 
                 <!-- Content -->
-                <h6 class="text-uppercase font-weight-bold">Company name</h6>
+                <h6 class="text-uppercase font-weight-bold">科技专家资源共享</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>我们提供最全面的，最权威的论文下载,在这里你可以享受知识分享的乐趣  </p>
 
             </div>
             <!-- Grid column -->
@@ -255,20 +345,11 @@
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Products</h6>
+                <h6 class="text-uppercase font-weight-bold">我们所在</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="#!">MDBootstrap</a>
-                </p>
-                <p>
-                    <a href="#!">MDWordPress</a>
-                </p>
-                <p>
-                    <a href="#!">BrandFlow</a>
-                </p>
-                <p>
-                    <a href="#!">Bootstrap Angular</a>
-                </p>
+                <p> 学院路 37号，海淀区</p>
+                <p> 北京航空航天大学</p>
+                <p>  软件学院</p>
 
             </div>
             <!-- Grid column -->
@@ -277,19 +358,19 @@
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                <h6 class="text-uppercase font-weight-bold">友情链接</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a href="#!">Your Account</a>
+                    <a href="http://epub.cnki.net/kns/default.htm">中国知网</a>
                 </p>
                 <p>
-                    <a href="#!">Become an Affiliate</a>
+                    <a href="https://www.csdn.net/">CSDN</a>
                 </p>
                 <p>
-                    <a href="#!">Shipping Rates</a>
+                    <a href="https://www.openacademic.ai/oag/">Open Academic</a>
                 </p>
                 <p>
-                    <a href="#!">Help</a>
+                    <a href="http://219.224.166.3:8011/">在线协作平台</a>
                 </p>
 
             </div>
@@ -299,16 +380,16 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <h6 class="text-uppercase font-weight-bold">联系我们</h6>
                 <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <i class="fa fa-home mr-3"></i> New York, NY 10012, US</p>
+                    <i class="fa fa-home mr-3"></i>  北京航空航天大学</p>
                 <p>
                     <i class="fa fa-envelope mr-3"></i> info@example.com</p>
                 <p>
-                    <i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <i class="fa fa-phone mr-3"></i> 12345678</p>
                 <p>
-                    <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+                    <i class="fa fa-print mr-3"></i>123577818</p>
 
             </div>
             <!-- Grid column -->

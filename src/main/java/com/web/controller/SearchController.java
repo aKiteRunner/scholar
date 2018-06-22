@@ -139,12 +139,12 @@ public class SearchController {
                 scholarName = (String)source.get("scholarName");
             }
 
-            System.out.println("id: " + id);
-            System.out.println("name: " + name);
-            System.out.println("popularity: " + popularity);
-            System.out.println("abstract1: " + abstract1);
-            System.out.println("scholarName: " + scholarName);
-            System.out.println("price: " + price);
+//            System.out.println("id: " + id);
+//            System.out.println("name: " + name);
+//            System.out.println("popularity: " + popularity);
+//            System.out.println("abstract1: " + abstract1);
+//            System.out.println("scholarName: " + scholarName);
+//            System.out.println("price: " + price);
 
             HashMap<String, Object> map = new HashMap<>();
             map.put("id", id);

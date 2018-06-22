@@ -85,12 +85,12 @@ public class UploadController {
                 Paper paper = new Paper();
                 paper.setDisciplineId(Integer.parseInt(discipline));
 //                paper.setSubjectId(subjectService.selectByName(subject).getId());
-                paper.setName(file.getOriginalFilename());
+                paper.setName(getFileNameNoEx(file.getOriginalFilename()));
                 paper.setPath(storedFile.getAbsolutePath());
                 paper.setTime(new Date());
                 paper.setPrice(price);
                 paperService.insertPaper(paper);
-                Integer paperId = paperService.selectByName(file.getOriginalFilename()).getId();
+                Integer paperId = paperService.selectByName(getFileNameNoEx(file.getOriginalFilename())).getId();
                 System.out.println(paperId);
                 // paper与scholar关系
                 ScholarPaper scholarPaper = new ScholarPaper();
@@ -120,6 +120,16 @@ public class UploadController {
         return "redirect:/setting/";
     }
 
+    public static String getFileNameNoEx(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot >-1) && (dot < (filename.length()))) {
+                return filename.substring(0, dot);
+            }
+        }
+        return filename;
+    }
+
     @RequestMapping(value = "/download/{paperId}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> download(@PathVariable Integer paperId,
                                            HttpSession httpSession) throws Exception {
@@ -133,8 +143,9 @@ public class UploadController {
         if (paper == null || !userPaperService.paperAccessible(userId, paperId)) {
             return null;
         }
-        File file = new File(paper.getPath());
-        String filename = paper.getName();
+        File file = new File(paper.getPath() + ".pdf");
+        String filename = paper.getName() + ".pdf";
+        System.out.println(filename);
         HttpHeaders headers = new HttpHeaders();
         //通知浏览器以attachment（下载方式）打开图片
         headers.setContentDispositionFormData("attachment", filename);
